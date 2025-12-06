@@ -15,8 +15,8 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <None Include="TestAsm.asm">
+    <MASM Include="TestAsm.asm">
       <Filter>源文件</Filter>
-    </None>
+    </MASM>
   </ItemGroup>
 </Project>
