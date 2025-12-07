@@ -253,7 +253,15 @@ namespace test.ViewModels
         /// </summary>
         private void Register(object parameter)
         {
-            // 原有注册逻辑不变
+            // 显示注册窗口
+            RegisterWindow registerWindow = new RegisterWindow();
+            registerWindow.Show();
+            
+            // 关闭当前登录窗口
+            if (parameter is Window loginWindow)
+            {
+                loginWindow.Hide();
+            }
         }
         
         /// <summary>
