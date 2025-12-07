@@ -3,6 +3,8 @@ using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
+using Login_Sample.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace test.ViewModels
 {
@@ -17,6 +19,7 @@ namespace test.ViewModels
         private Visibility _factoryNoVisibility = Visibility.Visible;
         private double _windowHeight = 320;
         private double _windowWidth = 380;
+        private bool _isLoading = false;
 
         /// <summary>
         /// 是否启用分厂号输入
@@ -169,6 +172,7 @@ namespace test.ViewModels
         }
 
         private ImageSource m_Icon;
+        private readonly ApplicationDbContext _dbContext;
 
         public ImageSource Icon
         {
@@ -178,6 +182,22 @@ namespace test.ViewModels
                 if (m_Icon != value)
                 {
                     m_Icon = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// 是否正在加载
+        /// </summary>
+        public bool IsLoading
+        {
+            get { return _isLoading; }
+            set
+            {
+                if (_isLoading != value)
+                {
+                    _isLoading = value;
                     OnPropertyChanged();
                 }
             }
@@ -201,6 +221,9 @@ namespace test.ViewModels
 
         public LoginViewModel()
         {
+            // 初始化数据库上下文
+            _dbContext = new ApplicationDbContext();
+            
             LoginCommand = new RelayCommand(Login);
             RegisterCommand = new RelayCommand(Register);
             CloseCommand = new RelayCommand(Close);
@@ -214,7 +237,7 @@ namespace test.ViewModels
         /// 处理密码变更的方法
         /// </summary>
         /// <param name="password">密码字符串</param>
-        private void HandlePasswordChanged(object password)
+        private void HandlePasswordChanged(object? password)
         {
             if (password is string passwordStr)
             {
@@ -225,7 +248,7 @@ namespace test.ViewModels
         /// <summary>
         /// 登录方法（更新为接受object参数）
         /// </summary>
-        private void Login(object parameter)
+        private async void Login(object? parameter)
         {
             // 原有登录逻辑不变
             if (string.IsNullOrEmpty(Username) || string.IsNullOrEmpty(Password))
@@ -235,23 +258,54 @@ namespace test.ViewModels
                 return;
             }
             
-            // 模拟登录验证
-            if (Username == "admin" && Password == "123456")
+            try
             {
+                IsLoading = true;
                 ErrorVisibility = Visibility.Hidden;
-                // 登录成功后的操作
+                
+                // 从数据库验证用户
+                var user = await _dbContext.Users.FirstOrDefaultAsync(u => u.Username == Username);
+                if (user != null)
+                {
+                    // 验证密码
+                    if (PasswordHasher.VerifyPassword(user.PasswordHash, Password))
+                    {
+                        ErrorVisibility = Visibility.Hidden;
+                        MessageBox.Show("登录成功！", "成功", MessageBoxButton.OK, MessageBoxImage.Information);
+                        
+                        // 关闭登录窗口
+                        if (parameter is Window loginWindow)
+                        {
+                            loginWindow.Close();
+                        }
+                    }
+                    else
+                    {
+                        ErrorMessage = "用户名或密码错误";
+                        ErrorVisibility = Visibility.Visible;
+                    }
+                }
+                else
+                {
+                    ErrorMessage = "用户名或密码错误";
+                    ErrorVisibility = Visibility.Visible;
+                }
             }
-            else
+            catch (Exception ex)
             {
-                ErrorMessage = "用户名或密码错误";
+                ErrorMessage = "登录失败：" + ex.Message;
                 ErrorVisibility = Visibility.Visible;
+            }
+            finally
+            {
+                IsLoading = false;
             }
         }
         
         /// <summary>
         /// 注册方法（更新为接受object参数）
         /// </summary>
-        private void Register(object parameter)
+        private void Register(object? parameter)
         {
             // 显示注册窗口
             RegisterWindow registerWindow = new RegisterWindow();
@@ -267,7 +321,7 @@ namespace test.ViewModels
         /// <summary>
         /// 关闭方法（更新为接受object参数）
         /// </summary>
-        private void Close(object parameter)
+        private void Close(object? parameter)
         {
             // 原有关闭逻辑不变
         }
@@ -322,7 +376,7 @@ namespace test.ViewModels
 
         #region INotifyPropertyChanged
 
-        public event PropertyChangedEventHandler PropertyChanged = delegate { };
+        public event PropertyChangedEventHandler? PropertyChanged = delegate { };
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {

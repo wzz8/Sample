@@ -83,6 +83,6 @@
         <Button Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" Content="注册" Margin="20,10,20,5" Height="35" Command="{Binding RegisterCommand}"/>
         
         <!-- 返回登录按钮 -->
-        <Button Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" Content="返回登录" Margin="20,5,20,20" Height="35" Command="{Binding BackToLoginCommand}"/>
+        <Button Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" Content="返回" Margin="20,5,20,20" Height="35" Command="{Binding BackToLoginCommand}"/>
     </Grid>
 </Window>

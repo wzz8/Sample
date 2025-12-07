@@ -4,6 +4,8 @@ using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
+using Login_Sample.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace test.ViewModels
 {
@@ -16,6 +18,8 @@ namespace test.ViewModels
         private string _errorMessage = string.Empty;
         private Visibility _errorVisibility = Visibility.Collapsed;
         private ImageSource _icon;
+        private bool _isLoading = false;
+        private readonly ApplicationDbContext _dbContext;
 
         /// <summary>
         /// 用户名
@@ -128,6 +132,22 @@ namespace test.ViewModels
                 }
             }
         }
+        
+        /// <summary>
+        /// 是否正在加载
+        /// </summary>
+        public bool IsLoading
+        {
+            get { return _isLoading; }
+            set
+            {
+                if (_isLoading != value)
+                {
+                    _isLoading = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
 
         /// <summary>
         /// 注册命令
@@ -154,6 +174,9 @@ namespace test.ViewModels
         /// </summary>
         public RegisterViewModel()
         {
+            // 初始化数据库上下文
+            _dbContext = new ApplicationDbContext();
+            
             RegisterCommand = new RelayCommand(Register);
             BackToLoginCommand = new RelayCommand(BackToLogin);
             PasswordChangedCommand = new RelayCommand(HandlePasswordChanged);
@@ -194,7 +217,7 @@ namespace test.ViewModels
         /// <summary>
         /// 处理密码变更
         /// </summary>
-        private void HandlePasswordChanged(object parameter)
+        private void HandlePasswordChanged(object? parameter)
         {
             if (parameter is string password)
             {
@@ -205,7 +228,7 @@ namespace test.ViewModels
         /// <summary>
         /// 处理确认密码变更
         /// </summary>
-        private void HandleConfirmPasswordChanged(object parameter)
+        private void HandleConfirmPasswordChanged(object? parameter)
         {
             if (parameter is string password)
             {
@@ -216,7 +239,7 @@ namespace test.ViewModels
         /// <summary>
         /// 注册方法
         /// </summary>
-        private void Register(object parameter)
+        private async void Register(object? parameter)
         {
             // 验证输入
             if (!ValidateInput())
@@ -224,10 +247,44 @@ namespace test.ViewModels
                 return;
             }
 
-            // 执行注册逻辑（这里只是示例，实际项目中应该调用API或数据库）
+            // 执行注册逻辑
             try
             {
-                // 模拟注册成功
+                IsLoading = true;
+                
+                // 检查用户名是否已存在
+                if (await _dbContext.Users.AnyAsync(u => u.Username == Username))
+                {
+                    ErrorMessage = "用户名已存在";
+                    ErrorVisibility = Visibility.Visible;
+                    return;
+                }
+                
+                // 检查邮箱是否已存在
+                if (await _dbContext.Users.AnyAsync(u => u.Email == Email))
+                {
+                    ErrorMessage = "邮箱已被注册";
+                    ErrorVisibility = Visibility.Visible;
+                    return;
+                }
+                
+                // 哈希密码
+                string hashedPassword = PasswordHasher.HashPassword(Password);
+                
+                // 创建新用户
+                var newUser = new User
+                {
+                    Username = Username,
+                    Email = Email,
+                    PasswordHash = hashedPassword,
+                    CreatedAt = DateTime.UtcNow
+                };
+                
+                // 保存到数据库
+                _dbContext.Users.Add(newUser);
+                await _dbContext.SaveChangesAsync();
+                
+                // 注册成功
                 MessageBox.Show("注册成功！", "成功", MessageBoxButton.OK, MessageBoxImage.Information);
                 
                 // 注册成功后返回登录窗口
@@ -238,12 +295,16 @@ namespace test.ViewModels
                 ErrorMessage = "注册失败：" + ex.Message;
                 ErrorVisibility = Visibility.Visible;
             }
+            finally
+            {
+                IsLoading = false;
+            }
         }
 
         /// <summary>
         /// 返回登录窗口
         /// </summary>
-        private void BackToLogin(object parameter)
+        private void BackToLogin(object? parameter)
         {
             // 关闭当前窗口并打开登录窗口
             foreach (Window window in Application.Current.Windows)
@@ -327,7 +388,7 @@ namespace test.ViewModels
         }
 
         #region INotifyPropertyChanged 实现
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler? PropertyChanged;
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
