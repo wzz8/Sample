@@ -4,14 +4,14 @@ using System.Windows;
 namespace Login_Sample
 {
     /// <summary>
-    /// RegisterWindow.xaml 的交互逻辑
+    /// MainWindow.xaml 的交互逻辑
     /// </summary>
-    public partial class RegisterWindow : Window
+    public partial class MainWindow : Window
     {
-        public RegisterWindow()
+        public MainWindow()
         {
+            DataContext = new MainViewModel();
             InitializeComponent();
-            this.DataContext = new RegisterViewModel();
         }
     }
 }

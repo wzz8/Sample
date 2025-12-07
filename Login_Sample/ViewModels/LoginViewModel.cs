@@ -6,7 +6,7 @@ using System.Windows.Media;
 using Login_Sample.Data;
 using Microsoft.EntityFrameworkCore;
 
-namespace test.ViewModels
+namespace Login_Sample.ViewModels
 {
     public class LoginViewModel : INotifyPropertyChanged
     {
@@ -273,6 +273,14 @@ namespace test.ViewModels
                         ErrorVisibility = Visibility.Hidden;
                         MessageBox.Show("登录成功！", "成功", MessageBoxButton.OK, MessageBoxImage.Information);
                         
+                        // 设置全局用户状态
+                        App.CurrentUser = user;
+
+                        // 打开主界面
+                        MainWindow mainWindow = new MainWindow();
+                        Application.Current.MainWindow = mainWindow;
+                        mainWindow.Show();
+
                         // 关闭登录窗口
                         if (parameter is Window loginWindow)
                         {

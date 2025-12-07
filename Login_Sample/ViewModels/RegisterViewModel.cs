@@ -7,7 +7,7 @@ using System.Windows.Media;
 using Login_Sample.Data;
 using Microsoft.EntityFrameworkCore;
 
-namespace test.ViewModels
+namespace Login_Sample.ViewModels
 {
     public class RegisterViewModel : INotifyPropertyChanged
     {

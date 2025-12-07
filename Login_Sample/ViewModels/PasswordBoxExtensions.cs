@@ -2,7 +2,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
-namespace test.ViewModels
+namespace Login_Sample.ViewModels
 {
     public static class PasswordBoxExtensions
     {

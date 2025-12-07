@@ -4,13 +4,16 @@ using System.Windows;
 using Login_Sample.Data;
 using Microsoft.EntityFrameworkCore;
 
-namespace test;
+namespace Login_Sample;
 
 /// <summary>
 /// Interaction logic for App.xaml
 /// </summary>
 public partial class App : Application
 {
+    // 全局用户状态
+    public static User? CurrentUser { get; set; }
+    
     protected override void OnStartup(StartupEventArgs e)
     {
         base.OnStartup(e);
