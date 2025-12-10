@@ -35,6 +35,7 @@ namespace Login_Sample.ViewModels
         public LeadershipQueryViewModel LeadershipQueryVM { get; set; }
         public SystemManagementViewModel SystemManagementVM { get; set; }
         public RawInventoryViewModel RawInventoryVM { get; set; }
+        public CustomerManagementViewModel CustomerManagementVM { get; set; }
         
         // 各模块的View实例
         public DashboardView DashboardView { get; set; }
@@ -45,6 +46,7 @@ namespace Login_Sample.ViewModels
         public LeadershipQueryView LeadershipQueryView { get; set; }
         public SystemManagementView SystemManagementView { get; set; }
         public RawInventoryView RawInventoryView { get; set; }
+        public CustomerManagementView CustomerManagementView { get; set; }
 
         // 命令
         public ICommand NavigateCommand { get; set; }
@@ -66,6 +68,14 @@ namespace Login_Sample.ViewModels
             set { _currentTime = value; OnPropertyChanged(); }
         }
 
+        // 当前选中的模块
+        private string _currentModule = "Dashboard";
+        public string CurrentModule
+        {
+            get { return _currentModule; }
+            set { _currentModule = value; OnPropertyChanged(); }
+        }
+
         // 构造函数
         public MainViewModel()
         {
@@ -78,6 +88,7 @@ namespace Login_Sample.ViewModels
             LeadershipQueryVM = new LeadershipQueryViewModel();
             SystemManagementVM = new SystemManagementViewModel();
             RawInventoryVM = new RawInventoryViewModel();
+            CustomerManagementVM = new CustomerManagementViewModel();
             
             // 初始化各模块的View
             DashboardView = new DashboardView() { DataContext = DashboardVM };
@@ -88,6 +99,7 @@ namespace Login_Sample.ViewModels
             LeadershipQueryView = new LeadershipQueryView() { DataContext = LeadershipQueryVM };
             SystemManagementView = new SystemManagementView() { DataContext = SystemManagementVM };
             RawInventoryView = new RawInventoryView() { DataContext = RawInventoryVM };
+            CustomerManagementView = new CustomerManagementView() { DataContext = CustomerManagementVM };
 
             // 初始化命令
             NavigateCommand = new RelayCommand(Navigate);
@@ -115,27 +127,39 @@ namespace Login_Sample.ViewModels
             {
                 case "Dashboard":
                     CurrentView = DashboardView;
+                    CurrentModule = "Dashboard";
                     break;
                 case "BusinessReception":
                     CurrentView = BusinessReceptionView;
+                    CurrentModule = "BusinessReception";
                     break;
                 case "FinancialSettlement":
                     CurrentView = FinancialSettlementView;
+                    CurrentModule = "FinancialSettlement";
                     break;
                 case "SparePartsManagement":
                     CurrentView = SparePartsManagementView;
+                    CurrentModule = "SparePartsManagement";
                     break;
                 case "WorkshopManagement":
                     CurrentView = WorkshopManagementView;
+                    CurrentModule = "WorkshopManagement";
                     break;
                 case "LeadershipQuery":
                     CurrentView = LeadershipQueryView;
+                    CurrentModule = "LeadershipQuery";
                     break;
                 case "SystemManagement":
                     CurrentView = SystemManagementView;
+                    CurrentModule = "SystemManagement";
                     break;
                 case "RawInventory":
                     CurrentView = RawInventoryView;
+                    CurrentModule = "RawInventory";
+                    break;
+                case "CustomerManagement":
+                    CurrentView = CustomerManagementView;
+                    CurrentModule = "CustomerManagement";
                     break;
             }
         }

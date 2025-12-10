@@ -1,0 +1,341 @@
+<UserControl x:Class="Login_Sample.Views.CustomerManagementView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:Login_Sample.Views"
+             xmlns:vm="clr-namespace:Login_Sample.ViewModels"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d"
+             d:DesignHeight="450"
+             d:DesignWidth="800"
+             d:DataContext="{d:DesignInstance vm:CustomerManagementViewModel}">
+    <UserControl.Resources>
+        <!-- NullToVisibilityConverter转换器 -->
+        <local:NullToVisibilityConverter x:Key="NullToVisibilityConverter"/>
+    </UserControl.Resources>
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <!-- 搜索和标题区域 -->
+        <StackPanel Orientation="Vertical" Margin="0,0,0,10">
+            <TextBlock Text="客户管理" FontSize="24" FontWeight="Bold" Margin="0,0,0,10"/>
+            <materialDesign:Card Padding="10">
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                    <materialDesign:PackIcon Kind="Magnify" Margin="0,0,10,0" Foreground="#666"/>
+                    <TextBox Width="300" Text="{Binding SearchQuery, UpdateSourceTrigger=PropertyChanged}"
+                             materialDesign:HintAssist.Hint="搜索客户名称、电话、邮箱或ID"/>
+                </StackPanel>
+            </materialDesign:Card>
+        </StackPanel>
+        
+        <!-- 内容区域 -->
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="300"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            
+            <!-- 客户列表 -->
+            <materialDesign:Card Grid.Column="0" Margin="0,0,10,0" Padding="5">
+                <StackPanel>
+                    <TextBlock Text="客户列表" FontWeight="Bold" Margin="5,0,0,5"/>
+                    <DataGrid ItemsSource="{Binding Customers}"
+                              SelectedItem="{Binding SelectedCustomer}"
+                              AutoGenerateColumns="False"
+                              IsReadOnly="True"
+                              SelectionMode="Single"
+                              CanUserSortColumns="True">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="50"/>
+                            <DataGridTextColumn Header="姓名" Binding="{Binding Name}" Width="*"/>
+                            <DataGridTextColumn Header="电话" Binding="{Binding Phone}" Width="120"/>
+                            <DataGridTextColumn Header="等级" Binding="{Binding CustomerLevel}" Width="60"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </StackPanel>
+            </materialDesign:Card>
+            
+            <!-- 详细信息区域 -->
+            <TabControl Grid.Column="1" Margin="10,0,0,0">
+                <!-- 客户信息 -->
+                <TabItem Header="客户信息">
+                    <materialDesign:Card Padding="10">
+                        <Grid>
+                            <StackPanel DataContext="{Binding SelectedCustomer}" Visibility="{Binding ., Converter={StaticResource NullToVisibilityConverter}}">
+                                <Grid Margin="0,0,0,10">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="150"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="150"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                    
+                                    <TextBlock Text="客户ID：" FontWeight="Bold" Grid.Row="0" Grid.Column="0" Margin="5"/>
+                                    <TextBlock Text="{Binding Id}" Grid.Row="0" Grid.Column="1" Margin="5"/>
+                                    <TextBlock Text="姓名：" FontWeight="Bold" Grid.Row="0" Grid.Column="2" Margin="5"/>
+                                    <TextBlock Text="{Binding Name}" Grid.Row="0" Grid.Column="3" Margin="5"/>
+                                    
+                                    <TextBlock Text="性别：" FontWeight="Bold" Grid.Row="1" Grid.Column="0" Margin="5"/>
+                                    <TextBlock Text="{Binding Gender}" Grid.Row="1" Grid.Column="1" Margin="5"/>
+                                    <TextBlock Text="电话：" FontWeight="Bold" Grid.Row="1" Grid.Column="2" Margin="5"/>
+                                    <TextBlock Text="{Binding Phone}" Grid.Row="1" Grid.Column="3" Margin="5"/>
+                                    
+                                    <TextBlock Text="邮箱：" FontWeight="Bold" Grid.Row="2" Grid.Column="0" Margin="5"/>
+                                    <TextBlock Text="{Binding Email}" Grid.Row="2" Grid.Column="1" Margin="5"/>
+                                    <TextBlock Text="地址：" FontWeight="Bold" Grid.Row="2" Grid.Column="2" Margin="5"/>
+                                    <TextBlock Text="{Binding Address}" Grid.Row="2" Grid.Column="3" Margin="5"/>
+                                    
+                                    <TextBlock Text="客户等级：" FontWeight="Bold" Grid.Row="3" Grid.Column="0" Margin="5"/>
+                                    <TextBlock Text="{Binding CustomerLevel}" Grid.Row="3" Grid.Column="1" Margin="5"/>
+                                    <TextBlock Text="创建时间：" FontWeight="Bold" Grid.Row="3" Grid.Column="2" Margin="5"/>
+                                    <TextBlock Text="{Binding CreatedAt}" Grid.Row="3" Grid.Column="3" Margin="5"/>
+                                </Grid>
+                                
+                                <TextBlock Text="备注：" FontWeight="Bold" Margin="5,0,0,5"/>
+                                <TextBox Text="{Binding Remarks}" IsReadOnly="True" Height="80" TextWrapping="Wrap" AcceptsReturn="True" Margin="5"/>
+                            </StackPanel>
+                            <TextBlock Text="请选择客户" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" Visibility="{Binding SelectedCustomer, Converter={StaticResource NullToVisibilityConverter}, ConverterParameter=True}"/>
+                        </Grid>
+                    </materialDesign:Card>
+                </TabItem>
+                
+                <!-- 客户车辆 -->
+                <TabItem Header="客户车辆">
+                    <materialDesign:Card Padding="10">
+                        <Grid>
+                            <StackPanel Visibility="{Binding SelectedCustomer, Converter={StaticResource NullToVisibilityConverter}}">
+                                <TextBlock Text="车辆信息" FontWeight="Bold" Margin="5,0,0,5"/>
+                                <DataGrid ItemsSource="{Binding CustomerVehicles}"
+                                          AutoGenerateColumns="False"
+                                          IsReadOnly="True"
+                                          CanUserSortColumns="True">
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Header="车牌号" Binding="{Binding LicensePlate}" Width="100"/>
+                                        <DataGridTextColumn Header="车型" Binding="{Binding VehicleModel}" Width="120"/>
+                                        <DataGridTextColumn Header="品牌" Binding="{Binding VehicleBrand}" Width="80"/>
+                                        <DataGridTextColumn Header="颜色" Binding="{Binding VehicleColor}" Width="80"/>
+                                        <DataGridTextColumn Header="里程" Binding="{Binding Mileage}" Width="80"/>
+                                        <DataGridTextColumn Header="状态" Binding="{Binding Status}" Width="80"/>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                            </StackPanel>
+                            <TextBlock Text="请先选择客户" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" Visibility="{Binding SelectedCustomer, Converter={StaticResource NullToVisibilityConverter}, ConverterParameter=True}"/>
+                        </Grid>
+                    </materialDesign:Card>
+                </TabItem>
+                
+                <!-- 客户预约 -->
+                <TabItem Header="客户预约">
+                    <materialDesign:Card Padding="10">
+                        <Grid>
+                            <StackPanel Visibility="{Binding SelectedCustomer, Converter={StaticResource NullToVisibilityConverter}}">
+                                <TextBlock Text="预约信息" FontWeight="Bold" Margin="5,0,0,5"/>
+                                <DataGrid ItemsSource="{Binding CustomerAppointments}"
+                                          AutoGenerateColumns="False"
+                                          IsReadOnly="True"
+                                          CanUserSortColumns="True">
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Header="类型" Binding="{Binding AppointmentType}" Width="80"/>
+                                        <DataGridTextColumn Header="日期" Binding="{Binding AppointmentDate}" Width="120"/>
+                                        <DataGridTextColumn Header="时间" Binding="{Binding AppointmentTime}" Width="80"/>
+                                        <DataGridTextColumn Header="服务内容" Binding="{Binding ServiceContent}" Width="*"/>
+                                        <DataGridTextColumn Header="状态" Binding="{Binding Status}" Width="80"/>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                            </StackPanel>
+                            <TextBlock Text="请先选择客户" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" Visibility="{Binding SelectedCustomer, Converter={StaticResource NullToVisibilityConverter}, ConverterParameter=True}"/>
+                        </Grid>
+                    </materialDesign:Card>
+                </TabItem>
+                
+                <!-- 客户回访 -->
+                <TabItem Header="客户回访">
+                    <materialDesign:Card Padding="10">
+                        <Grid>
+                            <StackPanel Visibility="{Binding SelectedCustomer, Converter={StaticResource NullToVisibilityConverter}}">
+                                <TextBlock Text="回访记录" FontWeight="Bold" Margin="5,0,0,5"/>
+                                <DataGrid ItemsSource="{Binding CustomerVisits}"
+                                          AutoGenerateColumns="False"
+                                          IsReadOnly="True"
+                                          CanUserSortColumns="True">
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Header="类型" Binding="{Binding VisitType}" Width="100"/>
+                                        <DataGridTextColumn Header="日期" Binding="{Binding VisitDate}" Width="120"/>
+                                        <DataGridTextColumn Header="方式" Binding="{Binding VisitMethod}" Width="80"/>
+                                        <DataGridTextColumn Header="回访人" Binding="{Binding Visitor}" Width="80"/>
+                                        <DataGridTextColumn Header="满意度" Binding="{Binding SatisfactionScore}" Width="80"/>
+                                        <DataGridTextColumn Header="反馈" Binding="{Binding CustomerFeedback}" Width="*"/>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                            </StackPanel>
+                            <TextBlock Text="请先选择客户" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" Visibility="{Binding SelectedCustomer, Converter={StaticResource NullToVisibilityConverter}, ConverterParameter=True}"/>
+                        </Grid>
+                    </materialDesign:Card>
+                </TabItem>
+                
+                <!-- 会员管理 -->
+                <TabItem Header="会员管理">
+                    <materialDesign:Card Padding="10">
+                        <Grid>
+                            <StackPanel Visibility="{Binding SelectedCustomer, Converter={StaticResource NullToVisibilityConverter}}">
+                                <TextBlock Text="会员信息" FontWeight="Bold" Margin="5,0,0,5"/>
+                                <DataGrid ItemsSource="{Binding CustomerMemberships}"
+                                          AutoGenerateColumns="False"
+                                          IsReadOnly="True"
+                                          CanUserSortColumns="True">
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Header="会员等级" Binding="{Binding MembershipLevel}" Width="80"/>
+                                        <DataGridTextColumn Header="会员卡号" Binding="{Binding MembershipNumber}" Width="120"/>
+                                        <DataGridTextColumn Header="积分" Binding="{Binding PointsBalance}" Width="80"/>
+                                        <DataGridTextColumn Header="累计消费" Binding="{Binding TotalConsumption, StringFormat=C}" Width="100"/>
+                                        <DataGridTextColumn Header="状态" Binding="{Binding Status}" Width="80"/>
+                                        <DataGridTextColumn Header="到期日期" Binding="{Binding ExpiryDate}" Width="120"/>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                            </StackPanel>
+                            <TextBlock Text="请先选择客户" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" Visibility="{Binding SelectedCustomer, Converter={StaticResource NullToVisibilityConverter}, ConverterParameter=True}"/>
+                        </Grid>
+                    </materialDesign:Card>
+                </TabItem>
+                
+                <!-- 客户关怀 -->
+                <TabItem Header="客户关怀">
+                    <materialDesign:Card Padding="10">
+                        <Grid>
+                            <StackPanel Visibility="{Binding SelectedCustomer, Converter={StaticResource NullToVisibilityConverter}}">
+                                <TextBlock Text="关怀记录" FontWeight="Bold" Margin="5,0,0,5"/>
+                                <DataGrid ItemsSource="{Binding CustomerCares}"
+                                          AutoGenerateColumns="False"
+                                          IsReadOnly="True"
+                                          CanUserSortColumns="True">
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Header="类型" Binding="{Binding CareType}" Width="100"/>
+                                        <DataGridTextColumn Header="主题" Binding="{Binding CareSubject}" Width="150"/>
+                                        <DataGridTextColumn Header="日期" Binding="{Binding CareDate}" Width="120"/>
+                                        <DataGridTextColumn Header="方式" Binding="{Binding CareMethod}" Width="80"/>
+                                        <DataGridTextColumn Header="执行人" Binding="{Binding Executor}" Width="80"/>
+                                        <DataGridTextColumn Header="结果" Binding="{Binding ExecutionResult}" Width="*"/>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                            </StackPanel>
+                            <TextBlock Text="请先选择客户" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" Visibility="{Binding SelectedCustomer, Converter={StaticResource NullToVisibilityConverter}, ConverterParameter=True}"/>
+                        </Grid>
+                    </materialDesign:Card>
+                </TabItem>
+                
+                <!-- 客户意见 -->
+                <TabItem Header="客户意见">
+                    <materialDesign:Card Padding="10">
+                        <Grid>
+                            <StackPanel Visibility="{Binding SelectedCustomer, Converter={StaticResource NullToVisibilityConverter}}">
+                                <TextBlock Text="意见反馈" FontWeight="Bold" Margin="5,0,0,5"/>
+                                <DataGrid ItemsSource="{Binding CustomerFeedbacks}"
+                                          AutoGenerateColumns="False"
+                                          IsReadOnly="True"
+                                          CanUserSortColumns="True">
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Header="类型" Binding="{Binding FeedbackType}" Width="100"/>
+                                        <DataGridTextColumn Header="主题" Binding="{Binding FeedbackSubject}" Width="150"/>
+                                        <DataGridTextColumn Header="日期" Binding="{Binding FeedbackDate}" Width="120"/>
+                                        <DataGridTextColumn Header="状态" Binding="{Binding Status}" Width="80"/>
+                                        <DataGridTextColumn Header="优先级" Binding="{Binding Priority}" Width="80"/>
+                                        <DataGridTextColumn Header="内容" Binding="{Binding FeedbackContent}" Width="*"/>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                            </StackPanel>
+                            <TextBlock Text="请先选择客户" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" Visibility="{Binding SelectedCustomer, Converter={StaticResource NullToVisibilityConverter}, ConverterParameter=True}"/>
+                        </Grid>
+                    </materialDesign:Card>
+                </TabItem>
+                
+                <!-- 特殊客户 -->
+                <TabItem Header="特殊客户">
+                    <materialDesign:Card Padding="10">
+                        <Grid>
+                            <StackPanel Visibility="{Binding SelectedCustomer, Converter={StaticResource NullToVisibilityConverter}}">
+                                <TextBlock Text="特殊客户信息" FontWeight="Bold" Margin="5,0,0,5"/>
+                                <DataGrid ItemsSource="{Binding SpecialCustomers}"
+                                          AutoGenerateColumns="False"
+                                          IsReadOnly="True"
+                                          CanUserSortColumns="True">
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Header="类型" Binding="{Binding SpecialType}" Width="100"/>
+                                        <DataGridTextColumn Header="原因" Binding="{Binding SpecialReason}" Width="150"/>
+                                        <DataGridTextColumn Header="状态" Binding="{Binding Status}" Width="80"/>
+                                        <DataGridTextColumn Header="生效日期" Binding="{Binding StartDate}" Width="120"/>
+                                        <DataGridTextColumn Header="到期日期" Binding="{Binding ExpiryDate}" Width="120"/>
+                                        <DataGridTextColumn Header="备注" Binding="{Binding Remarks}" Width="*"/>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                            </StackPanel>
+                            <TextBlock Text="请先选择客户" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" Visibility="{Binding SelectedCustomer, Converter={StaticResource NullToVisibilityConverter}, ConverterParameter=True}"/>
+                        </Grid>
+                    </materialDesign:Card>
+                </TabItem>
+                
+                <!-- 保险代理 -->
+                <TabItem Header="保险代理">
+                    <materialDesign:Card Padding="10">
+                        <Grid>
+                            <StackPanel Visibility="{Binding SelectedCustomer, Converter={StaticResource NullToVisibilityConverter}}">
+                                <TextBlock Text="保险代理信息" FontWeight="Bold" Margin="5,0,0,5"/>
+                                <DataGrid ItemsSource="{Binding InsuranceAgents}"
+                                          AutoGenerateColumns="False"
+                                          IsReadOnly="True"
+                                          CanUserSortColumns="True">
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Header="保险公司" Binding="{Binding InsuranceCompany}" Width="120"/>
+                                        <DataGridTextColumn Header="代理人" Binding="{Binding AgentName}" Width="100"/>
+                                        <DataGridTextColumn Header="联系方式" Binding="{Binding AgentContact}" Width="120"/>
+                                        <DataGridTextColumn Header="保险类型" Binding="{Binding InsuranceType}" Width="100"/>
+                                        <DataGridTextColumn Header="生效日期" Binding="{Binding EffectiveDate}" Width="120"/>
+                                        <DataGridTextColumn Header="到期日期" Binding="{Binding ExpiryDate}" Width="120"/>
+                                        <DataGridTextColumn Header="金额" Binding="{Binding InsuranceAmount, StringFormat=C}" Width="100"/>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                            </StackPanel>
+                            <TextBlock Text="请先选择客户" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" Visibility="{Binding SelectedCustomer, Converter={StaticResource NullToVisibilityConverter}, ConverterParameter=True}"/>
+                        </Grid>
+                    </materialDesign:Card>
+                </TabItem>
+                
+                <!-- 消费卡 -->
+                <TabItem Header="消费卡">
+                    <materialDesign:Card Padding="10">
+                        <Grid>
+                            <StackPanel Visibility="{Binding SelectedCustomer, Converter={StaticResource NullToVisibilityConverter}}">
+                                <TextBlock Text="消费卡信息" FontWeight="Bold" Margin="5,0,0,5"/>
+                                <DataGrid ItemsSource="{Binding CustomerCards}"
+                                          AutoGenerateColumns="False"
+                                          IsReadOnly="True"
+                                          CanUserSortColumns="True">
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Header="卡号" Binding="{Binding CardNumber}" Width="150"/>
+                                        <DataGridTextColumn Header="卡类型" Binding="{Binding CardType}" Width="100"/>
+                                        <DataGridTextColumn Header="初始金额" Binding="{Binding InitialAmount, StringFormat=C}" Width="100"/>
+                                        <DataGridTextColumn Header="当前余额" Binding="{Binding CurrentBalance, StringFormat=C}" Width="100"/>
+                                        <DataGridTextColumn Header="累计消费" Binding="{Binding TotalConsumption, StringFormat=C}" Width="100"/>
+                                        <DataGridTextColumn Header="开卡日期" Binding="{Binding IssueDate}" Width="120"/>
+                                        <DataGridTextColumn Header="有效期至" Binding="{Binding ExpiryDate}" Width="120"/>
+                                        <DataGridTextColumn Header="状态" Binding="{Binding Status}" Width="80"/>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                            </StackPanel>
+                            <TextBlock Text="请先选择客户" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" Visibility="{Binding SelectedCustomer, Converter={StaticResource NullToVisibilityConverter}, ConverterParameter=True}"/>
+                        </Grid>
+                    </materialDesign:Card>
+                </TabItem>
+            </TabControl>
+        </Grid>
+    </Grid>
+</UserControl>

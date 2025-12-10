@@ -28,11 +28,6 @@
                 <Trigger Property="IsPressed" Value="True">
                     <Setter Property="Background" Value="#2C3E50"/>
                 </Trigger>
-                <DataTrigger Binding="{Binding IsSelected}" Value="True">
-                    <Setter Property="Background" Value="#2C3E50"/>
-                    <Setter Property="BorderBrush" Value="#3498DB"/>
-                    <Setter Property="BorderThickness" Value="0,0,3,0"/>
-                </DataTrigger>
             </Style.Triggers>
         </Style>
         
@@ -70,53 +65,158 @@
                 <!-- 导航菜单 -->
                 <StackPanel Margin="10,20,10,10">
                     <TextBlock Text="主菜单" FontSize="12" Foreground="#BDC3C7" Margin="0,10,0,5"/>
-                    <Button Style="{StaticResource NavButtonStyle}" Command="{Binding NavigateCommand}" CommandParameter="Dashboard">
+                    <Button Command="{Binding NavigateCommand}" CommandParameter="Dashboard">
                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                             <materialDesign:PackIcon Kind="ViewDashboard" Width="20" Height="20" Margin="0,0,10,0"/>
                             <TextBlock Text="仪表盘"/>
                         </StackPanel>
+                        <Button.Style>
+                            <Style TargetType="Button" BasedOn="{StaticResource NavButtonStyle}">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding CurrentModule}" Value="Dashboard">
+                                        <Setter Property="Background" Value="#2C3E50"/>
+                                        <Setter Property="BorderBrush" Value="#3498DB"/>
+                                        <Setter Property="BorderThickness" Value="0,0,3,0"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
                     </Button>
-                    <Button Style="{StaticResource NavButtonStyle}" Command="{Binding NavigateCommand}" CommandParameter="BusinessReception">
+                    <Button Command="{Binding NavigateCommand}" CommandParameter="BusinessReception">
                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                             <materialDesign:PackIcon Kind="AccountGroup" Width="20" Height="20" Margin="0,0,10,0"/>
                             <TextBlock Text="业务接待"/>
                         </StackPanel>
+                        <Button.Style>
+                            <Style TargetType="Button" BasedOn="{StaticResource NavButtonStyle}">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding CurrentModule}" Value="BusinessReception">
+                                        <Setter Property="Background" Value="#2C3E50"/>
+                                        <Setter Property="BorderBrush" Value="#3498DB"/>
+                                        <Setter Property="BorderThickness" Value="0,0,3,0"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
                     </Button>
-                    <Button Style="{StaticResource NavButtonStyle}" Command="{Binding NavigateCommand}" CommandParameter="FinancialSettlement">
+                    <Button Command="{Binding NavigateCommand}" CommandParameter="FinancialSettlement">
                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                             <materialDesign:PackIcon Kind="Cash" Width="20" Height="20" Margin="0,0,10,0"/>
                             <TextBlock Text="财务结算"/>
                         </StackPanel>
+                        <Button.Style>
+                            <Style TargetType="Button" BasedOn="{StaticResource NavButtonStyle}">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding CurrentModule}" Value="FinancialSettlement">
+                                        <Setter Property="Background" Value="#2C3E50"/>
+                                        <Setter Property="BorderBrush" Value="#3498DB"/>
+                                        <Setter Property="BorderThickness" Value="0,0,3,0"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
                     </Button>
-                    <Button Style="{StaticResource NavButtonStyle}" Command="{Binding NavigateCommand}" CommandParameter="SparePartsManagement">
+                    <Button Command="{Binding NavigateCommand}" CommandParameter="SparePartsManagement">
                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                             <materialDesign:PackIcon Kind="Box" Width="20" Height="20" Margin="0,0,10,0"/>
                             <TextBlock Text="备件管理"/>
                         </StackPanel>
+                        <Button.Style>
+                            <Style TargetType="Button" BasedOn="{StaticResource NavButtonStyle}">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding CurrentModule}" Value="SparePartsManagement">
+                                        <Setter Property="Background" Value="#2C3E50"/>
+                                        <Setter Property="BorderBrush" Value="#3498DB"/>
+                                        <Setter Property="BorderThickness" Value="0,0,3,0"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
                     </Button>
-                    <Button Style="{StaticResource NavButtonStyle}" Command="{Binding NavigateCommand}" CommandParameter="WorkshopManagement">
+                    <Button Command="{Binding NavigateCommand}" CommandParameter="WorkshopManagement">
                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                             <materialDesign:PackIcon Kind="Factory" Width="20" Height="20" Margin="0,0,10,0"/>
                             <TextBlock Text="车间管理"/>
                         </StackPanel>
+                        <Button.Style>
+                            <Style TargetType="Button" BasedOn="{StaticResource NavButtonStyle}">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding CurrentModule}" Value="WorkshopManagement">
+                                        <Setter Property="Background" Value="#2C3E50"/>
+                                        <Setter Property="BorderBrush" Value="#3498DB"/>
+                                        <Setter Property="BorderThickness" Value="0,0,3,0"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
                     </Button>
-                    <Button Style="{StaticResource NavButtonStyle}" Command="{Binding NavigateCommand}" CommandParameter="LeadershipQuery">
+                    <Button Command="{Binding NavigateCommand}" CommandParameter="LeadershipQuery">
                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                             <materialDesign:PackIcon Kind="ChartLine" Width="20" Height="20" Margin="0,0,10,0"/>
                             <TextBlock Text="领导查询"/>
                         </StackPanel>
+                        <Button.Style>
+                            <Style TargetType="Button" BasedOn="{StaticResource NavButtonStyle}">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding CurrentModule}" Value="LeadershipQuery">
+                                        <Setter Property="Background" Value="#2C3E50"/>
+                                        <Setter Property="BorderBrush" Value="#3498DB"/>
+                                        <Setter Property="BorderThickness" Value="0,0,3,0"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
                     </Button>
-                    <Button Style="{StaticResource NavButtonStyle}" Command="{Binding NavigateCommand}" CommandParameter="SystemManagement">
+                    <Button Command="{Binding NavigateCommand}" CommandParameter="SystemManagement">
                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                             <materialDesign:PackIcon Kind="Cog" Width="20" Height="20" Margin="0,0,10,0"/>
                             <TextBlock Text="系统管理"/>
                         </StackPanel>
+                        <Button.Style>
+                            <Style TargetType="Button" BasedOn="{StaticResource NavButtonStyle}">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding CurrentModule}" Value="SystemManagement">
+                                        <Setter Property="Background" Value="#2C3E50"/>
+                                        <Setter Property="BorderBrush" Value="#3498DB"/>
+                                        <Setter Property="BorderThickness" Value="0,0,3,0"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
                     </Button>
-                    <Button Style="{StaticResource NavButtonStyle}" Command="{Binding NavigateCommand}" CommandParameter="RawInventory">
+                    <Button Command="{Binding NavigateCommand}" CommandParameter="CustomerManagement">
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                            <materialDesign:PackIcon Kind="AccountGroup" Width="20" Height="20" Margin="0,0,10,0"/>
+                            <TextBlock Text="客户管理"/>
+                        </StackPanel>
+                        <Button.Style>
+                            <Style TargetType="Button" BasedOn="{StaticResource NavButtonStyle}">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding CurrentModule}" Value="CustomerManagement">
+                                        <Setter Property="Background" Value="#2C3E50"/>
+                                        <Setter Property="BorderBrush" Value="#3498DB"/>
+                                        <Setter Property="BorderThickness" Value="0,0,3,0"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+                    <Button Command="{Binding NavigateCommand}" CommandParameter="RawInventory">
                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                             <materialDesign:PackIcon Kind="Warehouse" Width="20" Height="20" Margin="0,0,10,0"/>
                             <TextBlock Text="原始库存"/>
                         </StackPanel>
+                        <Button.Style>
+                            <Style TargetType="Button" BasedOn="{StaticResource NavButtonStyle}">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding CurrentModule}" Value="RawInventory">
+                                        <Setter Property="Background" Value="#2C3E50"/>
+                                        <Setter Property="BorderBrush" Value="#3498DB"/>
+                                        <Setter Property="BorderThickness" Value="0,0,3,0"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
                     </Button>
                     
                     <!-- 退出按钮 -->
