@@ -29,6 +29,7 @@ namespace Login_Sample.ViewModels
         // 各模块的ViewModel实例
         public DashboardViewModel DashboardVM { get; set; }
         public BusinessReceptionViewModel BusinessReceptionVM { get; set; }
+        public VehicleMaintenanceViewModel VehicleMaintenanceVM { get; set; }
         public FinancialSettlementViewModel FinancialSettlementVM { get; set; }
         public SparePartsManagementViewModel SparePartsManagementVM { get; set; }
         public WorkshopManagementViewModel WorkshopManagementVM { get; set; }
@@ -40,6 +41,7 @@ namespace Login_Sample.ViewModels
         // 各模块的View实例
         public DashboardView DashboardView { get; set; }
         public BusinessReceptionView BusinessReceptionView { get; set; }
+        public VehicleMaintenanceView VehicleMaintenanceView { get; set; }
         public FinancialSettlementView FinancialSettlementView { get; set; }
         public SparePartsManagementView SparePartsManagementView { get; set; }
         public WorkshopManagementView WorkshopManagementView { get; set; }
@@ -82,6 +84,7 @@ namespace Login_Sample.ViewModels
             // 初始化各模块的ViewModel
             DashboardVM = new DashboardViewModel();
             BusinessReceptionVM = new BusinessReceptionViewModel();
+            VehicleMaintenanceVM = new VehicleMaintenanceViewModel();
             FinancialSettlementVM = new FinancialSettlementViewModel();
             SparePartsManagementVM = new SparePartsManagementViewModel();
             WorkshopManagementVM = new WorkshopManagementViewModel();
@@ -93,6 +96,7 @@ namespace Login_Sample.ViewModels
             // 初始化各模块的View
             DashboardView = new DashboardView() { DataContext = DashboardVM };
             BusinessReceptionView = new BusinessReceptionView() { DataContext = BusinessReceptionVM };
+            VehicleMaintenanceView = new VehicleMaintenanceView() { DataContext = VehicleMaintenanceVM };
             FinancialSettlementView = new FinancialSettlementView() { DataContext = FinancialSettlementVM };
             SparePartsManagementView = new SparePartsManagementView() { DataContext = SparePartsManagementVM };
             WorkshopManagementView = new WorkshopManagementView() { DataContext = WorkshopManagementVM };
@@ -132,6 +136,10 @@ namespace Login_Sample.ViewModels
                 case "BusinessReception":
                     CurrentView = BusinessReceptionView;
                     CurrentModule = "BusinessReception";
+                    break;
+                case "VehicleMaintenance":
+                    CurrentView = VehicleMaintenanceView;
+                    CurrentModule = "VehicleMaintenance";
                     break;
                 case "FinancialSettlement":
                     CurrentView = FinancialSettlementView;
