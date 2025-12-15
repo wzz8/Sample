@@ -112,6 +112,23 @@
                                     </Style>
                                 </Button.Style>
                             </Button>
+                            <Button Command="{Binding NavigateCommand}" CommandParameter="MaintenanceQuery">
+                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                    <materialDesign:PackIcon Kind="Magnify" Width="20" Height="20" Margin="0,0,10,0"/>
+                                    <TextBlock Text="维修查询"/>
+                                </StackPanel>
+                                <Button.Style>
+                                    <Style TargetType="Button" BasedOn="{StaticResource NavButtonStyle}">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding CurrentModule}" Value="MaintenanceQuery">
+                                                <Setter Property="Background" Value="#2C3E50"/>
+                                                <Setter Property="BorderBrush" Value="#3498DB"/>
+                                                <Setter Property="BorderThickness" Value="0,0,3,0"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+                            </Button>
                         </StackPanel>
                     </Expander>
                     <Button Command="{Binding NavigateCommand}" CommandParameter="FinancialSettlement">

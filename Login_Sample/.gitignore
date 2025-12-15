@@ -1,0 +1,42 @@
+# Visual Studio generated files
+.vs/
+.vscode/
+*.csproj.user
+*.suo
+*.user
+*.sln.docstates
+
+# Build output
+bin/
+obj/
+build_output.txt
+
+# Temporary files
+*.tmp
+*.temp
+*.cache
+
+# Log files
+*.log
+
+# Test results
+TestResults/
+*.trx
+
+# NuGet packages
+packages/
+*.nupkg
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Other sample projects
+../MASM_Sample/
+../MFC/
+../x64/

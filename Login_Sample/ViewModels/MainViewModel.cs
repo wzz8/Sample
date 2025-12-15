@@ -30,6 +30,7 @@ namespace Login_Sample.ViewModels
         public DashboardViewModel DashboardVM { get; set; }
         public BusinessReceptionViewModel BusinessReceptionVM { get; set; }
         public VehicleMaintenanceViewModel VehicleMaintenanceVM { get; set; }
+        public MaintenanceQueryViewModel MaintenanceQueryVM { get; set; }
         public FinancialSettlementViewModel FinancialSettlementVM { get; set; }
         public SparePartsManagementViewModel SparePartsManagementVM { get; set; }
         public WorkshopManagementViewModel WorkshopManagementVM { get; set; }
@@ -42,6 +43,7 @@ namespace Login_Sample.ViewModels
         public DashboardView DashboardView { get; set; }
         public BusinessReceptionView BusinessReceptionView { get; set; }
         public VehicleMaintenanceView VehicleMaintenanceView { get; set; }
+        public MaintenanceQueryView MaintenanceQueryView { get; set; }
         public FinancialSettlementView FinancialSettlementView { get; set; }
         public SparePartsManagementView SparePartsManagementView { get; set; }
         public WorkshopManagementView WorkshopManagementView { get; set; }
@@ -85,6 +87,7 @@ namespace Login_Sample.ViewModels
             DashboardVM = new DashboardViewModel();
             BusinessReceptionVM = new BusinessReceptionViewModel();
             VehicleMaintenanceVM = new VehicleMaintenanceViewModel();
+            MaintenanceQueryVM = new MaintenanceQueryViewModel();
             FinancialSettlementVM = new FinancialSettlementViewModel();
             SparePartsManagementVM = new SparePartsManagementViewModel();
             WorkshopManagementVM = new WorkshopManagementViewModel();
@@ -97,6 +100,7 @@ namespace Login_Sample.ViewModels
             DashboardView = new DashboardView() { DataContext = DashboardVM };
             BusinessReceptionView = new BusinessReceptionView() { DataContext = BusinessReceptionVM };
             VehicleMaintenanceView = new VehicleMaintenanceView() { DataContext = VehicleMaintenanceVM };
+            MaintenanceQueryView = new MaintenanceQueryView() { DataContext = MaintenanceQueryVM };
             FinancialSettlementView = new FinancialSettlementView() { DataContext = FinancialSettlementVM };
             SparePartsManagementView = new SparePartsManagementView() { DataContext = SparePartsManagementVM };
             WorkshopManagementView = new WorkshopManagementView() { DataContext = WorkshopManagementVM };
@@ -140,6 +144,10 @@ namespace Login_Sample.ViewModels
                 case "VehicleMaintenance":
                     CurrentView = VehicleMaintenanceView;
                     CurrentModule = "VehicleMaintenance";
+                    break;
+                case "MaintenanceQuery":
+                    CurrentView = MaintenanceQueryView;
+                    CurrentModule = "MaintenanceQuery";
                     break;
                 case "FinancialSettlement":
                     CurrentView = FinancialSettlementView;
