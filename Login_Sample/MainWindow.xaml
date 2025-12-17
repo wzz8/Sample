@@ -129,6 +129,74 @@
                                     </Style>
                                 </Button.Style>
                             </Button>
+                            <Button Command="{Binding NavigateCommand}" CommandParameter="ProjectQuery">
+                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                    <materialDesign:PackIcon Kind="ClipboardList" Width="20" Height="20" Margin="0,0,10,0"/>
+                                    <TextBlock Text="项目查询"/>
+                                </StackPanel>
+                                <Button.Style>
+                                    <Style TargetType="Button" BasedOn="{StaticResource NavButtonStyle}">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding CurrentModule}" Value="ProjectQuery">
+                                                <Setter Property="Background" Value="#2C3E50"/>
+                                                <Setter Property="BorderBrush" Value="#3498DB"/>
+                                                <Setter Property="BorderThickness" Value="0,0,3,0"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+                            </Button>
+                            <Button Command="{Binding NavigateCommand}" CommandParameter="RepairProgress">
+                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                    <materialDesign:PackIcon Kind="ProgressClock" Width="20" Height="20" Margin="0,0,10,0"/>
+                                    <TextBlock Text="维修进度"/>
+                                </StackPanel>
+                                <Button.Style>
+                                    <Style TargetType="Button" BasedOn="{StaticResource NavButtonStyle}">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding CurrentModule}" Value="RepairProgress">
+                                                <Setter Property="Background" Value="#2C3E50"/>
+                                                <Setter Property="BorderBrush" Value="#3498DB"/>
+                                                <Setter Property="BorderThickness" Value="0,0,3,0"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+                            </Button>
+                            <Button Command="{Binding NavigateCommand}" CommandParameter="InventoryQuery">
+                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                    <materialDesign:PackIcon Kind="Database" Width="20" Height="20" Margin="0,0,10,0"/>
+                                    <TextBlock Text="库存查询"/>
+                                </StackPanel>
+                                <Button.Style>
+                                    <Style TargetType="Button" BasedOn="{StaticResource NavButtonStyle}">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding CurrentModule}" Value="InventoryQuery">
+                                                <Setter Property="Background" Value="#2C3E50"/>
+                                                <Setter Property="BorderBrush" Value="#3498DB"/>
+                                                <Setter Property="BorderThickness" Value="0,0,3,0"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+                            </Button>
+                            <Button Command="{Binding NavigateCommand}" CommandParameter="ShortageManagement">
+                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                    <materialDesign:PackIcon Kind="PackageVariantClosed" Width="20" Height="20" Margin="0,0,10,0"/>
+                                    <TextBlock Text="缺件管理"/>
+                                </StackPanel>
+                                <Button.Style>
+                                    <Style TargetType="Button" BasedOn="{StaticResource NavButtonStyle}">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding CurrentModule}" Value="ShortageManagement">
+                                                <Setter Property="Background" Value="#2C3E50"/>
+                                                <Setter Property="BorderBrush" Value="#3498DB"/>
+                                                <Setter Property="BorderThickness" Value="0,0,3,0"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+                            </Button>
                         </StackPanel>
                     </Expander>
                     <Button Command="{Binding NavigateCommand}" CommandParameter="FinancialSettlement">

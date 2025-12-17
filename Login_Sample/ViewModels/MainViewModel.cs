@@ -26,24 +26,12 @@ namespace Login_Sample.ViewModels
             set { _currentView = value; OnPropertyChanged(); }
         }
 
-        // 各模块的ViewModel实例
-        public DashboardViewModel DashboardVM { get; set; }
-        public BusinessReceptionViewModel BusinessReceptionVM { get; set; }
-        public VehicleMaintenanceViewModel VehicleMaintenanceVM { get; set; }
-        public MaintenanceQueryViewModel MaintenanceQueryVM { get; set; }
-        public FinancialSettlementViewModel FinancialSettlementVM { get; set; }
-        public SparePartsManagementViewModel SparePartsManagementVM { get; set; }
-        public WorkshopManagementViewModel WorkshopManagementVM { get; set; }
-        public LeadershipQueryViewModel LeadershipQueryVM { get; set; }
-        public SystemManagementViewModel SystemManagementVM { get; set; }
-        public RawInventoryViewModel RawInventoryVM { get; set; }
-        public CustomerManagementViewModel CustomerManagementVM { get; set; }
-        
         // 各模块的View实例
         public DashboardView DashboardView { get; set; }
         public BusinessReceptionView BusinessReceptionView { get; set; }
         public VehicleMaintenanceView VehicleMaintenanceView { get; set; }
         public MaintenanceQueryView MaintenanceQueryView { get; set; }
+        public ProjectQueryView ProjectQueryView { get; set; }
         public FinancialSettlementView FinancialSettlementView { get; set; }
         public SparePartsManagementView SparePartsManagementView { get; set; }
         public WorkshopManagementView WorkshopManagementView { get; set; }
@@ -51,7 +39,27 @@ namespace Login_Sample.ViewModels
         public SystemManagementView SystemManagementView { get; set; }
         public RawInventoryView RawInventoryView { get; set; }
         public CustomerManagementView CustomerManagementView { get; set; }
-
+        public RepairProgressView RepairProgressView { get; set; }
+        public InventoryQueryView InventoryQueryView { get; set; }
+        public ShortageManagementView ShortageManagementView { get; set; }
+        
+        // 各模块的ViewModel实例
+        public DashboardViewModel DashboardVM { get; set; }
+        public BusinessReceptionViewModel BusinessReceptionVM { get; set; }
+        public VehicleMaintenanceViewModel VehicleMaintenanceVM { get; set; }
+        public MaintenanceQueryViewModel MaintenanceQueryVM { get; set; }
+        public ProjectQueryViewModel ProjectQueryVM { get; set; }
+        public FinancialSettlementViewModel FinancialSettlementVM { get; set; }
+        public SparePartsManagementViewModel SparePartsManagementVM { get; set; }
+        public WorkshopManagementViewModel WorkshopManagementVM { get; set; }
+        public LeadershipQueryViewModel LeadershipQueryVM { get; set; }
+        public SystemManagementViewModel SystemManagementVM { get; set; }
+        public RawInventoryViewModel RawInventoryVM { get; set; }
+        public CustomerManagementViewModel CustomerManagementVM { get; set; }
+        public RepairProgressViewModel RepairProgressVM { get; set; }
+        public InventoryQueryViewModel InventoryQueryVM { get; set; }
+        public ShortageManagementViewModel ShortageManagementVM { get; set; }
+        
         // 命令
         public ICommand NavigateCommand { get; set; }
         public ICommand LogoutCommand { get; set; }
@@ -80,6 +88,14 @@ namespace Login_Sample.ViewModels
             set { _currentModule = value; OnPropertyChanged(); }
         }
 
+        // 侧边栏位置
+        private bool _sidebarOnLeft = true;
+        public bool SidebarOnLeft
+        {
+            get { return _sidebarOnLeft; }
+            set { _sidebarOnLeft = value; OnPropertyChanged(); }
+        }
+
         // 构造函数
         public MainViewModel()
         {
@@ -88,6 +104,7 @@ namespace Login_Sample.ViewModels
             BusinessReceptionVM = new BusinessReceptionViewModel();
             VehicleMaintenanceVM = new VehicleMaintenanceViewModel();
             MaintenanceQueryVM = new MaintenanceQueryViewModel();
+            ProjectQueryVM = new ProjectQueryViewModel();
             FinancialSettlementVM = new FinancialSettlementViewModel();
             SparePartsManagementVM = new SparePartsManagementViewModel();
             WorkshopManagementVM = new WorkshopManagementViewModel();
@@ -95,12 +112,16 @@ namespace Login_Sample.ViewModels
             SystemManagementVM = new SystemManagementViewModel();
             RawInventoryVM = new RawInventoryViewModel();
             CustomerManagementVM = new CustomerManagementViewModel();
+            RepairProgressVM = new RepairProgressViewModel();
+            InventoryQueryVM = new InventoryQueryViewModel();
+            ShortageManagementVM = new ShortageManagementViewModel();
             
             // 初始化各模块的View
             DashboardView = new DashboardView() { DataContext = DashboardVM };
             BusinessReceptionView = new BusinessReceptionView() { DataContext = BusinessReceptionVM };
             VehicleMaintenanceView = new VehicleMaintenanceView() { DataContext = VehicleMaintenanceVM };
             MaintenanceQueryView = new MaintenanceQueryView() { DataContext = MaintenanceQueryVM };
+            ProjectQueryView = new ProjectQueryView() { DataContext = ProjectQueryVM };
             FinancialSettlementView = new FinancialSettlementView() { DataContext = FinancialSettlementVM };
             SparePartsManagementView = new SparePartsManagementView() { DataContext = SparePartsManagementVM };
             WorkshopManagementView = new WorkshopManagementView() { DataContext = WorkshopManagementVM };
@@ -108,7 +129,10 @@ namespace Login_Sample.ViewModels
             SystemManagementView = new SystemManagementView() { DataContext = SystemManagementVM };
             RawInventoryView = new RawInventoryView() { DataContext = RawInventoryVM };
             CustomerManagementView = new CustomerManagementView() { DataContext = CustomerManagementVM };
-
+            RepairProgressView = new RepairProgressView() { DataContext = RepairProgressVM };
+            InventoryQueryView = new InventoryQueryView() { DataContext = InventoryQueryVM };
+            ShortageManagementView = new ShortageManagementView() { DataContext = ShortageManagementVM };
+            
             // 初始化命令
             NavigateCommand = new RelayCommand(Navigate);
             LogoutCommand = new RelayCommand(Logout);
@@ -149,6 +173,10 @@ namespace Login_Sample.ViewModels
                     CurrentView = MaintenanceQueryView;
                     CurrentModule = "MaintenanceQuery";
                     break;
+                case "ProjectQuery":
+                    CurrentView = ProjectQueryView;
+                    CurrentModule = "ProjectQuery";
+                    break;
                 case "FinancialSettlement":
                     CurrentView = FinancialSettlementView;
                     CurrentModule = "FinancialSettlement";
@@ -176,6 +204,18 @@ namespace Login_Sample.ViewModels
                 case "CustomerManagement":
                     CurrentView = CustomerManagementView;
                     CurrentModule = "CustomerManagement";
+                    break;
+                case "RepairProgress":
+                    CurrentView = RepairProgressView;
+                    CurrentModule = "RepairProgress";
+                    break;
+                case "InventoryQuery":
+                    CurrentView = InventoryQueryView;
+                    CurrentModule = "InventoryQuery";
+                    break;
+                case "ShortageManagement":
+                    CurrentView = ShortageManagementView;
+                    CurrentModule = "ShortageManagement";
                     break;
             }
         }

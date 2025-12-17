@@ -260,9 +260,9 @@ namespace Login_Sample.ViewModels
             Factory = "全部";
             Category = "全部";
             Advisor = "全部";
-            StartDate = null;
-            EndDate = null;
-            SearchKeyword = null;
+            StartDate = DateTime.MinValue;
+            EndDate = DateTime.MaxValue;
+            SearchKeyword = string.Empty;
 
             // 重新加载全部数据
             InitializeMockData();
