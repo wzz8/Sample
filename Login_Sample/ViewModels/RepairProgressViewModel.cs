@@ -213,16 +213,16 @@ namespace Login_Sample.ViewModels{
         public class RepairProgressItem
         {
             public int Id { get; set; }
-            public string OrderNumber { get; set; }
-            public string CustomerName { get; set; }
-            public string LicensePlate { get; set; }
-            public string VehicleModel { get; set; }
+            public string OrderNumber { get; set; } = string.Empty;
+            public string CustomerName { get; set; } = string.Empty;
+            public string LicensePlate { get; set; } = string.Empty;
+            public string VehicleModel { get; set; } = string.Empty;
             public DateTime ReceptionDate { get; set; }
-            public string RepairStatus { get; set; }
-            public string CurrentStage { get; set; }
-            public string Technician { get; set; }
+            public string RepairStatus { get; set; } = string.Empty;
+            public string CurrentStage { get; set; } = string.Empty;
+            public string Technician { get; set; } = string.Empty;
             public DateTime EstimatedCompletionTime { get; set; }
-            public List<RepairItemStatus> RepairItems { get; set; }
+            public List<RepairItemStatus> RepairItems { get; set; } = new List<RepairItemStatus>();
         }
         
         /// <summary>
@@ -230,8 +230,8 @@ namespace Login_Sample.ViewModels{
         /// </summary>
         public class RepairItemStatus
         {
-            public string ItemName { get; set; }
-            public string Status { get; set; }
+            public string ItemName { get; set; } = string.Empty;
+            public string Status { get; set; } = string.Empty;
         }
     }
 }
