@@ -1,0 +1,177 @@
+<UserControl x:Class="Login_Sample.Views.DispatchManagementView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:Login_Sample.Views"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <!-- NullToVisibilityConverter -->
+        <BooleanToVisibilityConverter x:Key="NullToVisibilityConverter"/>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <!-- 标题栏 -->
+        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,20" HorizontalAlignment="Stretch">
+            <TextBlock Text="派工处理" FontSize="24" FontWeight="Bold" VerticalAlignment="Center"/>
+            <StackPanel Orientation="Horizontal" Margin="20,0,0,0" HorizontalAlignment="Right" VerticalAlignment="Center">
+                <materialDesign:PackIcon Kind="Calendar" Margin="0,0,5,0"/>
+                <TextBlock x:Name="CurrentDateText" FontSize="14"/>
+            </StackPanel>
+        </StackPanel>
+
+        <Grid Grid.Row="1" Margin="0,20,0,0">
+            <!-- 左侧：车辆列表 -->
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="300"/>
+                <ColumnDefinition Width="20"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            
+            <!-- 车辆列表 -->
+            <Grid Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                
+                <TextBlock Text="在修车辆列表" FontSize="16" FontWeight="Bold" Margin="0,0,0,10"/>
+                <ListBox ItemsSource="{Binding VehiclesInRepair}" SelectedItem="{Binding SelectedVehicle}" Grid.Row="1" Margin="0,0,0,10">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Margin="5">
+                                <TextBlock Text="{Binding LicensePlate}" FontSize="14" FontWeight="Bold"/>
+                                <TextBlock Text="{Binding Model}" FontSize="12" Foreground="Gray"/>
+                                <TextBlock Text="客户: {Binding CustomerName}" FontSize="12" Foreground="Gray"/>
+                                <TextBlock Text="接车日期: {Binding ReceptionDate, StringFormat='yyyy-MM-dd'}" FontSize="12" Foreground="Gray"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                    <ListBox.ItemContainerStyle>
+                        <Style TargetType="ListBoxItem">
+                            <Setter Property="Background" Value="#FFFFFF"/>
+                            <Setter Property="BorderBrush" Value="#E0E0E0"/>
+                            <Setter Property="BorderThickness" Value="1"/>
+                            <Setter Property="Margin" Value="0,0,0,5"/>
+                            <Setter Property="Padding" Value="10"/>
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                            <Style.Triggers>
+                                <Trigger Property="IsSelected" Value="True">
+                                    <Setter Property="Background" Value="#3498DB"/>
+                                    <Setter Property="Foreground" Value="White"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </ListBox.ItemContainerStyle>
+                </ListBox>
+            </Grid>
+            
+            <!-- 右侧：维修项目和派工 -->
+            <Grid Grid.Column="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                
+                <!-- 选中车辆信息 -->
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,20">
+                    <TextBlock Text="当前车辆: " FontSize="14" FontWeight="Bold"/>
+                    <TextBlock Text="{Binding SelectedVehicle.LicensePlate}" FontSize="14" Margin="5,0,5,0" FontWeight="Bold"/>
+                    <TextBlock Text="({Binding SelectedVehicle.Model})" FontSize="14"/>
+                    <TextBlock Text=" - 客户: {Binding SelectedVehicle.CustomerName}" FontSize="14" Margin="10,0,0,0"/>
+                </StackPanel>
+                
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="20"/>
+                        <ColumnDefinition Width="250"/>
+                    </Grid.ColumnDefinitions>
+                    
+                    <!-- 维修项目 -->
+                    <Grid Grid.Column="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        
+                        <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                            <TextBlock Text="维修项目" FontSize="16" FontWeight="Bold" VerticalAlignment="Center"/>
+                            <TextBlock Text=" ({Binding RepairItems.Count})" FontSize="14" VerticalAlignment="Center"/>
+                        </StackPanel>
+                        
+                        <!-- 维修项目列表 -->
+                        <DataGrid ItemsSource="{Binding RepairItems}" Grid.Row="1" AutoGenerateColumns="False" SelectionMode="Single">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="50"/>
+                                <DataGridTextColumn Header="项目名称" Binding="{Binding Name}" Width="*"/>
+                                <DataGridTextColumn Header="进度" Binding="{Binding Progress, StringFormat='{}{0}%'}" Width="80"/>
+                                <DataGridTextColumn Header="状态" Binding="{Binding Status}" Width="100"/>
+                                <DataGridTextColumn Header="指派技师" Binding="{Binding AssignedTechnician}" Width="100"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                        
+                        <!-- 添加维修项目 -->
+                        <StackPanel Orientation="Horizontal" Grid.Row="2" Margin="0,10,0,0">
+                            <TextBox Text="{Binding NewRepairItemName}" Margin="0,0,10,0" ToolTip="输入新维修项目名称" Width="119"/>
+                            <Button Content="添加" Command="{Binding AddRepairItemCommand}" Width="80"/>
+                        </StackPanel>
+                    </Grid>
+                    
+                    <!-- 右侧：可用技师和派工 -->
+                    <Grid Grid.Column="2">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        
+                        <TextBlock Text="可用技师" FontSize="16" FontWeight="Bold" Margin="0,0,0,10"/>
+                        
+                        <!-- 可用技师列表 -->
+                        <ListBox ItemsSource="{Binding AvailableTechnicians}" SelectedItem="{Binding SelectedTechnician}" Grid.Row="1" Margin="0,0,0,20">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Margin="5">
+                                        <TextBlock Text="{Binding Name}" FontSize="14" FontWeight="Bold"/>
+                                        <TextBlock Text="{Binding Position}" FontSize="12" Foreground="Gray"/>
+                                        <TextBlock Text="当前工作量: {Binding CurrentWorkload}" FontSize="12" Foreground="Gray"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                            <ListBox.ItemContainerStyle>
+                                <Style TargetType="ListBoxItem">
+                                    <Setter Property="Background" Value="#FFFFFF"/>
+                                    <Setter Property="BorderBrush" Value="#E0E0E0"/>
+                                    <Setter Property="BorderThickness" Value="1"/>
+                                    <Setter Property="Margin" Value="0,0,0,5"/>
+                                    <Setter Property="Padding" Value="10"/>
+                                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsSelected" Value="True">
+                                            <Setter Property="Background" Value="#3498DB"/>
+                                            <Setter Property="Foreground" Value="White"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </ListBox.ItemContainerStyle>
+                        </ListBox>
+                        
+                        <!-- 派工按钮 -->
+                        <StackPanel Grid.Row="2" Orientation="Vertical" HorizontalAlignment="Stretch">
+                            <Button Content="指派技师" Command="{Binding AssignTechnicianCommand}" Width="100" HorizontalAlignment="Center" Margin="0,0,0,10"/>
+                            <Button Content="保存派工" Command="{Binding SaveDispatchCommand}" Width="100" HorizontalAlignment="Center"/>
+                        </StackPanel>
+                    </Grid>
+                </Grid>
+            </Grid>
+        </Grid>
+    </Grid>
+</UserControl>
