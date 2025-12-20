@@ -3,7 +3,7 @@ using System.Globalization;
 using System.Windows;
 using System.Windows.Data;
 
-namespace Login_Sample.Views
+namespace Login_Sample.Converters
 {
     /// <summary>
     /// 将对象是否为null转换为Visibility的转换器
