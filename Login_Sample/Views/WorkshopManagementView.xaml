@@ -4,10 +4,48 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:Login_Sample.Views"
-    xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             xmlns:converters="clr-namespace:Login_Sample.Converters"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:viewmodels="clr-namespace:Login_Sample.ViewModels"
              mc:Ignorable="d"
              d:DesignHeight="700" d:DesignWidth="900">
+    <UserControl.Resources>
+        <!-- 转换器 -->
+        <converters:DashboardDataTypeToVisibilityConverter x:Key="DashboardDataTypeToVisibilityConverter" />
+        
+        <!-- 状态样式 -->
+        <Style x:Key="StatusBadgeStyle" TargetType="Border">
+            <Setter Property="CornerRadius" Value="12" />
+            <Setter Property="Padding" Value="8,4,8,4" />
+            <Setter Property="TextBlock.FontSize" Value="12" />
+            <Setter Property="TextBlock.FontWeight" Value="Medium" />
+            <Setter Property="TextBlock.Foreground" Value="White" />
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Status}" Value="已完成">
+                    <Setter Property="Background" Value="#28A745" />
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Status}" Value="正在进行">
+                    <Setter Property="Background" Value="#17A2B8" />
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Status}" Value="待进行">
+                    <Setter Property="Background" Value="#FFC107" />
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Status}" Value="待料">
+                    <Setter Property="Background" Value="#FD7E14" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+        
+        <!-- 进度条样式 -->
+        <Style x:Key="ProgressBarStyle" TargetType="ProgressBar">
+            <Setter Property="Height" Value="8" />
+            <Setter Property="Background" Value="#E9ECEF" />
+            <Setter Property="Foreground" Value="#3498DB" />
+            <Setter Property="BorderThickness" Value="0" />
+        </Style>
+    </UserControl.Resources>
+    
     <Grid Background="#F5F5F5">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -23,68 +61,217 @@
         </Border>
         
         <!-- 模块内容区域 -->
-        <Grid Grid.Row="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="300"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            
-            <!-- 左侧：维修进度表单 -->
-            <Border Background="#FFFFFF" Margin="10" CornerRadius="5" Grid.Column="0">
-                <StackPanel>
-                    <TextBlock Text="维修进度" FontSize="18" FontWeight="Bold" Foreground="#2C3E50" Margin="15,15,0,15"/>
-                    
-                    <materialDesign:Card Margin="10" Padding="10">
-                        <StackPanel>
-                            <TextBlock Text="维修任务" FontWeight="Bold" Margin="0,0,0,10"/>
-                            
-                            <ComboBox materialDesign:HintAssist.Hint="选择车辆" Margin="0,0,0,10">
-                                <ComboBoxItem Content="京A12345 - 张三"/>
-                                <ComboBoxItem Content="京B67890 - 李四"/>
-                            </ComboBox>
-                            <ComboBox materialDesign:HintAssist.Hint="维修状态" Margin="0,0,0,10">
-                                <ComboBoxItem Content="待维修"/>
-                                <ComboBoxItem Content="维修中"/>
-                                <ComboBoxItem Content="已完成"/>
-                                <ComboBoxItem Content="已交付"/>
-                            </ComboBox>
-                            <TextBox materialDesign:HintAssist.Hint="维修技师" Margin="0,0,0,10"/>
-                            <TextBox materialDesign:HintAssist.Hint="维修内容" TextWrapping="Wrap" AcceptsReturn="True" Height="100" Margin="0,0,0,15"/>
-                            
-                            <Button Content="更新进度" Background="#3498DB" Foreground="White" Margin="0,10,0,0"/>
-                        </StackPanel>
-                    </materialDesign:Card>
-                </StackPanel>
-            </Border>
-            
-            <!-- 右侧：维修任务列表 -->
-            <Border Background="#FFFFFF" Margin="10" CornerRadius="5" Grid.Column="1">
-                <StackPanel>
-                    <TextBlock Text="维修任务列表" FontSize="18" FontWeight="Bold" Foreground="#2C3E50" Margin="15,15,0,15"/>
-                    
-                    <DataGrid AutoGenerateColumns="False" Margin="10" CanUserAddRows="False">
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Header="任务编号" Width="120"/>
-                            <DataGridTextColumn Header="车牌号码" Width="100"/>
-                            <DataGridTextColumn Header="客户姓名" Width="100"/>
-                            <DataGridTextColumn Header="维修技师" Width="100"/>
-                            <DataGridTextColumn Header="维修状态" Width="100"/>
-                            <DataGridTextColumn Header="开始时间" Width="150"/>
-                            <DataGridTemplateColumn Header="操作" Width="120">
-                                <DataGridTemplateColumn.CellTemplate>
+        <Grid Grid.Row="1" Margin="10">
+            <!-- 标签页切换 -->
+            <TabControl TabStripPlacement="Top" Background="White">
+                <TabItem Header="按技师查看">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        
+                        <!-- 技师选择器 -->
+                        <Border Background="#FFFFFF" Margin="0,0,0,10" Padding="10">
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                <TextBlock Text="选择技师：" Margin="0,0,10,0" VerticalAlignment="Center" />
+                                <ComboBox Width="200" ItemsSource="{Binding Technicians}" 
+                                          SelectedItem="{Binding SelectedTechnician}" 
+                                          DisplayMemberPath="Name" />
+                                <Button Margin="10,0,0,0" Command="{Binding RefreshDataCommand}">
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                        <materialDesign:PackIcon Kind="Refresh" VerticalAlignment="Center" />
+                                        <TextBlock Text="刷新" Margin="5,0,0,0" VerticalAlignment="Center" />
+                                    </StackPanel>
+                                </Button>
+                            </StackPanel>
+                        </Border>
+                        
+                        <!-- 技师仪表盘 -->
+                        <ScrollViewer Grid.Row="1">
+                            <WrapPanel>
+                                <!-- 技师工作进度卡片 -->
+                                <ItemsControl ItemsSource="{Binding TechnicianDashboardData}">
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <materialDesign:Card Margin="10" Width="350" Height="250"
+                                                                  Visibility="{Binding Type, Converter={StaticResource DashboardDataTypeToVisibilityConverter}, ConverterParameter=TechnicianOverview}">
+                                                <StackPanel>
+                                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,15">
+                                                        <materialDesign:PackIcon Kind="Account" Width="24" Height="24" Foreground="#3498DB" Margin="0,0,10,0"/>
+                                                        <TextBlock Text="{Binding TechnicianName}" FontSize="18" FontWeight="Bold" Foreground="#2C3E50"/>
+                                                    </StackPanel>
+                                                    
+                                                    <!-- 任务概览 -->
+                                                    <StackPanel Margin="0,0,0,15">
+                                                        <TextBlock Text="任务概览" FontSize="14" FontWeight="Medium" Margin="0,0,0,10"/>
+                                                        <Grid>
+                                                            <Grid.ColumnDefinitions>
+                                                                <ColumnDefinition Width="*" />
+                                                                <ColumnDefinition Width="*" />
+                                                            </Grid.ColumnDefinitions>
+                                                            <Grid.RowDefinitions>
+                                                                <RowDefinition Height="Auto" />
+                                                                <RowDefinition Height="Auto" />
+                                                            </Grid.RowDefinitions>
+                                                            
+                                                            <StackPanel Grid.Column="0" Grid.Row="0" Margin="0,0,10,10">
+                                                                <TextBlock Text="总任务" FontSize="12" Foreground="#6C757D" />
+                                                                <TextBlock Text="{Binding TotalTasks}" FontSize="24" FontWeight="Bold" Foreground="#2C3E50" />
+                                                            </StackPanel>
+                                                            <StackPanel Grid.Column="1" Grid.Row="0" Margin="0,0,10,10">
+                                                                <TextBlock Text="已完成" FontSize="12" Foreground="#6C757D" />
+                                                                <TextBlock Text="{Binding CompletedTasks}" FontSize="24" FontWeight="Bold" Foreground="#28A745" />
+                                                            </StackPanel>
+                                                            <StackPanel Grid.Column="0" Grid.Row="1" Margin="0,0,10,10">
+                                                                <TextBlock Text="进行中" FontSize="12" Foreground="#6C757D" />
+                                                                <TextBlock Text="{Binding InProgressTasks}" FontSize="24" FontWeight="Bold" Foreground="#17A2B8" />
+                                                            </StackPanel>
+                                                            <StackPanel Grid.Column="1" Grid.Row="1" Margin="0,0,10,10">
+                                                                <TextBlock Text="待进行" FontSize="12" Foreground="#6C757D" />
+                                                                <TextBlock Text="{Binding PendingTasks}" FontSize="24" FontWeight="Bold" Foreground="#FFC107" />
+                                                            </StackPanel>
+                                                        </Grid>
+                                                    </StackPanel>
+                                                    
+                                                    <!-- 进度概览 -->
+                                                    <StackPanel>
+                                                        <TextBlock Text="整体进度" FontSize="14" FontWeight="Medium" Margin="0,0,0,10"/>
+                                                        <ProgressBar Value="{Binding OverallProgress}" Style="{StaticResource ProgressBarStyle}" />
+                                                        <TextBlock Text="{Binding OverallProgress, StringFormat={}{0}%}" FontSize="12" Foreground="#6C757D" HorizontalAlignment="Center" Margin="0,5,0,0" />
+                                                    </StackPanel>
+                                                </StackPanel>
+                                            </materialDesign:Card>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                                
+                                <!-- 车辆任务卡片 -->
+                                <ItemsControl ItemsSource="{Binding TechnicianDashboardData}">
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <materialDesign:Card Margin="10" Width="350" Height="250"
+                                                                  Visibility="{Binding Type, Converter={StaticResource DashboardDataTypeToVisibilityConverter}, ConverterParameter=VehicleTask}">
+                                                <StackPanel>
+                                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,15">
+                                                        <materialDesign:PackIcon Kind="Car" Width="24" Height="24" Foreground="#3498DB" Margin="0,0,10,0"/>
+                                                        <TextBlock Text="{Binding VehicleId}" FontSize="18" FontWeight="Bold" Foreground="#2C3E50"/>
+                                                    </StackPanel>
+                                                    
+                                                    <TextBlock Text="维修项目" FontSize="14" FontWeight="Medium" Margin="0,0,0,10"/>
+                                                    
+                                                    <!-- 维修项目列表 -->
+                                                    <ItemsControl ItemsSource="{Binding RepairItems}">
+                                                        <ItemsControl.ItemTemplate>
+                                                            <DataTemplate>
+                                                                <Grid Margin="0,0,0,10">
+                                                                    <Grid.ColumnDefinitions>
+                                                                        <ColumnDefinition Width="*" />
+                                                                        <ColumnDefinition Width="80" />
+                                                                    </Grid.ColumnDefinitions>
+                                                                    <StackPanel Grid.Column="0">
+                                                                        <TextBlock Text="{Binding Name}" FontSize="14" />
+                                                                        <ProgressBar Value="{Binding Progress}" Style="{StaticResource ProgressBarStyle}" Margin="0,5,0,0" />
+                                                                    </StackPanel>
+                                                                    <Border Grid.Column="1" Style="{StaticResource StatusBadgeStyle}" HorizontalAlignment="Right">
+                                                                        <TextBlock Text="{Binding Status}" />
+                                                                    </Border>
+                                                                </Grid>
+                                                            </DataTemplate>
+                                                        </ItemsControl.ItemTemplate>
+                                                    </ItemsControl>
+                                                </StackPanel>
+                                            </materialDesign:Card>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                            </WrapPanel>
+                        </ScrollViewer>
+                    </Grid>
+                </TabItem>
+                
+                <TabItem Header="按车辆查看">
+                    <ScrollViewer>
+                        <WrapPanel>
+                            <!-- 车辆维修进度卡片 -->
+                            <ItemsControl ItemsSource="{Binding VehicleDashboardData}">
+                                <ItemsControl.ItemTemplate>
                                     <DataTemplate>
-                                        <StackPanel Orientation="Horizontal">
-                                            <Button Content="查看" Margin="2" />
-                                            <Button Content="更新" Margin="2" />
-                                        </StackPanel>
+                                        <materialDesign:Card Margin="10" Width="350" Height="300">
+                                            <StackPanel>
+                                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,15">
+                                                    <materialDesign:PackIcon Kind="Car" Width="24" Height="24" Foreground="#3498DB" Margin="0,0,10,0"/>
+                                                    <TextBlock Text="{Binding VehicleId}" FontSize="18" FontWeight="Bold" Foreground="#2C3E50"/>
+                                                </StackPanel>
+                                                
+                                                <!-- 车辆信息 -->
+                                                <StackPanel Margin="0,0,0,15">
+                                                    <Grid>
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="*" />
+                                                            <ColumnDefinition Width="*" />
+                                                        </Grid.ColumnDefinitions>
+                                                        <StackPanel Grid.Column="0">
+                                                            <TextBlock Text="车型" FontSize="12" Foreground="#6C757D" />
+                                                            <TextBlock Text="{Binding Model}" FontSize="14" />
+                                                        </StackPanel>
+                                                        <StackPanel Grid.Column="1">
+                                                            <TextBlock Text="客户" FontSize="12" Foreground="#6C757D" />
+                                                            <TextBlock Text="{Binding CustomerName}" FontSize="14" />
+                                                        </StackPanel>
+                                                    </Grid>
+                                                    <Grid Margin="0,10,0,0">
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="*" />
+                                                            <ColumnDefinition Width="*" />
+                                                        </Grid.ColumnDefinitions>
+                                                        <StackPanel Grid.Column="0">
+                                                            <TextBlock Text="技师" FontSize="12" Foreground="#6C757D" />
+                                                            <TextBlock Text="{Binding TechnicianName}" FontSize="14" />
+                                                        </StackPanel>
+                                                        <StackPanel Grid.Column="1">
+                                                            <TextBlock Text="接待时间" FontSize="12" Foreground="#6C757D" />
+                                                            <TextBlock Text="{Binding ReceptionDate}" FontSize="14" />
+                                                        </StackPanel>
+                                                    </Grid>
+                                                </StackPanel>
+                                                
+                                                <!-- 维修进度 -->
+                                                <StackPanel Margin="0,0,0,15">
+                                                    <TextBlock Text="维修进度" FontSize="14" FontWeight="Medium" Margin="0,0,0,10"/>
+                                                    <ProgressBar Value="{Binding OverallProgress}" Style="{StaticResource ProgressBarStyle}" />
+                                                    <TextBlock Text="{Binding OverallProgress, StringFormat={}{0}%}" FontSize="12" Foreground="#6C757D" HorizontalAlignment="Center" Margin="0,5,0,0" />
+                                                </StackPanel>
+                                                
+                                                <!-- 维修项目 -->
+                                                <StackPanel>
+                                                    <TextBlock Text="维修项目" FontSize="14" FontWeight="Medium" Margin="0,0,0,10"/>
+                                                    <ItemsControl ItemsSource="{Binding RepairItems}">
+                                                        <ItemsControl.ItemTemplate>
+                                                            <DataTemplate>
+                                                                <Grid Margin="0,0,0,8">
+                                                                    <Grid.ColumnDefinitions>
+                                                                        <ColumnDefinition Width="*" />
+                                                                        <ColumnDefinition Width="80" />
+                                                                    </Grid.ColumnDefinitions>
+                                                                    <TextBlock Text="{Binding Name}" FontSize="14" />
+                                                                    <Border Grid.Column="1" Style="{StaticResource StatusBadgeStyle}" HorizontalAlignment="Right">
+                                                                        <TextBlock Text="{Binding Status}" />
+                                                                    </Border>
+                                                                </Grid>
+                                                            </DataTemplate>
+                                                        </ItemsControl.ItemTemplate>
+                                                    </ItemsControl>
+                                                </StackPanel>
+                                            </StackPanel>
+                                        </materialDesign:Card>
                                     </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
-                        </DataGrid.Columns>
-                        <!-- 移除直接的数据定义，稍后通过ViewModel绑定 -->
-                    </DataGrid>
-                </StackPanel>
-            </Border>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </WrapPanel>
+                    </ScrollViewer>
+                </TabItem>
+            </TabControl>
         </Grid>
     </Grid>
 </UserControl>
