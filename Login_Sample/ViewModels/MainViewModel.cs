@@ -231,6 +231,9 @@ namespace Login_Sample.ViewModels
         // 退出登录命令处理
         private void Logout(object? parameter)
         {
+            // 新建登录窗口
+            LoginWindow loginWindow = new LoginWindow();
+
             // 关闭当前窗口
             foreach (System.Windows.Window window in System.Windows.Application.Current.Windows)
             {
@@ -242,7 +245,6 @@ namespace Login_Sample.ViewModels
             }
 
             // 打开登录窗口
-            LoginWindow loginWindow = new LoginWindow();
             loginWindow.Show();
         }
 

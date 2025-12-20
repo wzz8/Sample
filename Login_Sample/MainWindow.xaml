@@ -30,7 +30,7 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
-        
+
         <Style x:Key="DashboardCardStyle" TargetType="Border">
             <Setter Property="Background" Value="#FFFFFF"/>
             <Setter Property="BorderBrush" Value="#E0E0E0"/>
@@ -44,16 +44,17 @@
             </Setter>
         </Style>
     </Window.Resources>
-    
+
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="220"/>
+            <ColumnDefinition Width="250"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        
+
         <!-- 侧边栏 -->
         <Border Background="#2C3E50" Grid.Column="0">
             <StackPanel>
+
                 <!-- 系统标题 -->
                 <Border Background="#3498DB" Height="80">
                     <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
@@ -61,10 +62,12 @@
                         <TextBlock Text="Enterprise Management System" FontSize="12" Foreground="#E0E0E0" Margin="0,5,0,0"/>
                     </StackPanel>
                 </Border>
-                
+
                 <!-- 导航菜单 -->
                 <StackPanel Margin="10,20,10,10">
                     <TextBlock Text="主菜单" FontSize="12" Foreground="#BDC3C7" Margin="0,10,0,5"/>
+
+                    <!--仪表盘-->
                     <Button Command="{Binding NavigateCommand}" CommandParameter="Dashboard">
                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                             <materialDesign:PackIcon Kind="ViewDashboard" Width="20" Height="20" Margin="0,0,10,0"/>
@@ -82,17 +85,30 @@
                             </Style>
                         </Button.Style>
                     </Button>
+
                     <!-- 业务接待主菜单 -->
                     <Expander Background="#2C3E50" Margin="0,5,0,0" BorderThickness="0" HorizontalAlignment="Stretch">
+
                         <Expander.Header>
-                            <Button Command="{Binding NavigateCommand}" CommandParameter="BusinessReception" Style="{StaticResource NavButtonStyle}" HorizontalAlignment="Left">
+                            <Button Command="{Binding NavigateCommand}" CommandParameter="BusinessReception" HorizontalAlignment="Left">
                                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                                     <materialDesign:PackIcon Kind="AccountGroup" Width="20" Height="20" Margin="0,0,10,0"/>
                                     <TextBlock Text="业务接待"/>
                                 </StackPanel>
+                                <Button.Style>
+                                    <Style TargetType="Button" BasedOn="{StaticResource NavButtonStyle}">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding CurrentModule}" Value="BusinessReception">
+                                                <Setter Property="Background" Value="#2C3E50"/>
+                                                <Setter Property="BorderBrush" Value="#3498DB"/>
+                                                <Setter Property="BorderThickness" Value="0,0,3,0"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
                             </Button>
                         </Expander.Header>
-                        
+
                         <!-- 子菜单 -->
                         <StackPanel Margin="20,0,0,0">
                             <Button Command="{Binding NavigateCommand}" CommandParameter="VehicleMaintenance">
@@ -216,6 +232,8 @@
                             </Button>
                         </StackPanel>
                     </Expander>
+
+                    <!--财务结算-->
                     <Button Command="{Binding NavigateCommand}" CommandParameter="FinancialSettlement">
                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                             <materialDesign:PackIcon Kind="Cash" Width="20" Height="20" Margin="0,0,10,0"/>
@@ -233,6 +251,8 @@
                             </Style>
                         </Button.Style>
                     </Button>
+
+                    <!--备件管理-->
                     <Button Command="{Binding NavigateCommand}" CommandParameter="SparePartsManagement">
                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                             <materialDesign:PackIcon Kind="Box" Width="20" Height="20" Margin="0,0,10,0"/>
@@ -250,6 +270,8 @@
                             </Style>
                         </Button.Style>
                     </Button>
+
+                    <!--车间管理-->
                     <Button Command="{Binding NavigateCommand}" CommandParameter="WorkshopManagement">
                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                             <materialDesign:PackIcon Kind="Factory" Width="20" Height="20" Margin="0,0,10,0"/>
@@ -267,6 +289,8 @@
                             </Style>
                         </Button.Style>
                     </Button>
+
+                    <!--领导查询-->
                     <Button Command="{Binding NavigateCommand}" CommandParameter="LeadershipQuery">
                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                             <materialDesign:PackIcon Kind="ChartLine" Width="20" Height="20" Margin="0,0,10,0"/>
@@ -284,6 +308,8 @@
                             </Style>
                         </Button.Style>
                     </Button>
+
+                    <!--系统管理-->
                     <Button Command="{Binding NavigateCommand}" CommandParameter="SystemManagement">
                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                             <materialDesign:PackIcon Kind="Cog" Width="20" Height="20" Margin="0,0,10,0"/>
@@ -301,6 +327,8 @@
                             </Style>
                         </Button.Style>
                     </Button>
+
+                    <!--客户管理-->
                     <Button Command="{Binding NavigateCommand}" CommandParameter="CustomerManagement">
                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                             <materialDesign:PackIcon Kind="AccountGroup" Width="20" Height="20" Margin="0,0,10,0"/>
@@ -318,6 +346,8 @@
                             </Style>
                         </Button.Style>
                     </Button>
+
+                    <!--原始库存-->
                     <Button Command="{Binding NavigateCommand}" CommandParameter="RawInventory">
                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                             <materialDesign:PackIcon Kind="Warehouse" Width="20" Height="20" Margin="0,0,10,0"/>
@@ -335,7 +365,7 @@
                             </Style>
                         </Button.Style>
                     </Button>
-                    
+
                     <!-- 退出按钮 -->
                     <Button Style="{StaticResource NavButtonStyle}" Command="{Binding LogoutCommand}" Margin="0,30,0,0">
                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
@@ -344,11 +374,13 @@
                         </StackPanel>
                     </Button>
                 </StackPanel>
+
             </StackPanel>
         </Border>
-        
+
         <!-- 主内容区域 -->
         <Grid Grid.Column="1">
+
             <!-- 顶部标题栏 -->
             <Border Background="WhiteSmoke" Height="60" BorderBrush="#E0E0E0" BorderThickness="0,0,0,1" VerticalAlignment="Top">
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right">
@@ -362,7 +394,7 @@
                     <TextBlock Text="{Binding CurrentTime}" FontSize="14" Foreground="#7F8C8D" Margin="0,0,20,0"/>
                 </StackPanel>
             </Border>
-            
+
             <!-- 内容区域 -->
             <ContentControl Margin="0,60,0,0" Content="{Binding CurrentView}" VerticalAlignment="Top"/>
         </Grid>
