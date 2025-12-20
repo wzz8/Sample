@@ -253,23 +253,51 @@
                     </Button>
 
                     <!--备件管理-->
-                    <Button Command="{Binding NavigateCommand}" CommandParameter="SparePartsManagement">
-                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                            <materialDesign:PackIcon Kind="Box" Width="20" Height="20" Margin="0,0,10,0"/>
-                            <TextBlock Text="备件管理"/>
+                    <Expander Background="#2C3E50" Margin="0,5,0,0" BorderThickness="0" HorizontalAlignment="Stretch">
+                        <Expander.Header>
+                            <Button Command="{Binding NavigateCommand}" CommandParameter="SparePartsManagement" HorizontalAlignment="Left">
+                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                    <materialDesign:PackIcon Kind="Box" Width="20" Height="20" Margin="0,0,10,0"/>
+                                    <TextBlock Text="备件管理"/>
+                                </StackPanel>
+                                <Button.Style>
+                                    <Style TargetType="Button" BasedOn="{StaticResource NavButtonStyle}">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding CurrentModule}" Value="SparePartsManagement">
+                                                <Setter Property="Background" Value="#2C3E50"/>
+                                                <Setter Property="BorderBrush" Value="#3498DB"/>
+                                                <Setter Property="BorderThickness" Value="0,0,3,0"/>
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding CurrentModule}" Value="SparePartsInbound">
+                                                <Setter Property="Background" Value="#2C3E50"/>
+                                                <Setter Property="BorderBrush" Value="#3498DB"/>
+                                                <Setter Property="BorderThickness" Value="0,0,3,0"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+                            </Button>
+                        </Expander.Header>
+                        <StackPanel>
+                            <Button Command="{Binding NavigateCommand}" CommandParameter="SparePartsInbound" Margin="30,5,10,5">
+                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                    <materialDesign:PackIcon Kind="Warehouse" Width="20" Height="20" Margin="0,0,10,0"/>
+                                    <TextBlock Text="备件入库"/>
+                                </StackPanel>
+                                <Button.Style>
+                                    <Style TargetType="Button" BasedOn="{StaticResource NavButtonStyle}">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding CurrentModule}" Value="SparePartsInbound">
+                                                <Setter Property="Background" Value="#2C3E50"/>
+                                                <Setter Property="BorderBrush" Value="#3498DB"/>
+                                                <Setter Property="BorderThickness" Value="0,0,3,0"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+                            </Button>
                         </StackPanel>
-                        <Button.Style>
-                            <Style TargetType="Button" BasedOn="{StaticResource NavButtonStyle}">
-                                <Style.Triggers>
-                                    <DataTrigger Binding="{Binding CurrentModule}" Value="SparePartsManagement">
-                                        <Setter Property="Background" Value="#2C3E50"/>
-                                        <Setter Property="BorderBrush" Value="#3498DB"/>
-                                        <Setter Property="BorderThickness" Value="0,0,3,0"/>
-                                    </DataTrigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Button.Style>
-                    </Button>
+                    </Expander>
 
                     <!--车间管理-->
                     <Expander Background="#2C3E50" Margin="0,5,0,0" BorderThickness="0" HorizontalAlignment="Stretch">

@@ -47,6 +47,8 @@ namespace Login_Sample.ViewModels
         public DispatchManagementView DispatchManagementView { get; set; }
         // 新增项目审查视图
         public ProjectAuditView ProjectAuditView { get; set; }
+        // 新增备件入库视图
+        public SparePartsInboundView SparePartsInboundView { get; set; }
         
         // 各模块的ViewModel实例
         public DashboardViewModel DashboardVM { get; set; }
@@ -69,6 +71,8 @@ namespace Login_Sample.ViewModels
         public DispatchManagementViewModel DispatchManagementVM { get; set; }
         // 新增项目审查ViewModel
         public ProjectAuditViewModel ProjectAuditVM { get; set; }
+        // 新增备件入库ViewModel
+        public SparePartsInboundViewModel SparePartsInboundVM { get; set; }
         
         // 命令
         public ICommand NavigateCommand { get; set; }
@@ -130,6 +134,8 @@ namespace Login_Sample.ViewModels
             DispatchManagementVM = new DispatchManagementViewModel();
             // 初始化项目审查ViewModel
             ProjectAuditVM = new ProjectAuditViewModel();
+            // 初始化备件入库ViewModel
+            SparePartsInboundVM = new SparePartsInboundViewModel();
             
             // 初始化各模块的View
             DashboardView = new DashboardView() { DataContext = DashboardVM };
@@ -152,6 +158,8 @@ namespace Login_Sample.ViewModels
             DispatchManagementView = new DispatchManagementView() { DataContext = DispatchManagementVM };
             // 初始化项目审查View
             ProjectAuditView = new ProjectAuditView() { DataContext = ProjectAuditVM };
+            // 初始化备件入库View
+            SparePartsInboundView = new SparePartsInboundView() { DataContext = SparePartsInboundVM };
             
             // 初始化命令
             NavigateCommand = new RelayCommand(Navigate);
@@ -250,6 +258,11 @@ namespace Login_Sample.ViewModels
                 case "ProjectAudit":
                     CurrentView = ProjectAuditView;
                     CurrentModule = "ProjectAudit";
+                    break;
+                // 新增备件入库导航
+                case "SparePartsInbound":
+                    CurrentView = SparePartsInboundView;
+                    CurrentModule = "SparePartsInbound";
                     break;
             }
         }
