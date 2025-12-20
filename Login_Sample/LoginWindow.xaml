@@ -11,7 +11,7 @@
         Width="{Binding WindowWidth}"
         WindowStartupLocation="CenterScreen"
         ResizeMode="NoResize"
-        Icon="{Binding Icon}">
+        Icon="{Binding Icon}" Background="#F5F5F5">
     <Window.Resources>
         <Style TargetType="Button">
             <Setter Property="Background" Value="#0078D7"/>
@@ -46,7 +46,7 @@
             <Setter Property="IsEditable" Value="True"/>
         </Style>
     </Window.Resources>
-    <Grid Background="#F5F5F5">
+    <Grid Margin="0 20 0 0">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="*"/>
