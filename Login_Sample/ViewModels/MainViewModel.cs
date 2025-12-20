@@ -43,6 +43,8 @@ namespace Login_Sample.ViewModels
         public InventoryQueryView InventoryQueryView { get; set; }
         public ShortageManagementView ShortageManagementView { get; set; }
         public InsuranceManagementView InsuranceManagementView { get; set; }
+        // 新增派工处理视图
+        public DispatchManagementView DispatchManagementView { get; set; }
         
         // 各模块的ViewModel实例
         public DashboardViewModel DashboardVM { get; set; }
@@ -61,6 +63,8 @@ namespace Login_Sample.ViewModels
         public InventoryQueryViewModel InventoryQueryVM { get; set; }
         public ShortageManagementViewModel ShortageManagementVM { get; set; }
         public InsuranceManagementViewModel InsuranceManagementVM { get; set; }
+        // 新增派工处理ViewModel
+        public DispatchManagementViewModel DispatchManagementVM { get; set; }
         
         // 命令
         public ICommand NavigateCommand { get; set; }
@@ -118,6 +122,8 @@ namespace Login_Sample.ViewModels
             InventoryQueryVM = new InventoryQueryViewModel();
             ShortageManagementVM = new ShortageManagementViewModel();
             InsuranceManagementVM = new InsuranceManagementViewModel();
+            // 初始化派工处理ViewModel
+            DispatchManagementVM = new DispatchManagementViewModel();
             
             // 初始化各模块的View
             DashboardView = new DashboardView() { DataContext = DashboardVM };
@@ -136,6 +142,8 @@ namespace Login_Sample.ViewModels
             InventoryQueryView = new InventoryQueryView() { DataContext = InventoryQueryVM };
             ShortageManagementView = new ShortageManagementView() { DataContext = ShortageManagementVM };
             InsuranceManagementView = new InsuranceManagementView() { DataContext = InsuranceManagementVM };
+            // 初始化派工处理View
+            DispatchManagementView = new DispatchManagementView() { DataContext = DispatchManagementVM };
             
             // 初始化命令
             NavigateCommand = new RelayCommand(Navigate);
@@ -224,6 +232,16 @@ namespace Login_Sample.ViewModels
                 case "InsuranceManagement":
                     CurrentView = InsuranceManagementView;
                     CurrentModule = "InsuranceManagement";
+                    break;
+                // 新增派工处理导航
+                case "DispatchManagement":
+                    CurrentView = DispatchManagementView;
+                    CurrentModule = "DispatchManagement";
+                    break;
+                // 新增项目审核导航
+                case "ProjectAudit":
+                    CurrentView = WorkshopManagementView;
+                    CurrentModule = "ProjectAudit";
                     break;
             }
         }

@@ -56,7 +56,7 @@
             <StackPanel>
 
                 <!-- 系统标题 -->
-                <Border Background="#3498DB" Height="80">
+                <Border Background="#3498DB" Height="60">
                     <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
                         <TextBlock Text="企业管理系统" FontSize="18" FontWeight="Bold" Foreground="White"/>
                         <TextBlock Text="Enterprise Management System" FontSize="12" Foreground="#E0E0E0" Margin="0,5,0,0"/>
@@ -272,23 +272,66 @@
                     </Button>
 
                     <!--车间管理-->
-                    <Button Command="{Binding NavigateCommand}" CommandParameter="WorkshopManagement">
-                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                            <materialDesign:PackIcon Kind="Factory" Width="20" Height="20" Margin="0,0,10,0"/>
-                            <TextBlock Text="车间管理"/>
+                    <Expander Background="#2C3E50" Margin="0,5,0,0" BorderThickness="0" HorizontalAlignment="Stretch">
+                        <Expander.Header>
+                            <Button Command="{Binding NavigateCommand}" CommandParameter="WorkshopManagement" HorizontalAlignment="Left">
+                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                    <materialDesign:PackIcon Kind="Factory" Width="20" Height="20" Margin="0,0,10,0"/>
+                                    <TextBlock Text="车间管理"/>
+                                </StackPanel>
+                                <Button.Style>
+                                    <Style TargetType="Button" BasedOn="{StaticResource NavButtonStyle}">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding CurrentModule}" Value="WorkshopManagement">
+                                                <Setter Property="Background" Value="#2C3E50"/>
+                                                <Setter Property="BorderBrush" Value="#3498DB"/>
+                                                <Setter Property="BorderThickness" Value="0,0,3,0"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+                            </Button>
+                        </Expander.Header>
+                        <!-- 子菜单 -->
+                        <StackPanel Margin="20,0,0,0" Background="#2C3E50">
+                            <!-- 派工处理 -->
+                            <Button Command="{Binding NavigateCommand}" CommandParameter="DispatchManagement" Margin="0,2,0,2">
+                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                    <materialDesign:PackIcon Kind="ClipboardText" Width="18" Height="18" Margin="0,0,10,0"/>
+                                    <TextBlock Text="派工处理"/>
+                                </StackPanel>
+                                <Button.Style>
+                                    <Style TargetType="Button" BasedOn="{StaticResource NavButtonStyle}">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding CurrentModule}" Value="DispatchManagement">
+                                                <Setter Property="Background" Value="#2C3E50"/>
+                                                <Setter Property="BorderBrush" Value="#3498DB"/>
+                                                <Setter Property="BorderThickness" Value="0,0,3,0"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+                            </Button>
+                            <!-- 项目审核 -->
+                            <Button Command="{Binding NavigateCommand}" CommandParameter="ProjectAudit" Margin="0,2,0,2">
+                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                    <materialDesign:PackIcon Kind="ClipboardCheck" Width="18" Height="18" Margin="0,0,10,0"/>
+                                    <TextBlock Text="项目审核"/>
+                                </StackPanel>
+                                <Button.Style>
+                                    <Style TargetType="Button" BasedOn="{StaticResource NavButtonStyle}">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding CurrentModule}" Value="ProjectAudit">
+                                                <Setter Property="Background" Value="#2C3E50"/>
+                                                <Setter Property="BorderBrush" Value="#3498DB"/>
+                                                <Setter Property="BorderThickness" Value="0,0,3,0"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+                            </Button>
                         </StackPanel>
-                        <Button.Style>
-                            <Style TargetType="Button" BasedOn="{StaticResource NavButtonStyle}">
-                                <Style.Triggers>
-                                    <DataTrigger Binding="{Binding CurrentModule}" Value="WorkshopManagement">
-                                        <Setter Property="Background" Value="#2C3E50"/>
-                                        <Setter Property="BorderBrush" Value="#3498DB"/>
-                                        <Setter Property="BorderThickness" Value="0,0,3,0"/>
-                                    </DataTrigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Button.Style>
-                    </Button>
+                    </Expander>
 
                     <!--领导查询-->
                     <Button Command="{Binding NavigateCommand}" CommandParameter="LeadershipQuery">

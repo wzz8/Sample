@@ -64,6 +64,94 @@
         <Grid Grid.Row="1" Margin="10">
             <!-- 标签页切换 -->
             <TabControl TabStripPlacement="Top" Background="White">
+                <TabItem Header="查询维修进度">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        
+                        <!-- 查询条件区域 -->
+                        <Border Background="#FFFFFF" Margin="0,0,0,10" Padding="10">
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                <TextBlock Text="维修工：" Margin="0,0,5,0" VerticalAlignment="Center" />
+                                <ComboBox Width="150" ItemsSource="{Binding Technicians}" 
+                                          SelectedItem="{Binding SelectedTechnicianForQuery}" 
+                                          DisplayMemberPath="Name" Margin="0,0,15,0" />
+                                <TextBlock Text="车牌号：" Margin="0,0,5,0" VerticalAlignment="Center" />
+                                <TextBox Width="150" Text="{Binding LicensePlateForQuery}" Margin="0,0,15,0" />
+                                <Button Content="查询" Command="{Binding QueryCommand}" Padding="10,5" />
+                            </StackPanel>
+                        </Border>
+                        
+                        <!-- 查询结果区域 -->
+                        <ScrollViewer Grid.Row="1">
+                            <WrapPanel>
+                                <ItemsControl ItemsSource="{Binding QueryResultData}">
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <materialDesign:Card Margin="10" Width="350" Height="300">
+                                                <StackPanel>
+                                                    <!-- 车辆基本信息 -->
+                                                    <StackPanel Orientation="Horizontal" Margin="0,10,0,0" HorizontalAlignment="Center">
+                                                        <materialDesign:PackIcon Kind="Car" Width="24" Height="24" Foreground="#3498DB" Margin="0,0,10,0"/>
+                                                        <TextBlock Text="{Binding VehicleId}" FontSize="18" FontWeight="Bold" Foreground="#2C3E50"/>
+                                                    </StackPanel>
+                                                    
+                                                    <!-- 进度显示 -->
+                                                    <StackPanel Margin="15,15,15,0">
+                                                        <Grid>
+                                                            <Grid.ColumnDefinitions>
+                                                                <ColumnDefinition Width="Auto"/>
+                                                                <ColumnDefinition Width="*"/>
+                                                                <ColumnDefinition Width="Auto"/>
+                                                            </Grid.ColumnDefinitions>
+                                                            <TextBlock Text="总体进度：" FontSize="14" FontWeight="Medium" Foreground="#34495E" />
+                                                            <ProgressBar Grid.Column="1" Value="{Binding OverallProgress}" Style="{StaticResource ProgressBarStyle}" Margin="10,0" />
+                                                            <TextBlock Grid.Column="2" Text="{Binding OverallProgress, StringFormat={}{0}%}" FontSize="14" FontWeight="Medium" Foreground="#34495E" />
+                                                        </Grid>
+                                                    </StackPanel>
+                                                    
+                                                    <!-- 车型信息 -->
+                                                    <StackPanel Margin="15,10,15,0">
+                                                        <TextBlock Text="车型：{Binding Model}" FontSize="14" Foreground="#7F8C8D" />
+                                                        <TextBlock Text="客户：{Binding CustomerName}" FontSize="14" Foreground="#7F8C8D" Margin="0,5,0,0" />
+                                                        <TextBlock Text="接车日期：{Binding ReceptionDate}" FontSize="14" Foreground="#7F8C8D" Margin="0,5,0,0" />
+                                                        <TextBlock Text="维修工：{Binding TechnicianName}" FontSize="14" Foreground="#7F8C8D" Margin="0,5,0,0" />
+                                                    </StackPanel>
+                                                    
+                                                    <!-- 维修项目列表 -->
+                                                    <StackPanel Margin="15,10,15,0">
+                                                        <TextBlock Text="维修项目：" FontSize="14" FontWeight="Medium" Foreground="#34495E" Margin="0,0,0,10" />
+                                                        <ItemsControl ItemsSource="{Binding RepairItems}">
+                                                            <ItemsControl.ItemTemplate>
+                                                                <DataTemplate>
+                                                                    <StackPanel Margin="0,5,0,0">
+                                                                        <Grid>
+                                                                            <Grid.ColumnDefinitions>
+                                                                                <ColumnDefinition Width="*"/>
+                                                                                <ColumnDefinition Width="80"/>
+                                                                            </Grid.ColumnDefinitions>
+                                                                            <TextBlock Text="{Binding Name}" FontSize="13" Foreground="#5D6D7E" />
+                                                                            <Border Grid.Column="1" Style="{StaticResource StatusBadgeStyle}" HorizontalAlignment="Right">
+                                                                                <TextBlock Text="{Binding Status}" />
+                                                                            </Border>
+                                                                        </Grid>
+                                                                        <ProgressBar Value="{Binding Progress}" Style="{StaticResource ProgressBarStyle}" Margin="0,5,0,0" />
+                                                                    </StackPanel>
+                                                                </DataTemplate>
+                                                            </ItemsControl.ItemTemplate>
+                                                        </ItemsControl>
+                                                    </StackPanel>
+                                                </StackPanel>
+                                            </materialDesign:Card>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                            </WrapPanel>
+                        </ScrollViewer>
+                    </Grid>
+                </TabItem>
                 <TabItem Header="按技师查看">
                     <Grid>
                         <Grid.RowDefinitions>
