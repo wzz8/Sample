@@ -25,6 +25,10 @@
         
         <!-- 模块内容区域 -->
         <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
             <!-- 查询条件区域 -->
             <materialDesign:Card Margin="10" Padding="15">
                 <StackPanel>
@@ -80,7 +84,7 @@
             </materialDesign:Card>
             
             <!-- 统计信息区域 -->
-            <Grid Grid.Row="1" Margin="10,90,10,10">
+            <Grid Grid.Row="1" Margin="10,0,10,10">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="300"/>

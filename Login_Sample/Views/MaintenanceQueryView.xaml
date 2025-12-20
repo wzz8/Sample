@@ -14,6 +14,7 @@
     <Grid Margin="20">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
@@ -24,7 +25,7 @@
         </StackPanel>
 
         <!-- 查询条件区域 -->
-        <materialDesign:Card x:Name="QueryCard" Grid.Row="0" Margin="0,0,0,20" Background="White">
+        <materialDesign:Card x:Name="QueryCard" Grid.Row="1" Margin="0,0,0,20" Background="White">
             <Grid Margin="20">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -140,7 +141,7 @@
         </materialDesign:Card>
 
         <!-- 维修记录列表 -->
-        <materialDesign:Card x:Name="RecordsCard" Grid.Row="1" Background="White">
+        <materialDesign:Card x:Name="RecordsCard" Grid.Row="2" Background="White">
             <Grid Margin="20">
                 <DataGrid ItemsSource="{Binding MaintenanceRecords}" 
                           AutoGenerateColumns="False" 
