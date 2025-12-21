@@ -103,6 +103,15 @@
                                 </Button.Content>
                             </Button>
                             
+                            <Button Command="{Binding ReturnSparePartsCommand}" Background="#E74C3C" Foreground="White" Margin="0,0,10,0">
+                                <Button.Content>
+                                    <StackPanel Orientation="Horizontal">
+                                        <materialDesign:PackIcon Kind="ArrowLeft" Width="16" Height="16" Margin="0,0,5,0"/>
+                                        <TextBlock>备件退货</TextBlock>
+                                    </StackPanel>
+                                </Button.Content>
+                            </Button>
+                            
                             <Button Command="{Binding ResetCommand}" Background="#95A5A6" Foreground="White">
                                 <Button.Content>
                                     <StackPanel Orientation="Horizontal">

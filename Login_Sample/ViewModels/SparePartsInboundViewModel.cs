@@ -1,9 +1,10 @@
+using Login_Sample.Data;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
-using Login_Sample.Data;
+using System.Linq;
 
 namespace Login_Sample.ViewModels
 {
@@ -14,6 +15,7 @@ namespace Login_Sample.ViewModels
         public ICommand AddInboundItemCommand { get; set; }
         public ICommand RemoveInboundItemCommand { get; set; }
         public ICommand ResetCommand { get; set; }
+        public ICommand ReturnSparePartsCommand { get; set; }
         
         // 入库记录属性
         private string _inboundNumber;
@@ -82,6 +84,7 @@ namespace Login_Sample.ViewModels
             AddInboundItemCommand = new RelayCommand(AddInboundItem);
             RemoveInboundItemCommand = new RelayCommand(RemoveInboundItem);
             ResetCommand = new RelayCommand(Reset);
+            ReturnSparePartsCommand = new RelayCommand(ReturnSpareParts);
             
             // 初始化属性
             _inboundNumber = GenerateInboundNumber();
@@ -157,6 +160,43 @@ namespace Login_Sample.ViewModels
             OnPropertyChanged(nameof(InboundPerson));
             OnPropertyChanged(nameof(InboundDate));
             OnPropertyChanged(nameof(Remarks));
+        }
+        
+        // 备件退货功能
+        private void ReturnSpareParts(object? obj)
+        {
+            if (!_inboundItems.Any())
+            {
+                System.Windows.MessageBox.Show("没有可退货的备件项！", "提示", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Information);
+                return;
+            }
+
+            // 这里实现退货逻辑
+            // 1. 检查是否有选中的项，如果有则退货选中项，否则退货所有项
+            // 2. 更新库存数量（减去退货数量）
+            // 3. 记录退货信息
+
+            // 模拟退货过程
+            string returnInfo = "退货备件：\n";
+            foreach (var item in _inboundItems)
+            {
+                // 更新库存数量
+                var inventoryItem = _availableSpareParts.FirstOrDefault(i => i.Id == item.InventoryItem.Id);
+                if (inventoryItem != null)
+                {
+                    inventoryItem.Quantity -= item.Quantity;
+                    if (inventoryItem.Quantity < 0)
+                        inventoryItem.Quantity = 0;
+                }
+
+                returnInfo += $"{item.InventoryItem.ItemName} - 数量：{item.Quantity}\n";
+            }
+
+            // 清空当前入库项
+            _inboundItems.Clear();
+            CalculateTotalAmounts();
+
+            System.Windows.MessageBox.Show(returnInfo + "\n退货成功！", "退货完成", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Information);
         }
         
         // 计算单条入库项的金额

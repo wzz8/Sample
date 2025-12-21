@@ -57,6 +57,8 @@ namespace Login_Sample.ViewModels
         public InventoryManagementView InventoryManagementView { get; set; }
         // 新增备件目录视图
         public SparePartsCatalogView SparePartsCatalogView { get; set; }
+        // 新增库存盘点视图
+        public InventoryCheckView InventoryCheckView { get; set; }
 
         // 各模块的ViewModel实例
         public DashboardViewModel DashboardVM { get; set; }
@@ -89,6 +91,8 @@ namespace Login_Sample.ViewModels
         public InventoryManagementViewModel InventoryManagementVM { get; set; }
         // 初始化备件目录ViewModel
         public SparePartsCatalogViewModel SparePartsCatalogVM { get; set; }
+        // 初始化库存盘点ViewModel
+        public InventoryCheckViewModel InventoryCheckVM { get; set; }
 
         // 命令
         public ICommand NavigateCommand { get; set; }
@@ -160,6 +164,8 @@ namespace Login_Sample.ViewModels
             InventoryManagementVM = new InventoryManagementViewModel();
             // 初始化备件目录ViewModel
             SparePartsCatalogVM = new SparePartsCatalogViewModel();
+            // 初始化库存盘点ViewModel
+            InventoryCheckVM = new InventoryCheckViewModel();
 
             // 初始化各模块的View
             DashboardView = new DashboardView() { DataContext = DashboardVM };
@@ -192,6 +198,8 @@ namespace Login_Sample.ViewModels
             InventoryManagementView = new InventoryManagementView() { DataContext = InventoryManagementVM };
             // 初始化备件目录View
             SparePartsCatalogView = new SparePartsCatalogView() { DataContext = SparePartsCatalogVM };
+            // 初始化库存盘点View
+            InventoryCheckView = new InventoryCheckView() { DataContext = InventoryCheckVM };
 
             // 初始化命令
             NavigateCommand = new RelayCommand(Navigate);
@@ -314,7 +322,11 @@ namespace Login_Sample.ViewModels
                 // 新增备件目录导航
                 case "SparePartsCatalog":
                     CurrentView = SparePartsCatalogView;
-                    CurrentModule = "SparePartsCatalog";
+                    CurrentModule = moduleName;
+                    break;
+                case "InventoryCheck":
+                    CurrentView = InventoryCheckView;
+                    CurrentModule = "InventoryCheck";
                     break;
             }
         }

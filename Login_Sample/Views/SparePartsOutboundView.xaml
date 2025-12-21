@@ -20,7 +20,7 @@
         <!-- 模块标题 -->
         <Border Background="#FFFFFF" Grid.Row="0" Height="80" BorderBrush="#E0E0E0" BorderThickness="0,0,0,1">
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="20,0,0,0">
-                <materialDesign:PackIcon Kind="Warehouse" Width="32" Height="32" Foreground="#3498DB" Margin="0,0,15,0"/>
+                <materialDesign:PackIcon Kind="PackageUp" Width="32" Height="32" Foreground="#3498DB" Margin="0,0,15,0"/>
                 <TextBlock Text="备件出库" FontSize="24" FontWeight="Bold" Foreground="#2C3E50"/>
             </StackPanel>
         </Border>
