@@ -40,6 +40,11 @@ namespace Login_Sample.Data
         public DbSet<InventoryInRecord> InventoryInRecords { get; set; }
         
         /// <summary>
+        /// 备件供应商表
+        /// </summary>
+        public DbSet<SparePartsSupplier> SparePartsSuppliers { get; set; }
+        
+        /// <summary>
         /// 配置数据库连接
         /// </summary>
         /// <param name="optionsBuilder">选项构建器</param>
@@ -246,6 +251,50 @@ namespace Login_Sample.Data
                     .WithMany()
                     .HasForeignKey(e => e.InventoryItemId)
                     .OnDelete(DeleteBehavior.Restrict);
+            });
+            
+            // 配置备件供应商表
+            modelBuilder.Entity<SparePartsSupplier>(entity =>
+            {
+                entity.ToTable("spare_parts_suppliers");
+                
+                entity.HasKey(e => e.Id);
+                entity.Property(e => e.Id).ValueGeneratedOnAdd();
+                
+                entity.Property(e => e.SupplierId)
+                    .IsRequired()
+                    .HasMaxLength(50);
+                
+                entity.Property(e => e.SupplierName)
+                    .IsRequired()
+                    .HasMaxLength(100);
+                
+                entity.Property(e => e.ContactPerson)
+                    .HasMaxLength(50);
+                
+                entity.Property(e => e.ContactPhone)
+                    .HasMaxLength(20);
+                
+                entity.Property(e => e.Email)
+                    .HasMaxLength(100);
+                
+                entity.Property(e => e.Address)
+                    .HasMaxLength(200);
+                
+                entity.Property(e => e.Remarks)
+                    .HasMaxLength(500);
+                
+                entity.Property(e => e.CreatedAt)
+                    .IsRequired()
+                    .HasColumnType("timestamp with time zone");
+                
+                entity.Property(e => e.UpdatedAt)
+                    .IsRequired()
+                    .HasColumnType("timestamp with time zone");
+                
+                // 添加索引
+                entity.HasIndex(e => e.SupplierId).IsUnique();
+                entity.HasIndex(e => e.SupplierName);
             });
         }
     }

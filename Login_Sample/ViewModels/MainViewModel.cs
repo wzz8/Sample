@@ -63,6 +63,8 @@ namespace Login_Sample.ViewModels
         public SparePartsBorrowView SparePartsBorrowView { get; set; }
         // 新增备件报废视图
         public SparePartsScrapView SparePartsScrapView { get; set; }
+        // 新增备件供货商视图
+        public SparePartsSupplierView SparePartsSupplierView { get; set; }
 
         // 各模块的ViewModel实例
         public DashboardViewModel DashboardVM { get; set; }
@@ -101,6 +103,8 @@ namespace Login_Sample.ViewModels
         public SparePartsBorrowViewModel SparePartsBorrowVM { get; set; }
         // 初始化备件报废ViewModel
         public SparePartsScrapViewModel SparePartsScrapVM { get; set; }
+        // 初始化备件供货商ViewModel
+        public SparePartsSupplierViewModel SparePartsSupplierVM { get; set; }
 
         // 命令
         public ICommand NavigateCommand { get; set; }
@@ -178,6 +182,8 @@ namespace Login_Sample.ViewModels
             SparePartsBorrowVM = new SparePartsBorrowViewModel();
             // 初始化备件报废ViewModel
             SparePartsScrapVM = new SparePartsScrapViewModel();
+            // 初始化备件供货商ViewModel
+            SparePartsSupplierVM = new SparePartsSupplierViewModel();
 
             // 初始化各模块的View
             DashboardView = new DashboardView() { DataContext = DashboardVM };
@@ -216,6 +222,8 @@ namespace Login_Sample.ViewModels
             SparePartsBorrowView = new SparePartsBorrowView() { DataContext = SparePartsBorrowVM };
             // 初始化备件报废View
             SparePartsScrapView = new SparePartsScrapView() { DataContext = SparePartsScrapVM };
+            // 初始化备件供货商View
+            SparePartsSupplierView = new SparePartsSupplierView() { DataContext = SparePartsSupplierVM };
 
             // 初始化命令
             NavigateCommand = new RelayCommand(Navigate);
@@ -353,6 +361,11 @@ namespace Login_Sample.ViewModels
                 case "SparePartsScrap":
                     CurrentView = SparePartsScrapView;
                     CurrentModule = "SparePartsScrap";
+                    break;
+                // 新增备件供货商导航
+                case "SparePartsSupplier":
+                    CurrentView = SparePartsSupplierView;
+                    CurrentModule = "SparePartsSupplier";
                     break;
             }
         }
