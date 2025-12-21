@@ -53,6 +53,8 @@ namespace Login_Sample.ViewModels
         public SparePartsOutboundView SparePartsOutboundView { get; set; }
         // 新增配件销售视图
         public SparePartsSaleView SparePartsSaleView { get; set; }
+        // 新增库存管理视图
+        public InventoryManagementView InventoryManagementView { get; set; }
         
         // 各模块的ViewModel实例
         public DashboardViewModel DashboardVM { get; set; }
@@ -71,16 +73,18 @@ namespace Login_Sample.ViewModels
         public InventoryQueryViewModel InventoryQueryVM { get; set; }
         public ShortageManagementViewModel ShortageManagementVM { get; set; }
         public InsuranceManagementViewModel InsuranceManagementVM { get; set; }
-        // 新增派工处理ViewModel
+        // 初始化派工处理ViewModel
         public DispatchManagementViewModel DispatchManagementVM { get; set; }
-        // 新增项目审查ViewModel
+        // 初始化项目审查ViewModel
         public ProjectAuditViewModel ProjectAuditVM { get; set; }
-        // 新增备件入库ViewModel
+        // 初始化备件入库ViewModel
         public SparePartsInboundViewModel SparePartsInboundVM { get; set; }
-        // 新增备件出库ViewModel
+        // 初始化备件出库ViewModel
         public SparePartsOutboundViewModel SparePartsOutboundVM { get; set; }
-        // 新增配件销售ViewModel
+        // 初始化配件销售ViewModel
         public SparePartsSaleViewModel SparePartsSaleVM { get; set; }
+        // 初始化库存管理ViewModel
+        public InventoryManagementViewModel InventoryManagementVM { get; set; }
         
         // 命令
         public ICommand NavigateCommand { get; set; }
@@ -148,6 +152,8 @@ namespace Login_Sample.ViewModels
             SparePartsOutboundVM = new SparePartsOutboundViewModel();
             // 初始化配件销售ViewModel
             SparePartsSaleVM = new SparePartsSaleViewModel();
+            // 初始化库存管理ViewModel
+            InventoryManagementVM = new InventoryManagementViewModel();
             
             // 初始化各模块的View
             DashboardView = new DashboardView() { DataContext = DashboardVM };
@@ -176,6 +182,8 @@ namespace Login_Sample.ViewModels
             SparePartsOutboundView = new SparePartsOutboundView() { DataContext = SparePartsOutboundVM };
             // 初始化配件销售View
             SparePartsSaleView = new SparePartsSaleView() { DataContext = SparePartsSaleVM };
+            // 初始化库存管理View
+            InventoryManagementView = new InventoryManagementView() { DataContext = InventoryManagementVM };
             
             // 初始化命令
             NavigateCommand = new RelayCommand(Navigate);
@@ -285,9 +293,15 @@ namespace Login_Sample.ViewModels
                     CurrentView = SparePartsOutboundView;
                     CurrentModule = "SparePartsOutbound";
                     break;
+                // 新增配件销售导航
                 case "SparePartsSale":
                     CurrentView = SparePartsSaleView;
                     CurrentModule = "SparePartsSale";
+                    break;
+                // 新增库存管理导航
+                case "InventoryManagement":
+                    CurrentView = InventoryManagementView;
+                    CurrentModule = "InventoryManagement";
                     break;
             }
         }

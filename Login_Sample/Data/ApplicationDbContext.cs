@@ -35,6 +35,11 @@ namespace Login_Sample.Data
         public DbSet<SparePartsSale> SparePartsSales { get; set; }
         
         /// <summary>
+        /// 备件入库记录表
+        /// </summary>
+        public DbSet<InventoryInRecord> InventoryInRecords { get; set; }
+        
+        /// <summary>
         /// 配置数据库连接
         /// </summary>
         /// <param name="optionsBuilder">选项构建器</param>
