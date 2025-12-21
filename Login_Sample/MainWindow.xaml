@@ -1,4 +1,4 @@
-<Window x:Class="Login_Sample.MainWindow"
+﻿<Window x:Class="Login_Sample.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -402,6 +402,24 @@
                                         </Style>
                                     </Button.Style>
                                 </Button>
+                                 <!-- 备件报废-->
+                                <Button Command="{Binding NavigateCommand}" CommandParameter="SparePartsScrap" Margin="30,5,10,5">
+                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                        <materialDesign:PackIcon Kind="Delete" Width="20" Height="20" Margin="0,0,10,0"/>
+                                        <TextBlock Text="备件报废"/>
+                                    </StackPanel>
+                                    <Button.Style>
+                                        <Style TargetType="Button" BasedOn="{StaticResource NavButtonStyle}">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding CurrentModule}" Value="SparePartsScrap">
+                                                    <Setter Property="Background" Value="#2C3E50"/>
+                                                    <Setter Property="BorderBrush" Value="#3498DB"/>
+                                                    <Setter Property="BorderThickness" Value="0,0,3,0"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Button.Style>
+                                </Button> 
                             </StackPanel>
                         </Expander>
 

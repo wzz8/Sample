@@ -61,6 +61,8 @@ namespace Login_Sample.ViewModels
         public InventoryCheckView InventoryCheckView { get; set; }
         // 新增备件借用视图
         public SparePartsBorrowView SparePartsBorrowView { get; set; }
+        // 新增备件报废视图
+        public SparePartsScrapView SparePartsScrapView { get; set; }
 
         // 各模块的ViewModel实例
         public DashboardViewModel DashboardVM { get; set; }
@@ -97,6 +99,8 @@ namespace Login_Sample.ViewModels
         public InventoryCheckViewModel InventoryCheckVM { get; set; }
         // 初始化备件借用ViewModel
         public SparePartsBorrowViewModel SparePartsBorrowVM { get; set; }
+        // 初始化备件报废ViewModel
+        public SparePartsScrapViewModel SparePartsScrapVM { get; set; }
 
         // 命令
         public ICommand NavigateCommand { get; set; }
@@ -172,6 +176,8 @@ namespace Login_Sample.ViewModels
             InventoryCheckVM = new InventoryCheckViewModel();
             // 初始化备件借用ViewModel
             SparePartsBorrowVM = new SparePartsBorrowViewModel();
+            // 初始化备件报废ViewModel
+            SparePartsScrapVM = new SparePartsScrapViewModel();
 
             // 初始化各模块的View
             DashboardView = new DashboardView() { DataContext = DashboardVM };
@@ -208,6 +214,8 @@ namespace Login_Sample.ViewModels
             InventoryCheckView = new InventoryCheckView() { DataContext = InventoryCheckVM };
             // 初始化备件借用View
             SparePartsBorrowView = new SparePartsBorrowView() { DataContext = SparePartsBorrowVM };
+            // 初始化备件报废View
+            SparePartsScrapView = new SparePartsScrapView() { DataContext = SparePartsScrapVM };
 
             // 初始化命令
             NavigateCommand = new RelayCommand(Navigate);
@@ -340,6 +348,11 @@ namespace Login_Sample.ViewModels
                 case "SparePartsBorrow":
                     CurrentView = SparePartsBorrowView;
                     CurrentModule = "SparePartsBorrow";
+                    break;
+                // 新增备件报废导航
+                case "SparePartsScrap":
+                    CurrentView = SparePartsScrapView;
+                    CurrentModule = "SparePartsScrap";
                     break;
             }
         }
