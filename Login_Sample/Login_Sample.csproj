@@ -9,6 +9,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="build.log" />
+    <None Remove="build_errors.txt" />
+    <None Remove="build_output.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Include="login_icon.svg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
