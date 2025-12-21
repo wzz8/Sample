@@ -30,6 +30,11 @@ namespace Login_Sample.Data
         public DbSet<InventoryItem> InventoryItems { get; set; }
         
         /// <summary>
+        /// 配件销售表
+        /// </summary>
+        public DbSet<SparePartsSale> SparePartsSales { get; set; }
+        
+        /// <summary>
         /// 配置数据库连接
         /// </summary>
         /// <param name="optionsBuilder">选项构建器</param>
@@ -193,6 +198,49 @@ namespace Login_Sample.Data
                 entity.HasIndex(e => e.ItemNumber);
                 entity.HasIndex(e => e.ItemName);
                 entity.HasIndex(e => e.BranchName);
+            });
+            
+            // 配置配件销售表
+            modelBuilder.Entity<SparePartsSale>(entity =>
+            {
+                entity.ToTable("spare_parts_sales");
+                
+                entity.HasKey(e => e.Id);
+                entity.Property(e => e.Id).ValueGeneratedOnAdd();
+                
+                entity.Property(e => e.CustomerName)
+                    .IsRequired()
+                    .HasMaxLength(50);
+                
+                entity.Property(e => e.CustomerPhone)
+                    .HasMaxLength(20);
+                
+                entity.Property(e => e.QuantitySold)
+                    .IsRequired();
+                
+                entity.Property(e => e.UnitPrice)
+                    .IsRequired()
+                    .HasColumnType("decimal(18, 2)");
+                
+                entity.Property(e => e.TotalAmount)
+                    .IsRequired()
+                    .HasColumnType("decimal(18, 2)");
+                
+                entity.Property(e => e.SaleDate)
+                    .IsRequired()
+                    .HasColumnType("timestamp with time zone");
+                
+                entity.Property(e => e.SalesPerson)
+                    .IsRequired()
+                    .HasMaxLength(50);
+                
+                entity.Property(e => e.Remarks)
+                    .HasMaxLength(200);
+                
+                entity.HasOne(e => e.InventoryItem)
+                    .WithMany()
+                    .HasForeignKey(e => e.InventoryItemId)
+                    .OnDelete(DeleteBehavior.Restrict);
             });
         }
     }

@@ -1,0 +1,110 @@
+<UserControl x:Class="Login_Sample.Views.SparePartsOutboundView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:Login_Sample.Views"
+             xmlns:viewModels="clr-namespace:Login_Sample.ViewModels"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d"
+             d:DesignHeight="450" d:DesignWidth="800"
+             d:DataContext="{d:DesignInstance Type=viewModels:SparePartsOutboundViewModel, IsDesignTimeCreatable=True}">
+    <Grid Background="#F5F5F5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- 模块标题 -->
+        <Border Background="#FFFFFF" Grid.Row="0" Height="80" BorderBrush="#E0E0E0" BorderThickness="0,0,0,1">
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="20,0,0,0">
+                <materialDesign:PackIcon Kind="Warehouse" Width="32" Height="32" Foreground="#3498DB" Margin="0,0,15,0"/>
+                <TextBlock Text="备件出库" FontSize="24" FontWeight="Bold" Foreground="#2C3E50"/>
+            </StackPanel>
+        </Border>
+
+        <!-- 工单查询区域 -->
+        <Grid Grid.Row="1" Margin="10,20,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="200" />
+                <ColumnDefinition Width="100" />
+                <ColumnDefinition Width="100" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Column="0" Grid.Row="0" Text="工单号：" VerticalAlignment="Center" Margin="0,0,10,0" />
+            <TextBox Grid.Column="1" Grid.Row="0" Height="30" Margin="0,0,10,0" />
+            <Button Grid.Column="2" Grid.Row="0" Content="查询" Command="{Binding SearchWorkOrderCommand}" Height="30" Width="80" Margin="0,0,10,0" Background="#3D6DCC" Foreground="White" />
+            <Button Grid.Column="3" Grid.Row="0" Content="重置" Command="{Binding ResetCommand}" Height="30" Width="80" Background="#6C757D" Foreground="White" />
+        </Grid>
+
+        <!-- 工单列表 -->
+        <Grid Grid.Row="2" Margin="10,20,0,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Row="0" Text="维修工单列表" FontSize="16" FontWeight="Bold" Margin="0,0,0,10" />
+            <DataGrid Grid.Row="1" ItemsSource="{Binding WorkOrders}" SelectedItem="{Binding SelectedWorkOrder}" AutoGenerateColumns="False" Height="150" CanUserAddRows="False">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="工单号" Binding="{Binding WorkOrderId}" Width="150" />
+                    <DataGridTextColumn Header="车牌号" Binding="{Binding VehicleNumber}" Width="100" />
+                    <DataGridTextColumn Header="客户姓名" Binding="{Binding CustomerName}" Width="100" />
+                    <DataGridTextColumn Header="维修类型" Binding="{Binding MaintenanceType}" Width="150" />
+                    <DataGridTextColumn Header="维修日期" Binding="{Binding MaintenanceDate, StringFormat=yyyy-MM-dd}" Width="120" />
+                    <DataGridTextColumn Header="状态" Binding="{Binding Status}" Width="100" />
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+
+        <!-- 配件出库区域 -->
+        <Grid Grid.Row="3" Margin="10,20,0,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Row="0" Text="出库配件列表" FontSize="16" FontWeight="Bold" Margin="0,0,0,10" />
+            <DataGrid Grid.Row="1" ItemsSource="{Binding RequiredSpareParts}" AutoGenerateColumns="False" Height="150" CanUserAddRows="False">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="配件编号" Binding="{Binding SparePartId}" Width="100" />
+                    <DataGridTextColumn Header="配件名称" Binding="{Binding Name}" Width="120" />
+                    <DataGridTextColumn Header="类别" Binding="{Binding Category}" Width="100" />
+                    <DataGridTextColumn Header="规格型号" Binding="{Binding Specification}" Width="120" />
+                    <DataGridTextColumn Header="单位" Binding="{Binding Unit}" Width="60" />
+                    <DataGridTextColumn Header="需求数量" Binding="{Binding Quantity}" Width="80" />
+                    <DataGridTextColumn Header="当前库存" Binding="{Binding Inventory}" Width="80" />
+                    <DataGridTextColumn Header="备注" Binding="{Binding Remark}" Width="*" />
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <!-- 出库信息 -->
+            <Grid Grid.Row="2" Margin="0,20,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="150" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="200" />
+                    <ColumnDefinition Width="100" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Column="0" Grid.Row="0" Text="操作人：" VerticalAlignment="Center" Margin="0,0,10,0" />
+                <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding Operator}" Height="30" Margin="0,0,30,0" />
+                <TextBlock Grid.Column="2" Grid.Row="0" Text="操作时间：" VerticalAlignment="Center" Margin="0,0,10,0" />
+                <DatePicker Grid.Column="3" Grid.Row="0" SelectedDate="{Binding OperationTime}" Height="30" Margin="0,0,50,0" />
+                <Button Grid.Column="4" Grid.Row="0" Content="确认出库" Command="{Binding OutboundCommand}" Height="30" Width="100" Background="#28A745" Foreground="White" />
+            </Grid>
+        </Grid>
+    </Grid>
+</UserControl>

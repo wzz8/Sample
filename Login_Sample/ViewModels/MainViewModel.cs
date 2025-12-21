@@ -49,6 +49,10 @@ namespace Login_Sample.ViewModels
         public ProjectAuditView ProjectAuditView { get; set; }
         // 新增备件入库视图
         public SparePartsInboundView SparePartsInboundView { get; set; }
+        // 新增备件出库视图
+        public SparePartsOutboundView SparePartsOutboundView { get; set; }
+        // 新增配件销售视图
+        public SparePartsSaleView SparePartsSaleView { get; set; }
         
         // 各模块的ViewModel实例
         public DashboardViewModel DashboardVM { get; set; }
@@ -73,6 +77,10 @@ namespace Login_Sample.ViewModels
         public ProjectAuditViewModel ProjectAuditVM { get; set; }
         // 新增备件入库ViewModel
         public SparePartsInboundViewModel SparePartsInboundVM { get; set; }
+        // 新增备件出库ViewModel
+        public SparePartsOutboundViewModel SparePartsOutboundVM { get; set; }
+        // 新增配件销售ViewModel
+        public SparePartsSaleViewModel SparePartsSaleVM { get; set; }
         
         // 命令
         public ICommand NavigateCommand { get; set; }
@@ -136,6 +144,10 @@ namespace Login_Sample.ViewModels
             ProjectAuditVM = new ProjectAuditViewModel();
             // 初始化备件入库ViewModel
             SparePartsInboundVM = new SparePartsInboundViewModel();
+            // 初始化备件出库ViewModel
+            SparePartsOutboundVM = new SparePartsOutboundViewModel();
+            // 初始化配件销售ViewModel
+            SparePartsSaleVM = new SparePartsSaleViewModel();
             
             // 初始化各模块的View
             DashboardView = new DashboardView() { DataContext = DashboardVM };
@@ -160,6 +172,10 @@ namespace Login_Sample.ViewModels
             ProjectAuditView = new ProjectAuditView() { DataContext = ProjectAuditVM };
             // 初始化备件入库View
             SparePartsInboundView = new SparePartsInboundView() { DataContext = SparePartsInboundVM };
+            // 初始化备件出库View
+            SparePartsOutboundView = new SparePartsOutboundView() { DataContext = SparePartsOutboundVM };
+            // 初始化配件销售View
+            SparePartsSaleView = new SparePartsSaleView() { DataContext = SparePartsSaleVM };
             
             // 初始化命令
             NavigateCommand = new RelayCommand(Navigate);
@@ -263,6 +279,15 @@ namespace Login_Sample.ViewModels
                 case "SparePartsInbound":
                     CurrentView = SparePartsInboundView;
                     CurrentModule = "SparePartsInbound";
+                    break;
+                // 新增备件出库导航
+                case "SparePartsOutbound":
+                    CurrentView = SparePartsOutboundView;
+                    CurrentModule = "SparePartsOutbound";
+                    break;
+                case "SparePartsSale":
+                    CurrentView = SparePartsSaleView;
+                    CurrentModule = "SparePartsSale";
                     break;
             }
         }
