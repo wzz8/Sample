@@ -22,12 +22,16 @@
         <Border Background="#FFFFFF" Grid.Row="0" Height="80" BorderBrush="#E0E0E0" BorderThickness="0,0,0,1">
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="20,0,0,0">
                 <materialDesign:PackIcon Kind="Box" Width="32" Height="32" Foreground="#3498DB" Margin="0,0,15,0"/>
-                <TextBlock Text="备件管理仪表盘" FontSize="24" FontWeight="Bold" Foreground="#2C3E50"/>
+                <TextBlock Text="备件管理" FontSize="24" FontWeight="Bold" Foreground="#2C3E50"/>
             </StackPanel>
         </Border>
         
         <!-- 模块内容区域 -->
         <Grid Grid.Row="1" Margin="20">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
             <!-- 统计卡片区域 -->
             <Grid Grid.Row="0" Margin="0,0,0,20">
                 <Grid.ColumnDefinitions>
@@ -89,7 +93,7 @@
                 </Grid.ColumnDefinitions>
                 
                 <!-- 备件入库 -->
-                <materialDesign:Card Grid.Column="0" Grid.Row="0" Margin="0,0,15,15" Padding="20" MouseDown="Card_MouseDown" Tag="SparePartsInbound">
+                <materialDesign:Card Grid.Column="0" Grid.Row="0" Margin="0,0,15,15" MouseDown="Card_MouseDown" Tag="SparePartsInbound">
                     <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
                         <materialDesign:PackIcon Kind="ArrowDownCircle" Width="48" Height="48" Foreground="#3498DB" Margin="0,0,0,10"/>
                         <TextBlock Text="备件入库" FontSize="16" FontWeight="Bold" Foreground="#2C3E50"/>
@@ -98,7 +102,7 @@
                 </materialDesign:Card>
                 
                 <!-- 备件出库 -->
-                <materialDesign:Card Grid.Column="1" Grid.Row="0" Margin="15,0,15,15" Padding="20" MouseDown="Card_MouseDown" Tag="SparePartsOutbound">
+                <materialDesign:Card Grid.Column="1" Grid.Row="0" Margin="15,0,15,15" MouseDown="Card_MouseDown" Tag="SparePartsOutbound">
                     <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
                         <materialDesign:PackIcon Kind="ArrowUpCircle" Width="48" Height="48" Foreground="#E74C3C" Margin="0,0,0,10"/>
                         <TextBlock Text="备件出库" FontSize="16" FontWeight="Bold" Foreground="#2C3E50"/>
@@ -107,7 +111,7 @@
                 </materialDesign:Card>
                 
                 <!-- 配件销售 -->
-                <materialDesign:Card Grid.Column="2" Grid.Row="0" Margin="15,0,15,15" Padding="20" MouseDown="Card_MouseDown" Tag="SparePartsSale">
+                <materialDesign:Card Grid.Column="2" Grid.Row="0" Margin="15,0,15,15" MouseDown="Card_MouseDown" Tag="SparePartsSale">
                     <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
                         <materialDesign:PackIcon Kind="Cash" Width="48" Height="48" Foreground="#F39C12" Margin="0,0,0,10"/>
                         <TextBlock Text="配件销售" FontSize="16" FontWeight="Bold" Foreground="#2C3E50"/>
@@ -116,7 +120,7 @@
                 </materialDesign:Card>
                 
                 <!-- 库存管理 -->
-                <materialDesign:Card Grid.Column="3" Grid.Row="0" Margin="15,0,15,15" Padding="20" MouseDown="Card_MouseDown" Tag="InventoryManagement">
+                <materialDesign:Card Grid.Column="3" Grid.Row="0" Margin="15,0,15,15" MouseDown="Card_MouseDown" Tag="InventoryManagement">
                     <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
                         <materialDesign:PackIcon Kind="Warehouse" Width="48" Height="48" Foreground="#2ECC71" Margin="0,0,0,10"/>
                         <TextBlock Text="库存管理" FontSize="16" FontWeight="Bold" Foreground="#2C3E50"/>
@@ -125,7 +129,7 @@
                 </materialDesign:Card>
                 
                 <!-- 备件目录 -->
-                <materialDesign:Card Grid.Column="4" Grid.Row="0" Margin="15,0,0,15" Padding="20" MouseDown="Card_MouseDown" Tag="SparePartsCatalog">
+                <materialDesign:Card Grid.Column="4" Grid.Row="0" Margin="15,0,0,15" MouseDown="Card_MouseDown" Tag="SparePartsCatalog">
                     <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
                         <materialDesign:PackIcon Kind="FileDocument" Width="48" Height="48" Foreground="#9B59B6" Margin="0,0,0,10"/>
                         <TextBlock Text="备件目录" FontSize="16" FontWeight="Bold" Foreground="#2C3E50"/>
@@ -134,7 +138,7 @@
                 </materialDesign:Card>
                 
                 <!-- 库存盘点 -->
-                <materialDesign:Card Grid.Column="0" Grid.Row="1" Margin="0,15,15,0" Padding="20" MouseDown="Card_MouseDown" Tag="InventoryCheck">
+                <materialDesign:Card Grid.Column="0" Grid.Row="1" Margin="0,15,15,0" MouseDown="Card_MouseDown" Tag="InventoryCheck">
                     <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
                         <materialDesign:PackIcon Kind="ClipboardList" Width="48" Height="48" Foreground="#16A085" Margin="0,0,0,10"/>
                         <TextBlock Text="库存盘点" FontSize="16" FontWeight="Bold" Foreground="#2C3E50"/>
@@ -143,7 +147,7 @@
                 </materialDesign:Card>
                 
                 <!-- 备件借用 -->
-                <materialDesign:Card Grid.Column="1" Grid.Row="1" Margin="15,15,15,0" Padding="20" MouseDown="Card_MouseDown" Tag="SparePartsBorrow">
+                <materialDesign:Card Grid.Column="1" Grid.Row="1" Margin="15,15,15,0" MouseDown="Card_MouseDown" Tag="SparePartsBorrow">
                     <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
                         <materialDesign:PackIcon Kind="Handshake" Width="48" Height="48" Foreground="#F1C40F" Margin="0,0,0,10"/>
                         <TextBlock Text="备件借用" FontSize="16" FontWeight="Bold" Foreground="#2C3E50"/>
@@ -152,7 +156,7 @@
                 </materialDesign:Card>
                 
                 <!-- 备件报废 -->
-                <materialDesign:Card Grid.Column="2" Grid.Row="1" Margin="15,15,15,0" Padding="20" MouseDown="Card_MouseDown" Tag="SparePartsScrap">
+                <materialDesign:Card Grid.Column="2" Grid.Row="1" Margin="15,15,15,0" MouseDown="Card_MouseDown" Tag="SparePartsScrap">
                     <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
                         <materialDesign:PackIcon Kind="Delete" Width="48" Height="48" Foreground="#E74C3C" Margin="0,0,0,10"/>
                         <TextBlock Text="备件报废" FontSize="16" FontWeight="Bold" Foreground="#2C3E50"/>
@@ -161,7 +165,7 @@
                 </materialDesign:Card>
                 
                 <!-- 备件供货商 -->
-                <materialDesign:Card Grid.Column="3" Grid.Row="1" Margin="15,15,15,0" Padding="20" MouseDown="Card_MouseDown" Tag="SparePartsSupplier">
+                <materialDesign:Card Grid.Column="3" Grid.Row="1" Margin="15,15,15,0" MouseDown="Card_MouseDown" Tag="SparePartsSupplier">
                     <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
                         <materialDesign:PackIcon Kind="Store" Width="48" Height="48" Foreground="#34495E" Margin="0,0,0,10"/>
                         <TextBlock Text="备件供货商" FontSize="16" FontWeight="Bold" Foreground="#2C3E50"/>
@@ -170,7 +174,7 @@
                 </materialDesign:Card>
                 
                 <!-- 更多功能 -->
-                <materialDesign:Card Grid.Column="4" Grid.Row="1" Margin="15,15,0,0" Padding="20">
+                <materialDesign:Card Grid.Column="4" Grid.Row="1" Margin="15,15,0,0">
                     <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
                         <materialDesign:PackIcon Kind="DotsHorizontal" Width="48" Height="48" Foreground="#7F8C8D" Margin="0,0,0,10"/>
                         <TextBlock Text="更多功能" FontSize="16" FontWeight="Bold" Foreground="#2C3E50"/>
