@@ -55,7 +55,9 @@ namespace Login_Sample.ViewModels
         public SparePartsSaleView SparePartsSaleView { get; set; }
         // 新增库存管理视图
         public InventoryManagementView InventoryManagementView { get; set; }
-        
+        // 新增备件目录视图
+        public SparePartsCatalogView SparePartsCatalogView { get; set; }
+
         // 各模块的ViewModel实例
         public DashboardViewModel DashboardVM { get; set; }
         public BusinessReceptionViewModel BusinessReceptionVM { get; set; }
@@ -85,7 +87,9 @@ namespace Login_Sample.ViewModels
         public SparePartsSaleViewModel SparePartsSaleVM { get; set; }
         // 初始化库存管理ViewModel
         public InventoryManagementViewModel InventoryManagementVM { get; set; }
-        
+        // 初始化备件目录ViewModel
+        public SparePartsCatalogViewModel SparePartsCatalogVM { get; set; }
+
         // 命令
         public ICommand NavigateCommand { get; set; }
         public ICommand LogoutCommand { get; set; }
@@ -154,7 +158,9 @@ namespace Login_Sample.ViewModels
             SparePartsSaleVM = new SparePartsSaleViewModel();
             // 初始化库存管理ViewModel
             InventoryManagementVM = new InventoryManagementViewModel();
-            
+            // 初始化备件目录ViewModel
+            SparePartsCatalogVM = new SparePartsCatalogViewModel();
+
             // 初始化各模块的View
             DashboardView = new DashboardView() { DataContext = DashboardVM };
             BusinessReceptionView = new BusinessReceptionView() { DataContext = BusinessReceptionVM };
@@ -184,7 +190,9 @@ namespace Login_Sample.ViewModels
             SparePartsSaleView = new SparePartsSaleView() { DataContext = SparePartsSaleVM };
             // 初始化库存管理View
             InventoryManagementView = new InventoryManagementView() { DataContext = InventoryManagementVM };
-            
+            // 初始化备件目录View
+            SparePartsCatalogView = new SparePartsCatalogView() { DataContext = SparePartsCatalogVM };
+
             // 初始化命令
             NavigateCommand = new RelayCommand(Navigate);
             LogoutCommand = new RelayCommand(Logout);
@@ -302,6 +310,11 @@ namespace Login_Sample.ViewModels
                 case "InventoryManagement":
                     CurrentView = InventoryManagementView;
                     CurrentModule = "InventoryManagement";
+                    break;
+                // 新增备件目录导航
+                case "SparePartsCatalog":
+                    CurrentView = SparePartsCatalogView;
+                    CurrentModule = "SparePartsCatalog";
                     break;
             }
         }
