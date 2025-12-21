@@ -59,6 +59,8 @@ namespace Login_Sample.ViewModels
         public SparePartsCatalogView SparePartsCatalogView { get; set; }
         // 新增库存盘点视图
         public InventoryCheckView InventoryCheckView { get; set; }
+        // 新增备件借用视图
+        public SparePartsBorrowView SparePartsBorrowView { get; set; }
 
         // 各模块的ViewModel实例
         public DashboardViewModel DashboardVM { get; set; }
@@ -93,6 +95,8 @@ namespace Login_Sample.ViewModels
         public SparePartsCatalogViewModel SparePartsCatalogVM { get; set; }
         // 初始化库存盘点ViewModel
         public InventoryCheckViewModel InventoryCheckVM { get; set; }
+        // 初始化备件借用ViewModel
+        public SparePartsBorrowViewModel SparePartsBorrowVM { get; set; }
 
         // 命令
         public ICommand NavigateCommand { get; set; }
@@ -166,6 +170,8 @@ namespace Login_Sample.ViewModels
             SparePartsCatalogVM = new SparePartsCatalogViewModel();
             // 初始化库存盘点ViewModel
             InventoryCheckVM = new InventoryCheckViewModel();
+            // 初始化备件借用ViewModel
+            SparePartsBorrowVM = new SparePartsBorrowViewModel();
 
             // 初始化各模块的View
             DashboardView = new DashboardView() { DataContext = DashboardVM };
@@ -200,6 +206,8 @@ namespace Login_Sample.ViewModels
             SparePartsCatalogView = new SparePartsCatalogView() { DataContext = SparePartsCatalogVM };
             // 初始化库存盘点View
             InventoryCheckView = new InventoryCheckView() { DataContext = InventoryCheckVM };
+            // 初始化备件借用View
+            SparePartsBorrowView = new SparePartsBorrowView() { DataContext = SparePartsBorrowVM };
 
             // 初始化命令
             NavigateCommand = new RelayCommand(Navigate);
@@ -327,6 +335,11 @@ namespace Login_Sample.ViewModels
                 case "InventoryCheck":
                     CurrentView = InventoryCheckView;
                     CurrentModule = "InventoryCheck";
+                    break;
+                // 新增备件借用导航
+                case "SparePartsBorrow":
+                    CurrentView = SparePartsBorrowView;
+                    CurrentModule = "SparePartsBorrow";
                     break;
             }
         }
