@@ -137,7 +137,7 @@ namespace Login_Sample.ViewModels
                     VehicleBrand = w.Vehicle.VehicleBrand,
                     VehicleModel = w.Vehicle.VehicleModel,
                     ReceptionDate = w.ReceptionDate,
-                    CompletedDate = w.CompletedDate ?? DateTime.Now,
+                    CompletedDate = w.CompletedDate ?? DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Utc),
                     Status = w.Status,
                     TotalAmount = w.TotalAmount,
                     ProblemDescription = w.ProblemDescription
@@ -185,12 +185,14 @@ namespace Login_Sample.ViewModels
 
                 if (StartDate.HasValue)
                 {
-                    query = query.Where(w => w.CompletedDate >= StartDate.Value.Date);
+                    DateTime startDate = DateTime.SpecifyKind(StartDate.Value.Date, DateTimeKind.Utc);
+                    query = query.Where(w => w.CompletedDate >= startDate);
                 }
 
                 if (EndDate.HasValue)
                 {
-                    query = query.Where(w => w.CompletedDate <= EndDate.Value.Date.AddDays(1));
+                    DateTime endDate = DateTime.SpecifyKind(EndDate.Value.Date.AddDays(1), DateTimeKind.Utc);
+                    query = query.Where(w => w.CompletedDate <= endDate);
                 }
 
                 var settlementItems = query.Select(w => new SettlementItemViewModel
@@ -203,7 +205,7 @@ namespace Login_Sample.ViewModels
                     VehicleBrand = w.Vehicle.VehicleBrand,
                     VehicleModel = w.Vehicle.VehicleModel,
                     ReceptionDate = w.ReceptionDate,
-                    CompletedDate = w.CompletedDate ?? DateTime.Now,
+                    CompletedDate = w.CompletedDate ?? DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Utc),
                     Status = w.Status,
                     TotalAmount = w.TotalAmount,
                     ProblemDescription = w.ProblemDescription
