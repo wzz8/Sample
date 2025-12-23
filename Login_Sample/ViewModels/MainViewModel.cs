@@ -297,6 +297,27 @@ namespace Login_Sample.ViewModels
                     CurrentView = CustomerManagementView;
                     CurrentModule = "CustomerManagement";
                     break;
+                // 业务接待子功能导航
+                case "CustomerAppointment":
+                    CurrentView = CustomerManagementView;
+                    CurrentModule = "CustomerManagement";
+                    break;
+                case "VehicleReception":
+                    CurrentView = BusinessReceptionView;
+                    CurrentModule = "BusinessReception";
+                    break;
+                case "RepairArrangement":
+                    CurrentView = VehicleMaintenanceView;
+                    CurrentModule = "VehicleMaintenance";
+                    break;
+                case "CustomerFeedback":
+                    CurrentView = CustomerManagementView;
+                    CurrentModule = "CustomerManagement";
+                    break;
+                case "CompletedServices":
+                    CurrentView = MaintenanceQueryView;
+                    CurrentModule = "MaintenanceQuery";
+                    break;
                 case "RepairProgress":
                     CurrentView = RepairProgressView;
                     CurrentModule = "RepairProgress";

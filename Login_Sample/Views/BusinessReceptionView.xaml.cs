@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +23,20 @@ namespace Login_Sample.Views
         public BusinessReceptionView()
         {
             InitializeComponent();
+        }
+
+        // 卡片点击事件处理程序
+        private void Card_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (sender is MaterialDesignThemes.Wpf.Card card && card.Tag is string pageName)
+            {
+                // 获取MainViewModel实例
+                if (DataContext is ViewModels.MainViewModel mainViewModel)
+                {
+                    // 调用导航命令
+                    mainViewModel.NavigateCommand.Execute(pageName);
+                }
+            }
         }
     }
 }

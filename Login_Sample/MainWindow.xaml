@@ -96,7 +96,7 @@
                     <StackPanel>
 
                         <!-- 业务接待主菜单 -->
-                        <Expander Background="#2C3E50" Margin="0,5,0,0" BorderThickness="0" HorizontalAlignment="Stretch">
+                        <Expander Background="#2C3E50" Margin="0,5,0,0" BorderThickness="0" HorizontalAlignment="Stretch" MouseDoubleClick="Expander_MouseDoubleClick">
 
                             <Expander.Header>
                                 <Button Command="{Binding NavigateCommand}" CommandParameter="BusinessReception" HorizontalAlignment="Left">
@@ -262,7 +262,7 @@
                         </Button>
 
                         <!--备件管理-->
-                        <Expander Background="#2C3E50" Margin="0,5,0,0" BorderThickness="0" HorizontalAlignment="Stretch">
+                        <Expander Background="#2C3E50" Margin="0,5,0,0" BorderThickness="0" HorizontalAlignment="Stretch" MouseDoubleClick="Expander_MouseDoubleClick">
                             <Expander.Header>
                                 <Button Command="{Binding NavigateCommand}" CommandParameter="SparePartsManagement" HorizontalAlignment="Left">
                                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
@@ -442,7 +442,7 @@
                         </Expander>
 
                         <!--车间管理-->
-                        <Expander Background="#2C3E50" Margin="0,5,0,0" BorderThickness="0" HorizontalAlignment="Stretch">
+                        <Expander Background="#2C3E50" Margin="0,5,0,0" BorderThickness="0" HorizontalAlignment="Stretch" MouseDoubleClick="Expander_MouseDoubleClick">
                             <Expander.Header>
                                 <Button Command="{Binding NavigateCommand}" CommandParameter="WorkshopManagement" HorizontalAlignment="Left">
                                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
