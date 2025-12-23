@@ -65,6 +65,8 @@ namespace Login_Sample.ViewModels
         public SparePartsScrapView SparePartsScrapView { get; set; }
         // 新增备件供货商视图
         public SparePartsSupplierView SparePartsSupplierView { get; set; }
+        // 新增车辆结算视图
+        public VehicleSettlementView VehicleSettlementView { get; set; }
 
         // 各模块的ViewModel实例
         public DashboardViewModel DashboardVM { get; set; }
@@ -99,6 +101,8 @@ namespace Login_Sample.ViewModels
         public SparePartsCatalogViewModel SparePartsCatalogVM { get; set; }
         // 初始化库存盘点ViewModel
         public InventoryCheckViewModel InventoryCheckVM { get; set; }
+        // 初始化车辆结算ViewModel
+        public VehicleSettlementViewModel VehicleSettlementVM { get; set; }
         // 初始化备件借用ViewModel
         public SparePartsBorrowViewModel SparePartsBorrowVM { get; set; }
         // 初始化备件报废ViewModel
@@ -224,6 +228,10 @@ namespace Login_Sample.ViewModels
             SparePartsScrapView = new SparePartsScrapView() { DataContext = SparePartsScrapVM };
             // 初始化备件供货商View
             SparePartsSupplierView = new SparePartsSupplierView() { DataContext = SparePartsSupplierVM };
+            // 初始化车辆结算ViewModel
+            VehicleSettlementVM = new VehicleSettlementViewModel();
+            // 初始化车辆结算View
+            VehicleSettlementView = new VehicleSettlementView() { DataContext = VehicleSettlementVM };
 
             // 初始化命令
             NavigateCommand = new RelayCommand(Navigate);
@@ -272,6 +280,10 @@ namespace Login_Sample.ViewModels
                 case "FinancialSettlement":
                     CurrentView = FinancialSettlementView;
                     CurrentModule = "FinancialSettlement";
+                    break;
+                case "VehicleSettlement":
+                    CurrentView = VehicleSettlementView;
+                    CurrentModule = "VehicleSettlement";
                     break;
                 case "SparePartsManagement":
                     CurrentView = SparePartsManagementView;

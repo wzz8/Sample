@@ -243,23 +243,47 @@
                         </Expander>
 
                         <!--财务结算-->
-                        <Button Command="{Binding NavigateCommand}" CommandParameter="FinancialSettlement">
-                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                <materialDesign:PackIcon Kind="Cash" Width="20" Height="20" Margin="0,0,10,0"/>
-                                <TextBlock Text="财务结算"/>
+                        <Expander Background="#2C3E50" Margin="0,5,0,0" BorderThickness="0" HorizontalAlignment="Stretch" MouseDoubleClick="Expander_MouseDoubleClick">
+                            <Expander.Header>
+                                <Button Command="{Binding NavigateCommand}" CommandParameter="FinancialSettlement" HorizontalAlignment="Left" MouseDoubleClick="ExpanderButton_MouseDoubleClick">
+                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                        <materialDesign:PackIcon Kind="Cash" Width="20" Height="20" Margin="0,0,10,0"/>
+                                        <TextBlock Text="财务结算"/>
+                                    </StackPanel>
+                                    <Button.Style>
+                                        <Style TargetType="Button" BasedOn="{StaticResource NavButtonStyle}">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding CurrentModule}" Value="FinancialSettlement">
+                                                    <Setter Property="Background" Value="#2C3E50"/>
+                                                    <Setter Property="BorderBrush" Value="#3498DB"/>
+                                                    <Setter Property="BorderThickness" Value="0,0,3,0"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Button.Style>
+                                </Button>
+                            </Expander.Header>
+                            <StackPanel>
+                                <!--车辆结算-->                                
+                                <Button Command="{Binding NavigateCommand}" CommandParameter="VehicleSettlement" Margin="30,5,10,5">
+                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                        <materialDesign:PackIcon Kind="Car" Width="20" Height="20" Margin="0,0,10,0"/>
+                                        <TextBlock Text="车辆结算"/>
+                                    </StackPanel>
+                                    <Button.Style>
+                                        <Style TargetType="Button" BasedOn="{StaticResource NavButtonStyle}">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding CurrentModule}" Value="VehicleSettlement">
+                                                    <Setter Property="Background" Value="#2C3E50"/>
+                                                    <Setter Property="BorderBrush" Value="#3498DB"/>
+                                                    <Setter Property="BorderThickness" Value="0,0,3,0"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Button.Style>
+                                </Button>
                             </StackPanel>
-                            <Button.Style>
-                                <Style TargetType="Button" BasedOn="{StaticResource NavButtonStyle}">
-                                    <Style.Triggers>
-                                        <DataTrigger Binding="{Binding CurrentModule}" Value="FinancialSettlement">
-                                            <Setter Property="Background" Value="#2C3E50"/>
-                                            <Setter Property="BorderBrush" Value="#3498DB"/>
-                                            <Setter Property="BorderThickness" Value="0,0,3,0"/>
-                                        </DataTrigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </Button.Style>
-                        </Button>
+                        </Expander>
 
                         <!--备件管理-->
                         <Expander Background="#2C3E50" Margin="0,5,0,0" BorderThickness="0" HorizontalAlignment="Stretch" MouseDoubleClick="Expander_MouseDoubleClick">
