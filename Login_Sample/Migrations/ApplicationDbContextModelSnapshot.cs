@@ -63,7 +63,7 @@ namespace Login_Sample.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Customer");
+                    b.ToTable("Customers");
                 });
 
             modelBuilder.Entity("Login_Sample.Data.CustomerAppointment", b =>
@@ -79,11 +79,13 @@ namespace Login_Sample.Migrations
 
                     b.Property<string>("AppointmentTime")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(20)
+                        .HasColumnType("character varying(20)");
 
                     b.Property<string>("AppointmentType")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
@@ -91,21 +93,34 @@ namespace Login_Sample.Migrations
                     b.Property<int>("CustomerId")
                         .HasColumnType("integer");
 
+                    b.Property<int?>("CustomerId1")
+                        .HasColumnType("integer");
+
                     b.Property<string>("Receptionist")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)");
 
                     b.Property<string>("Remarks")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)");
 
                     b.Property<string>("ServiceContent")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)");
 
                     b.Property<string>("Status")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(20)
+                        .HasColumnType("character varying(20)");
+
+                    b.Property<int?>("TechnicianId")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<int>("VehicleId")
                         .HasColumnType("integer");
@@ -114,9 +129,13 @@ namespace Login_Sample.Migrations
 
                     b.HasIndex("CustomerId");
 
+                    b.HasIndex("CustomerId1");
+
+                    b.HasIndex("TechnicianId");
+
                     b.HasIndex("VehicleId");
 
-                    b.ToTable("CustomerAppointment");
+                    b.ToTable("customer_appointments", (string)null);
                 });
 
             modelBuilder.Entity("Login_Sample.Data.CustomerCard", b =>
@@ -387,7 +406,7 @@ namespace Login_Sample.Migrations
 
                     b.HasIndex("CustomerId");
 
-                    b.ToTable("CustomerVehicle");
+                    b.ToTable("CustomerVehicles");
                 });
 
             modelBuilder.Entity("Login_Sample.Data.CustomerVisit", b =>
@@ -865,6 +884,44 @@ namespace Login_Sample.Migrations
                     b.ToTable("SpecialCustomer");
                 });
 
+            modelBuilder.Entity("Login_Sample.Data.Technician", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)");
+
+                    b.Property<string>("Phone")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("character varying(20)");
+
+                    b.Property<string>("Remarks")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)");
+
+                    b.Property<string>("Specialty")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("character varying(20)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("technicians", (string)null);
+                });
+
             modelBuilder.Entity("Login_Sample.Data.User", b =>
                 {
                     b.Property<int>("Id")
@@ -962,18 +1019,29 @@ namespace Login_Sample.Migrations
             modelBuilder.Entity("Login_Sample.Data.CustomerAppointment", b =>
                 {
                     b.HasOne("Login_Sample.Data.Customer", "Customer")
-                        .WithMany("Appointments")
+                        .WithMany()
                         .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.HasOne("Login_Sample.Data.Customer", null)
+                        .WithMany("Appointments")
+                        .HasForeignKey("CustomerId1");
+
+                    b.HasOne("Login_Sample.Data.Technician", "Technician")
+                        .WithMany()
+                        .HasForeignKey("TechnicianId")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("Login_Sample.Data.CustomerVehicle", "Vehicle")
                         .WithMany()
                         .HasForeignKey("VehicleId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Customer");
+
+                    b.Navigation("Technician");
 
                     b.Navigation("Vehicle");
                 });

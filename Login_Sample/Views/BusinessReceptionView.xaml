@@ -177,7 +177,7 @@
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
 
-                            <Button Grid.Column="0" Margin="0,0,15,0" Height="50" Background="#3498DB" Foreground="White" materialDesign:ButtonAssist.CornerRadius="4">
+                            <Button Grid.Column="0" Margin="0,0,15,0" Height="50" Background="#3498DB" Foreground="White" materialDesign:ButtonAssist.CornerRadius="4" Command="{Binding NavigateCommand}" CommandParameter="AppointmentManagement">
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
                                     <materialDesign:PackIcon Kind="Plus" Width="24" Height="24" Margin="0,0,10,0"/>
                                     <TextBlock Text="新增预约"/>

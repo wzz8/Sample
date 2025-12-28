@@ -1,3 +1,7 @@
+using System;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace Login_Sample.Data
 {
     /// <summary>
@@ -8,42 +12,53 @@ namespace Login_Sample.Data
         /// <summary>
         /// 主键
         /// </summary>
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         
         /// <summary>
         /// 供应商ID
         /// </summary>
-        public string SupplierId { get; set; } = string.Empty;
+        [Required]
+        [MaxLength(50)]
+        public string SupplierId { get; set; }
         
         /// <summary>
         /// 供应商名称
         /// </summary>
-        public string SupplierName { get; set; } = string.Empty;
+        [Required]
+        [MaxLength(100)]
+        public string SupplierName { get; set; }
         
         /// <summary>
         /// 联系人
         /// </summary>
-        public string ContactPerson { get; set; } = string.Empty;
+        [MaxLength(50)]
+        public string ContactPerson { get; set; }
         
         /// <summary>
         /// 联系电话
         /// </summary>
-        public string ContactPhone { get; set; } = string.Empty;
+        [MaxLength(20)]
+        public string ContactPhone { get; set; }
         
         /// <summary>
         /// 电子邮箱
         /// </summary>
-        public string Email { get; set; } = string.Empty;
+        [MaxLength(100)]
+        public string Email { get; set; }
         
         /// <summary>
         /// 地址
         /// </summary>
-        public string Address { get; set; } = string.Empty;
+        [MaxLength(200)]
+        public string Address { get; set; }
         
         /// <summary>
         /// 备注
         /// </summary>
-        public string Remarks { get; set; } = string.Empty;
+        [MaxLength(500)]
+        public string Remarks { get; set; }
         
         /// <summary>
         /// 创建时间
@@ -54,5 +69,19 @@ namespace Login_Sample.Data
         /// 更新时间
         /// </summary>
         public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
+        
+        /// <summary>
+        /// 构造函数
+        /// </summary>
+        public SparePartsSupplier()
+        {
+            SupplierId = string.Empty;
+            SupplierName = string.Empty;
+            ContactPerson = string.Empty;
+            ContactPhone = string.Empty;
+            Email = string.Empty;
+            Address = string.Empty;
+            Remarks = string.Empty;
+        }
     }
 }

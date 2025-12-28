@@ -45,6 +45,26 @@ namespace Login_Sample.Data
         public DbSet<SparePartsSupplier> SparePartsSuppliers { get; set; }
         
         /// <summary>
+        /// 客户预约表
+        /// </summary>
+        public DbSet<CustomerAppointment> CustomerAppointments { get; set; }
+        
+        /// <summary>
+        /// 客户表
+        /// </summary>
+        public DbSet<Customer> Customers { get; set; }
+        
+        /// <summary>
+        /// 客户车辆表
+        /// </summary>
+        public DbSet<CustomerVehicle> CustomerVehicles { get; set; }
+        
+        /// <summary>
+        /// 维修技师表
+        /// </summary>
+        public DbSet<Technician> Technicians { get; set; }
+        
+        /// <summary>
         /// 配置数据库连接
         /// </summary>
         /// <param name="optionsBuilder">选项构建器</param>
@@ -295,6 +315,88 @@ namespace Login_Sample.Data
                 // 添加索引
                 entity.HasIndex(e => e.SupplierId).IsUnique();
                 entity.HasIndex(e => e.SupplierName);
+            });
+            
+            // 配置维修技师表
+            modelBuilder.Entity<Technician>(entity =>
+            {
+                entity.ToTable("technicians");
+                
+                entity.HasKey(e => e.Id);
+                entity.Property(e => e.Id).ValueGeneratedOnAdd();
+                
+                entity.Property(e => e.Name)
+                    .IsRequired()
+                    .HasMaxLength(50);
+                
+                entity.Property(e => e.Phone)
+                    .HasMaxLength(20);
+                
+                entity.Property(e => e.Specialty)
+                    .HasMaxLength(100);
+                
+                entity.Property(e => e.Status)
+                    .HasMaxLength(20);
+                
+                entity.Property(e => e.Remarks)
+                    .HasMaxLength(200);
+            });
+            
+            // 配置客户预约表
+            modelBuilder.Entity<CustomerAppointment>(entity =>
+            {
+                entity.ToTable("customer_appointments");
+                
+                entity.HasKey(e => e.Id);
+                entity.Property(e => e.Id).ValueGeneratedOnAdd();
+                
+                entity.Property(e => e.AppointmentType)
+                    .IsRequired()
+                    .HasMaxLength(50);
+                
+                entity.Property(e => e.AppointmentDate)
+                    .IsRequired();
+                
+                entity.Property(e => e.AppointmentTime)
+                    .IsRequired()
+                    .HasMaxLength(20);
+                
+                entity.Property(e => e.ServiceContent)
+                    .HasMaxLength(200);
+                
+                entity.Property(e => e.Status)
+                    .IsRequired()
+                    .HasMaxLength(20);
+                
+                entity.Property(e => e.Receptionist)
+                    .HasMaxLength(50);
+                
+                entity.Property(e => e.Remarks)
+                    .HasMaxLength(200);
+                
+                entity.Property(e => e.CreatedAt)
+                    .IsRequired()
+                    .HasColumnType("timestamp with time zone");
+                
+                entity.Property(e => e.UpdatedAt)
+                    .IsRequired()
+                    .HasColumnType("timestamp with time zone");
+                
+                // 外键关系
+                entity.HasOne(e => e.Customer)
+                    .WithMany()
+                    .HasForeignKey(e => e.CustomerId)
+                    .OnDelete(DeleteBehavior.Restrict);
+                
+                entity.HasOne(e => e.Vehicle)
+                    .WithMany()
+                    .HasForeignKey(e => e.VehicleId)
+                    .OnDelete(DeleteBehavior.Restrict);
+                
+                entity.HasOne(e => e.Technician)
+                    .WithMany()
+                    .HasForeignKey(e => e.TechnicianId)
+                    .OnDelete(DeleteBehavior.Restrict);
             });
         }
     }

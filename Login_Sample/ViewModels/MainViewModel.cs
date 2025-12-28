@@ -67,6 +67,8 @@ namespace Login_Sample.ViewModels
         public SparePartsSupplierView SparePartsSupplierView { get; set; }
         // 新增车辆结算视图
         public VehicleSettlementView VehicleSettlementView { get; set; }
+        // 新增服务预约视图
+        public AppointmentManagementView AppointmentManagementView { get; set; }
 
         // 各模块的ViewModel实例
         public DashboardViewModel DashboardVM { get; set; }
@@ -109,6 +111,8 @@ namespace Login_Sample.ViewModels
         public SparePartsScrapViewModel SparePartsScrapVM { get; set; }
         // 初始化备件供货商ViewModel
         public SparePartsSupplierViewModel SparePartsSupplierVM { get; set; }
+        // 新增服务预约ViewModel
+        public AppointmentManagementViewModel AppointmentManagementVM { get; set; }
 
         // 命令
         public ICommand NavigateCommand { get; set; }
@@ -188,6 +192,8 @@ namespace Login_Sample.ViewModels
             SparePartsScrapVM = new SparePartsScrapViewModel();
             // 初始化备件供货商ViewModel
             SparePartsSupplierVM = new SparePartsSupplierViewModel();
+            // 初始化服务预约ViewModel
+            AppointmentManagementVM = new AppointmentManagementViewModel();
 
             // 初始化各模块的View
             DashboardView = new DashboardView() { DataContext = DashboardVM };
@@ -232,6 +238,8 @@ namespace Login_Sample.ViewModels
             VehicleSettlementVM = new VehicleSettlementViewModel();
             // 初始化车辆结算View
             VehicleSettlementView = new VehicleSettlementView() { DataContext = VehicleSettlementVM };
+            // 初始化服务预约View
+            AppointmentManagementView = new AppointmentManagementView() { DataContext = AppointmentManagementVM };
 
             // 初始化命令
             NavigateCommand = new RelayCommand(Navigate);
@@ -268,6 +276,10 @@ namespace Login_Sample.ViewModels
                 case "VehicleMaintenance":
                     CurrentView = VehicleMaintenanceView;
                     CurrentModule = "VehicleMaintenance";
+                    break;
+                case "AppointmentManagement":
+                    CurrentView = AppointmentManagementView;
+                    CurrentModule = "AppointmentManagement";
                     break;
                 case "MaintenanceQuery":
                     CurrentView = MaintenanceQueryView;
@@ -311,8 +323,8 @@ namespace Login_Sample.ViewModels
                     break;
                 // 业务接待子功能导航
                 case "CustomerAppointment":
-                    CurrentView = CustomerManagementView;
-                    CurrentModule = "CustomerManagement";
+                    CurrentView = AppointmentManagementView;
+                    CurrentModule = "AppointmentManagement";
                     break;
                 case "VehicleReception":
                     CurrentView = BusinessReceptionView;

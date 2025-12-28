@@ -120,6 +120,23 @@
 
                             <!-- 子菜单 -->
                             <StackPanel Margin="20,0,0,0">
+                                <Button Command="{Binding NavigateCommand}" CommandParameter="AppointmentManagement">
+                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                        <materialDesign:PackIcon Kind="CalendarClock" Width="20" Height="20" Margin="0,0,10,0"/>
+                                        <TextBlock Text="服务预约"/>
+                                    </StackPanel>
+                                    <Button.Style>
+                                        <Style TargetType="Button" BasedOn="{StaticResource NavButtonStyle}">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding CurrentModule}" Value="AppointmentManagement">
+                                                    <Setter Property="Background" Value="#2C3E50"/>
+                                                    <Setter Property="BorderBrush" Value="#3498DB"/>
+                                                    <Setter Property="BorderThickness" Value="0,0,3,0"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Button.Style>
+                                </Button>
                                 <Button Command="{Binding NavigateCommand}" CommandParameter="VehicleMaintenance">
                                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                                         <materialDesign:PackIcon Kind="CarRepair" Width="20" Height="20" Margin="0,0,10,0"/>
