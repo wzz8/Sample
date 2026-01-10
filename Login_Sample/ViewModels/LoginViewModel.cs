@@ -10,28 +10,28 @@ namespace Login_Sample.ViewModels
 {
     public class LoginViewModel : INotifyPropertyChanged
     {
-        private bool _isFactoryNoEnabled = true;
-        private string _factoryNo = string.Empty;
+        private bool _isNoEnabled = true;
+        private string _No = string.Empty;
         private string _username = string.Empty;
         private string _password = string.Empty;
         private string _errorMessage = string.Empty;
         private Visibility _errorVisibility = Visibility.Hidden;
-        private Visibility _factoryNoVisibility = Visibility.Visible;
+        private Visibility _NoVisibility = Visibility.Visible;
         private double _windowHeight = 320;
         private double _windowWidth = 380;
         private bool _isLoading = false;
 
         /// <summary>
-        /// 是否启用分厂号输入
+        /// 是否启用店号输入
         /// </summary>
-        public bool IsFactoryNoEnabled
+        public bool IsNoEnabled
         {
-            get { return _isFactoryNoEnabled; }
+            get { return _isNoEnabled; }
             set 
             {
-                if (_isFactoryNoEnabled != value)
+                if (_isNoEnabled != value)
                 {
-                    _isFactoryNoEnabled = value;
+                    _isNoEnabled = value;
                     OnPropertyChanged();
                     UpdateUIState();
                 }
@@ -39,16 +39,16 @@ namespace Login_Sample.ViewModels
         }
 
         /// <summary>
-        /// 分厂号
+        /// 店号
         /// </summary>
-        public string FactoryNo
+        public string No
         {
-            get { return _factoryNo; }
+            get { return _No; }
             set 
             {
-                if (_factoryNo != value)
+                if (_No != value)
                 {
-                    _factoryNo = value;
+                    _No = value;
                     OnPropertyChanged();
                 }
             }
@@ -126,14 +126,14 @@ namespace Login_Sample.ViewModels
         /// <summary>
         /// 分厂号输入框可见性
         /// </summary>
-        public Visibility FactoryNoVisibility
+        public Visibility NoVisibility
         {
-            get { return _factoryNoVisibility; }
+            get { return _NoVisibility; }
             set 
             {
-                if (_factoryNoVisibility != value)
+                if (_NoVisibility != value)
                 {
-                    _factoryNoVisibility = value;
+                    _NoVisibility = value;
                     OnPropertyChanged();
                 }
             }
@@ -228,7 +228,7 @@ namespace Login_Sample.ViewModels
             RegisterCommand = new RelayCommand(Register);
             CloseCommand = new RelayCommand(Close);
             PasswordChangedCommand = new RelayCommand(HandlePasswordChanged);
-            IsFactoryNoEnabled = false;
+            IsNoEnabled = true;
             
             UpdateUIState();
         }
@@ -339,15 +339,15 @@ namespace Login_Sample.ViewModels
         /// </summary>
         private void UpdateUIState()
         {
-            if (IsFactoryNoEnabled)
+            if (IsNoEnabled)
             {
-                FactoryNoVisibility = Visibility.Visible;
+                NoVisibility = Visibility.Visible;
                 WindowHeight = 320;
                 WindowWidth = 380;
             }
             else
             {
-                FactoryNoVisibility = Visibility.Collapsed;
+                NoVisibility = Visibility.Collapsed;
                 WindowHeight = 270;
                 WindowWidth = 360;
             }
