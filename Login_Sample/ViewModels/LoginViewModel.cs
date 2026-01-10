@@ -3,6 +3,7 @@ using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
+using Login_Sample;
 using Login_Sample.Data;
 using Microsoft.EntityFrameworkCore;
 
@@ -218,6 +219,11 @@ namespace Login_Sample.ViewModels
         /// 关闭命令
         /// </summary>
         public RelayCommand CloseCommand { get; set; }
+        
+        /// <summary>
+        /// 设置命令
+        /// </summary>
+        public RelayCommand SettingsCommand { get; set; }
 
         public LoginViewModel()
         {
@@ -228,6 +234,7 @@ namespace Login_Sample.ViewModels
             RegisterCommand = new RelayCommand(Register);
             CloseCommand = new RelayCommand(Close);
             PasswordChangedCommand = new RelayCommand(HandlePasswordChanged);
+            SettingsCommand = new RelayCommand(Settings);
             IsNoEnabled = true;
             
             UpdateUIState();
@@ -333,6 +340,16 @@ namespace Login_Sample.ViewModels
         {
             // 原有关闭逻辑不变
         }
+        
+        /// <summary>
+        /// 设置方法
+        /// </summary>
+        private void Settings(object? parameter)
+        {
+            // 显示设置窗口
+            SettingsWindow settingsWindow = new SettingsWindow();
+            settingsWindow.ShowDialog();
+        }
 
         /// <summary>
         /// 更新UI状态
@@ -342,13 +359,13 @@ namespace Login_Sample.ViewModels
             if (IsNoEnabled)
             {
                 NoVisibility = Visibility.Visible;
-                WindowHeight = 320;
+                WindowHeight = 270;
                 WindowWidth = 380;
             }
             else
             {
                 NoVisibility = Visibility.Collapsed;
-                WindowHeight = 270;
+                WindowHeight = 230;
                 WindowWidth = 360;
             }
             Icon = CreateLoginIcon();

@@ -48,7 +48,8 @@
     </Window.Resources>
     <Grid Margin="0 20 0 0">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
@@ -62,24 +63,27 @@
         
         <!-- 店号 -->
         <Label Grid.Row="0" Grid.Column="0" Content="店号:" Margin="10,5,10,5" VerticalAlignment="Center" Visibility="{Binding NoVisibility}"/>
-        <TextBox Grid.Row="0" Grid.Column="1" Margin="0,5,20,5" Height="30" BorderBrush="#CCCCCC" BorderThickness="1" Padding="5" Text="{Binding No, UpdateSourceTrigger=PropertyChanged}" Visibility="{Binding NoVisibility}"/>
+        <TextBox Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Margin="0,5,20,5" Height="30" BorderBrush="#CCCCCC" BorderThickness="1" Padding="5" Text="{Binding No, UpdateSourceTrigger=PropertyChanged}" Visibility="{Binding NoVisibility}"/>
         
         <!-- 用户名 -->
         <Label Grid.Row="1" Grid.Column="0" Content="用户名:" Margin="10,5,10,5" VerticalAlignment="Center"/>
-        <ComboBox Grid.Row="1" Grid.Column="1" Margin="0,5,20,5" Height="30" IsEditable="True" BorderBrush="#CCCCCC" BorderThickness="1" Padding="5" Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}"/>
+        <ComboBox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Margin="0,5,20,5" Height="30" IsEditable="True" BorderBrush="#CCCCCC" BorderThickness="1" Padding="5" Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}"/>
         
         <!-- 密码 -->
         <Label Grid.Row="2" Grid.Column="0" Content="密码:" Margin="10,5,10,5" VerticalAlignment="Center"/>
-        <PasswordBox Grid.Row="2" Grid.Column="1" Margin="0,5,20,5" Height="30" BorderBrush="#CCCCCC" BorderThickness="1" Padding="5" vm:PasswordBoxExtensions.PasswordChangedCommand="{Binding PasswordChangedCommand}"/>
+        <PasswordBox Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Margin="0,5,20,5" Height="30" BorderBrush="#CCCCCC" BorderThickness="1" Padding="5" vm:PasswordBoxExtensions.PasswordChangedCommand="{Binding PasswordChangedCommand}"/>
         
         <!-- 错误提示 -->
-        <TextBlock Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Margin="20,5,20,10" Foreground="Red" TextAlignment="Center" FontSize="14" Visibility="{Binding ErrorVisibility}" Text="{Binding ErrorMessage}"/>
+        <TextBlock Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3" Margin="20,5,20,10" Foreground="Red" TextAlignment="Center" FontSize="14" Visibility="{Binding ErrorVisibility}" Text="{Binding ErrorMessage}"/>
         
         <!-- 登录按钮 -->
-        <Button Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Content="登录" Margin="20,5,20,5" Height="35" Command="{Binding LoginCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"/>
+        <Button Grid.Row="4" Grid.Column="1" Content="登录" Margin="5,5,5,5" Height="35" Command="{Binding LoginCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"/>
         
         <!-- 注册按钮 -->
-        <Button Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" Content="注册" Margin="20,5,20,20" Height="35" Command="{Binding RegisterCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"/>
+        <Button Grid.Row="4" Grid.Column="2" Content="注册" Margin="5,5,10,5" Height="35" Command="{Binding RegisterCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"/>
         
+        <!-- 设置按钮 -->
+        <Button Grid.Row="4" Grid.Column="0" Content="设置" Margin="10,5,5,5" Height="35" Command="{Binding SettingsCommand}"/>
+
     </Grid>
 </Window>
