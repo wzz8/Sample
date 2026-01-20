@@ -318,6 +318,44 @@
                                         </Style>
                                     </Button.Style>
                                 </Button>
+                                
+                                <!--款项处理-->                                
+                                <Button Command="{Binding NavigateCommand}" CommandParameter="PaymentProcessing" Margin="30,5,10,5">
+                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                        <materialDesign:PackIcon Kind="Bank" Width="20" Height="20" Margin="0,0,10,0"/>
+                                        <TextBlock Text="款项处理"/>
+                                    </StackPanel>
+                                    <Button.Style>
+                                        <Style TargetType="Button" BasedOn="{StaticResource NavButtonStyle}">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding CurrentModule}" Value="PaymentProcessing">
+                                                    <Setter Property="Background" Value="#2C3E50"/>
+                                                    <Setter Property="BorderBrush" Value="#3498DB"/>
+                                                    <Setter Property="BorderThickness" Value="0,0,3,0"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Button.Style>
+                                </Button>
+                                
+                                <!--财务审核-->                                
+                                <Button Command="{Binding NavigateCommand}" CommandParameter="FinancialAudit" Margin="30,5,10,5">
+                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                        <materialDesign:PackIcon Kind="CheckCircle" Width="20" Height="20" Margin="0,0,10,0"/>
+                                        <TextBlock Text="财务审核"/>
+                                    </StackPanel>
+                                    <Button.Style>
+                                        <Style TargetType="Button" BasedOn="{StaticResource NavButtonStyle}">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding CurrentModule}" Value="FinancialAudit">
+                                                    <Setter Property="Background" Value="#2C3E50"/>
+                                                    <Setter Property="BorderBrush" Value="#3498DB"/>
+                                                    <Setter Property="BorderThickness" Value="0,0,3,0"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Button.Style>
+                                </Button>
                             </StackPanel>
                         </Expander>
 

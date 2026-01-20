@@ -69,8 +69,12 @@ namespace Login_Sample.ViewModels
         public VehicleSettlementView VehicleSettlementView { get; set; }
         // 新增服务预约视图
         public AppointmentManagementView AppointmentManagementView { get; set; }
-        // 新增销售结算视图
+        // 初始化销售结算View
         public SalesSettlementView SalesSettlementView { get; set; }
+        // 初始化款项处理View
+        public PaymentProcessingView PaymentProcessingView { get; set; }
+        // 初始化财务审核View
+        public FinancialAuditView FinancialAuditView { get; set; }
 
         // 各模块的ViewModel实例
         public DashboardViewModel DashboardVM { get; set; }
@@ -117,6 +121,10 @@ namespace Login_Sample.ViewModels
         public AppointmentManagementViewModel AppointmentManagementVM { get; set; }
         // 初始化销售结算ViewModel
         public SalesSettlementViewModel SalesSettlementVM { get; set; }
+        // 初始化款项处理ViewModel
+        public PaymentProcessingViewModel PaymentProcessingVM { get; set; }
+        // 初始化财务审核ViewModel
+        public FinancialAuditViewModel FinancialAuditVM { get; set; }
 
         // 命令
         public ICommand NavigateCommand { get; set; }
@@ -246,6 +254,14 @@ namespace Login_Sample.ViewModels
             SalesSettlementVM = new SalesSettlementViewModel();
             // 初始化销售结算View
             SalesSettlementView = new SalesSettlementView() { DataContext = SalesSettlementVM };
+            // 初始化款项处理ViewModel
+            PaymentProcessingVM = new PaymentProcessingViewModel();
+            // 初始化款项处理View
+            PaymentProcessingView = new PaymentProcessingView() { DataContext = PaymentProcessingVM };
+            // 初始化财务审核ViewModel
+            FinancialAuditVM = new FinancialAuditViewModel();
+            // 初始化财务审核View
+            FinancialAuditView = new FinancialAuditView() { DataContext = FinancialAuditVM };
             // 初始化服务预约View
             AppointmentManagementView = new AppointmentManagementView() { DataContext = AppointmentManagementVM };
 
@@ -308,6 +324,14 @@ namespace Login_Sample.ViewModels
                 case "SalesSettlement":
                     CurrentView = SalesSettlementView;
                     CurrentModule = "SalesSettlement";
+                    break;
+                case "PaymentProcessing":
+                    CurrentView = PaymentProcessingView;
+                    CurrentModule = "PaymentProcessing";
+                    break;
+                case "FinancialAudit":
+                    CurrentView = FinancialAuditView;
+                    CurrentModule = "FinancialAudit";
                     break;
                 case "SparePartsManagement":
                     CurrentView = SparePartsManagementView;
