@@ -69,6 +69,8 @@ namespace Login_Sample.ViewModels
         public VehicleSettlementView VehicleSettlementView { get; set; }
         // 新增服务预约视图
         public AppointmentManagementView AppointmentManagementView { get; set; }
+        // 新增销售结算视图
+        public SalesSettlementView SalesSettlementView { get; set; }
 
         // 各模块的ViewModel实例
         public DashboardViewModel DashboardVM { get; set; }
@@ -111,8 +113,10 @@ namespace Login_Sample.ViewModels
         public SparePartsScrapViewModel SparePartsScrapVM { get; set; }
         // 初始化备件供货商ViewModel
         public SparePartsSupplierViewModel SparePartsSupplierVM { get; set; }
-        // 新增服务预约ViewModel
+        // 初始化服务预约ViewModel
         public AppointmentManagementViewModel AppointmentManagementVM { get; set; }
+        // 初始化销售结算ViewModel
+        public SalesSettlementViewModel SalesSettlementVM { get; set; }
 
         // 命令
         public ICommand NavigateCommand { get; set; }
@@ -238,6 +242,10 @@ namespace Login_Sample.ViewModels
             VehicleSettlementVM = new VehicleSettlementViewModel();
             // 初始化车辆结算View
             VehicleSettlementView = new VehicleSettlementView() { DataContext = VehicleSettlementVM };
+            // 初始化销售结算ViewModel
+            SalesSettlementVM = new SalesSettlementViewModel();
+            // 初始化销售结算View
+            SalesSettlementView = new SalesSettlementView() { DataContext = SalesSettlementVM };
             // 初始化服务预约View
             AppointmentManagementView = new AppointmentManagementView() { DataContext = AppointmentManagementVM };
 
@@ -296,6 +304,10 @@ namespace Login_Sample.ViewModels
                 case "VehicleSettlement":
                     CurrentView = VehicleSettlementView;
                     CurrentModule = "VehicleSettlement";
+                    break;
+                case "SalesSettlement":
+                    CurrentView = SalesSettlementView;
+                    CurrentModule = "SalesSettlement";
                     break;
                 case "SparePartsManagement":
                     CurrentView = SparePartsManagementView;

@@ -262,7 +262,7 @@
                         <!--财务结算-->
                         <Expander Background="#2C3E50" Margin="0,5,0,0" BorderThickness="0" HorizontalAlignment="Stretch" MouseDoubleClick="Expander_MouseDoubleClick">
                             <Expander.Header>
-                                <Button Command="{Binding NavigateCommand}" CommandParameter="FinancialSettlement" HorizontalAlignment="Left" MouseDoubleClick="ExpanderButton_MouseDoubleClick">
+                                <Button Command="{Binding NavigateCommand}" CommandParameter="FinancialSettlement" HorizontalAlignment="Left">
                                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                                         <materialDesign:PackIcon Kind="Cash" Width="20" Height="20" Margin="0,0,10,0"/>
                                         <TextBlock Text="财务结算"/>
@@ -291,6 +291,25 @@
                                         <Style TargetType="Button" BasedOn="{StaticResource NavButtonStyle}">
                                             <Style.Triggers>
                                                 <DataTrigger Binding="{Binding CurrentModule}" Value="VehicleSettlement">
+                                                    <Setter Property="Background" Value="#2C3E50"/>
+                                                    <Setter Property="BorderBrush" Value="#3498DB"/>
+                                                    <Setter Property="BorderThickness" Value="0,0,3,0"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Button.Style>
+                                </Button>
+                                
+                                <!--销售结算-->                                
+                                <Button Command="{Binding NavigateCommand}" CommandParameter="SalesSettlement" Margin="30,5,10,5">
+                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                        <materialDesign:PackIcon Kind="CashRegister" Width="20" Height="20" Margin="0,0,10,0"/>
+                                        <TextBlock Text="销售结算"/>
+                                    </StackPanel>
+                                    <Button.Style>
+                                        <Style TargetType="Button" BasedOn="{StaticResource NavButtonStyle}">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding CurrentModule}" Value="SalesSettlement">
                                                     <Setter Property="Background" Value="#2C3E50"/>
                                                     <Setter Property="BorderBrush" Value="#3498DB"/>
                                                     <Setter Property="BorderThickness" Value="0,0,3,0"/>
