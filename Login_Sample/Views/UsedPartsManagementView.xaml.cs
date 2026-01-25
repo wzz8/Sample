@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,9 +7,9 @@ using System.Windows.Controls;
 
 namespace Login_Sample.Views
 {
-    public partial class LeadershipQueryView : UserControl
+    public partial class UsedPartsManagementView : UserControl
     {
-        public LeadershipQueryView()
+        public UsedPartsManagementView()
         {
             InitializeComponent();
         }

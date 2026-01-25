@@ -5,7 +5,7 @@ using MaterialDesignThemes.Wpf;
 
 namespace Login_Sample.ViewModels
 {
-    public class LeadershipQueryViewModel : INotifyPropertyChanged
+    public class SparePartsReportViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler? PropertyChanged;
 
@@ -15,11 +15,13 @@ namespace Login_Sample.ViewModels
         }
 
         // 构造函数
-        public LeadershipQueryViewModel()
+        public SparePartsReportViewModel()
         {
             // 初始化数据或命令
         }
 
-        // 这里可以添加领导查询相关的属性和命令
+        // 备件月报相关属性和命令
+        // 每日动态相关属性和命令
+        // 进出存帐相关属性和命令
     }
 }

@@ -35,7 +35,7 @@ namespace Login_Sample.ViewModels
         public FinancialSettlementView FinancialSettlementView { get; set; }
         public SparePartsManagementView SparePartsManagementView { get; set; }
         public WorkshopManagementView WorkshopManagementView { get; set; }
-        public LeadershipQueryView LeadershipQueryView { get; set; }
+        public DecisionAnalysisView DecisionAnalysisView { get; set; }
         public SystemManagementView SystemManagementView { get; set; }
         public RawInventoryView RawInventoryView { get; set; }
         public CustomerManagementView CustomerManagementView { get; set; }
@@ -43,6 +43,18 @@ namespace Login_Sample.ViewModels
         public InventoryQueryView InventoryQueryView { get; set; }
         public ShortageManagementView ShortageManagementView { get; set; }
         public InsuranceManagementView InsuranceManagementView { get; set; }
+        // 新增业务报表视图
+        public BusinessReportView BusinessReportView { get; set; }
+        // 新增配件报表视图
+        public SparePartsReportView SparePartsReportView { get; set; }
+        // 新增分析视图
+        public AnalysisView AnalysisView { get; set; }
+        // 新增设备管理视图
+        public EquipmentManagementView EquipmentManagementView { get; set; }
+        // 新增旧件管理视图
+        public UsedPartsManagementView UsedPartsManagementView { get; set; }
+        // 新增服务车管理视图
+        public ServiceVehicleManagementView ServiceVehicleManagementView { get; set; }
         // 新增派工处理视图
         public DispatchManagementView DispatchManagementView { get; set; }
         // 新增项目审查视图
@@ -75,6 +87,14 @@ namespace Login_Sample.ViewModels
         public PaymentProcessingView PaymentProcessingView { get; set; }
         // 初始化财务审核View
         public FinancialAuditView FinancialAuditView { get; set; }
+        // 初始化改结算View
+        public SettlementModificationView SettlementModificationView { get; set; }
+        // 初始化欠账处理View
+        public DebtManagementView DebtManagementView { get; set; }
+        // 初始化预收预付View
+        public PrepaymentManagementView PrepaymentManagementView { get; set; }
+        // 初始化消费积分View
+        public ConsumptionPointsView ConsumptionPointsView { get; set; }
 
         // 各模块的ViewModel实例
         public DashboardViewModel DashboardVM { get; set; }
@@ -85,7 +105,7 @@ namespace Login_Sample.ViewModels
         public FinancialSettlementViewModel FinancialSettlementVM { get; set; }
         public SparePartsManagementViewModel SparePartsManagementVM { get; set; }
         public WorkshopManagementViewModel WorkshopManagementVM { get; set; }
-        public LeadershipQueryViewModel LeadershipQueryVM { get; set; }
+        public DecisionAnalysisViewModel DecisionAnalysisVM { get; set; }
         public SystemManagementViewModel SystemManagementVM { get; set; }
         public RawInventoryViewModel RawInventoryVM { get; set; }
         public CustomerManagementViewModel CustomerManagementVM { get; set; }
@@ -93,6 +113,18 @@ namespace Login_Sample.ViewModels
         public InventoryQueryViewModel InventoryQueryVM { get; set; }
         public ShortageManagementViewModel ShortageManagementVM { get; set; }
         public InsuranceManagementViewModel InsuranceManagementVM { get; set; }
+        // 初始化业务报表ViewModel
+        public BusinessReportViewModel BusinessReportVM { get; set; }
+        // 初始化配件报表ViewModel
+        public SparePartsReportViewModel SparePartsReportVM { get; set; }
+        // 初始化分析ViewModel
+        public AnalysisViewModel AnalysisVM { get; set; }
+        // 初始化设备管理ViewModel
+        public EquipmentManagementViewModel EquipmentManagementVM { get; set; }
+        // 初始化旧件管理ViewModel
+        public UsedPartsManagementViewModel UsedPartsManagementVM { get; set; }
+        // 初始化服务车管理ViewModel
+        public ServiceVehicleManagementViewModel ServiceVehicleManagementVM { get; set; }
         // 初始化派工处理ViewModel
         public DispatchManagementViewModel DispatchManagementVM { get; set; }
         // 初始化项目审查ViewModel
@@ -125,6 +157,14 @@ namespace Login_Sample.ViewModels
         public PaymentProcessingViewModel PaymentProcessingVM { get; set; }
         // 初始化财务审核ViewModel
         public FinancialAuditViewModel FinancialAuditVM { get; set; }
+        // 初始化改结算ViewModel
+        public SettlementModificationViewModel SettlementModificationVM { get; set; }
+        // 初始化欠账处理ViewModel
+        public DebtManagementViewModel DebtManagementVM { get; set; }
+        // 初始化预收预付ViewModel
+        public PrepaymentManagementViewModel PrepaymentManagementVM { get; set; }
+        // 初始化消费积分ViewModel
+        public ConsumptionPointsViewModel ConsumptionPointsVM { get; set; }
 
         // 命令
         public ICommand NavigateCommand { get; set; }
@@ -174,7 +214,7 @@ namespace Login_Sample.ViewModels
             FinancialSettlementVM = new FinancialSettlementViewModel();
             SparePartsManagementVM = new SparePartsManagementViewModel();
             WorkshopManagementVM = new WorkshopManagementViewModel();
-            LeadershipQueryVM = new LeadershipQueryViewModel();
+            DecisionAnalysisVM = new DecisionAnalysisViewModel();
             SystemManagementVM = new SystemManagementViewModel();
             RawInventoryVM = new RawInventoryViewModel();
             CustomerManagementVM = new CustomerManagementViewModel();
@@ -182,6 +222,18 @@ namespace Login_Sample.ViewModels
             InventoryQueryVM = new InventoryQueryViewModel();
             ShortageManagementVM = new ShortageManagementViewModel();
             InsuranceManagementVM = new InsuranceManagementViewModel();
+            // 初始化业务报表ViewModel
+            BusinessReportVM = new BusinessReportViewModel();
+            // 初始化配件报表ViewModel
+            SparePartsReportVM = new SparePartsReportViewModel();
+            // 初始化分析ViewModel
+            AnalysisVM = new AnalysisViewModel();
+            // 初始化设备管理ViewModel
+            EquipmentManagementVM = new EquipmentManagementViewModel();
+            // 初始化旧件管理ViewModel
+            UsedPartsManagementVM = new UsedPartsManagementViewModel();
+            // 初始化服务车管理ViewModel
+            ServiceVehicleManagementVM = new ServiceVehicleManagementViewModel();
             // 初始化派工处理ViewModel
             DispatchManagementVM = new DispatchManagementViewModel();
             // 初始化项目审查ViewModel
@@ -216,7 +268,7 @@ namespace Login_Sample.ViewModels
             FinancialSettlementView = new FinancialSettlementView() { DataContext = FinancialSettlementVM };
             SparePartsManagementView = new SparePartsManagementView() { DataContext = SparePartsManagementVM };
             WorkshopManagementView = new WorkshopManagementView() { DataContext = WorkshopManagementVM };
-            LeadershipQueryView = new LeadershipQueryView() { DataContext = LeadershipQueryVM };
+            DecisionAnalysisView = new DecisionAnalysisView() { DataContext = DecisionAnalysisVM };
             SystemManagementView = new SystemManagementView() { DataContext = SystemManagementVM };
             RawInventoryView = new RawInventoryView() { DataContext = RawInventoryVM };
             CustomerManagementView = new CustomerManagementView() { DataContext = CustomerManagementVM };
@@ -224,6 +276,18 @@ namespace Login_Sample.ViewModels
             InventoryQueryView = new InventoryQueryView() { DataContext = InventoryQueryVM };
             ShortageManagementView = new ShortageManagementView() { DataContext = ShortageManagementVM };
             InsuranceManagementView = new InsuranceManagementView() { DataContext = InsuranceManagementVM };
+            // 初始化业务报表View
+            BusinessReportView = new BusinessReportView() { DataContext = BusinessReportVM };
+            // 初始化配件报表View
+            SparePartsReportView = new SparePartsReportView() { DataContext = SparePartsReportVM };
+            // 初始化分析View
+            AnalysisView = new AnalysisView() { DataContext = AnalysisVM };
+            // 初始化设备管理View
+            EquipmentManagementView = new EquipmentManagementView() { DataContext = EquipmentManagementVM };
+            // 初始化旧件管理View
+            UsedPartsManagementView = new UsedPartsManagementView() { DataContext = UsedPartsManagementVM };
+            // 初始化服务车管理View
+            ServiceVehicleManagementView = new ServiceVehicleManagementView() { DataContext = ServiceVehicleManagementVM };
             // 初始化派工处理View
             DispatchManagementView = new DispatchManagementView() { DataContext = DispatchManagementVM };
             // 初始化项目审查View
@@ -262,6 +326,22 @@ namespace Login_Sample.ViewModels
             FinancialAuditVM = new FinancialAuditViewModel();
             // 初始化财务审核View
             FinancialAuditView = new FinancialAuditView() { DataContext = FinancialAuditVM };
+            // 初始化改结算ViewModel
+            SettlementModificationVM = new SettlementModificationViewModel();
+            // 初始化改结算View
+            SettlementModificationView = new SettlementModificationView() { DataContext = SettlementModificationVM };
+            // 初始化欠账处理ViewModel
+            DebtManagementVM = new DebtManagementViewModel();
+            // 初始化欠账处理View
+            DebtManagementView = new DebtManagementView() { DataContext = DebtManagementVM };
+            // 初始化预收预付ViewModel
+            PrepaymentManagementVM = new PrepaymentManagementViewModel();
+            // 初始化预收预付View
+            PrepaymentManagementView = new PrepaymentManagementView() { DataContext = PrepaymentManagementVM };
+            // 初始化消费积分ViewModel
+            ConsumptionPointsVM = new ConsumptionPointsViewModel();
+            // 初始化消费积分View
+            ConsumptionPointsView = new ConsumptionPointsView() { DataContext = ConsumptionPointsVM };
             // 初始化服务预约View
             AppointmentManagementView = new AppointmentManagementView() { DataContext = AppointmentManagementVM };
 
@@ -333,6 +413,22 @@ namespace Login_Sample.ViewModels
                     CurrentView = FinancialAuditView;
                     CurrentModule = "FinancialAudit";
                     break;
+                case "SettlementModification":
+                    CurrentView = SettlementModificationView;
+                    CurrentModule = "SettlementModification";
+                    break;
+                case "DebtManagement":
+                    CurrentView = DebtManagementView;
+                    CurrentModule = "DebtManagement";
+                    break;
+                case "PrepaymentManagement":
+                    CurrentView = PrepaymentManagementView;
+                    CurrentModule = "PrepaymentManagement";
+                    break;
+                case "ConsumptionPoints":
+                    CurrentView = ConsumptionPointsView;
+                    CurrentModule = "ConsumptionPoints";
+                    break;
                 case "SparePartsManagement":
                     CurrentView = SparePartsManagementView;
                     CurrentModule = "SparePartsManagement";
@@ -342,8 +438,32 @@ namespace Login_Sample.ViewModels
                     CurrentModule = "WorkshopManagement";
                     break;
                 case "LeadershipQuery":
-                    CurrentView = LeadershipQueryView;
+                    CurrentView = DecisionAnalysisView;
                     CurrentModule = "LeadershipQuery";
+                    break;
+                case "BusinessReport":
+                    CurrentView = BusinessReportView;
+                    CurrentModule = "BusinessReport";
+                    break;
+                case "SparePartsReport":
+                    CurrentView = SparePartsReportView;
+                    CurrentModule = "SparePartsReport";
+                    break;
+                case "Analysis":
+                    CurrentView = AnalysisView;
+                    CurrentModule = "Analysis";
+                    break;
+                case "EquipmentManagement":
+                    CurrentView = EquipmentManagementView;
+                    CurrentModule = "EquipmentManagement";
+                    break;
+                case "UsedPartsManagement":
+                    CurrentView = UsedPartsManagementView;
+                    CurrentModule = "UsedPartsManagement";
+                    break;
+                case "ServiceVehicleManagement":
+                    CurrentView = ServiceVehicleManagementView;
+                    CurrentModule = "ServiceVehicleManagement";
                     break;
                 case "SystemManagement":
                     CurrentView = SystemManagementView;
