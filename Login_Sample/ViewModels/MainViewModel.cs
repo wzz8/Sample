@@ -47,14 +47,22 @@ namespace Login_Sample.ViewModels
         public BusinessReportView BusinessReportView { get; set; }
         // 新增配件报表视图
         public SparePartsReportView SparePartsReportView { get; set; }
-        // 新增分析视图
-        public AnalysisView AnalysisView { get; set; }
         // 新增设备管理视图
         public EquipmentManagementView EquipmentManagementView { get; set; }
         // 新增旧件管理视图
         public UsedPartsManagementView UsedPartsManagementView { get; set; }
         // 新增服务车管理视图
         public ServiceVehicleManagementView ServiceVehicleManagementView { get; set; }
+        // 新增职员管理视图
+        public StaffManagementView StaffManagementView { get; set; }
+        // 新增用户管理视图
+        public UserManagementView UserManagementView { get; set; }
+        // 新增授权管理视图
+        public AuthorizationManagementView AuthorizationManagementView { get; set; }
+        // 新增系统升级视图
+        public SystemUpgradeView SystemUpgradeView { get; set; }
+        // 新增系统注册视图
+        public SystemRegistrationView SystemRegistrationView { get; set; }
         // 新增派工处理视图
         public DispatchManagementView DispatchManagementView { get; set; }
         // 新增项目审查视图
@@ -117,14 +125,22 @@ namespace Login_Sample.ViewModels
         public BusinessReportViewModel BusinessReportVM { get; set; }
         // 初始化配件报表ViewModel
         public SparePartsReportViewModel SparePartsReportVM { get; set; }
-        // 初始化分析ViewModel
-        public AnalysisViewModel AnalysisVM { get; set; }
         // 初始化设备管理ViewModel
         public EquipmentManagementViewModel EquipmentManagementVM { get; set; }
         // 初始化旧件管理ViewModel
         public UsedPartsManagementViewModel UsedPartsManagementVM { get; set; }
         // 初始化服务车管理ViewModel
         public ServiceVehicleManagementViewModel ServiceVehicleManagementVM { get; set; }
+        // 初始化职员管理ViewModel
+        public StaffManagementViewModel StaffManagementVM { get; set; }
+        // 初始化用户管理ViewModel
+        public UserManagementViewModel UserManagementVM { get; set; }
+        // 初始化授权管理ViewModel
+        public AuthorizationManagementViewModel AuthorizationManagementVM { get; set; }
+        // 初始化系统升级ViewModel
+        public SystemUpgradeViewModel SystemUpgradeVM { get; set; }
+        // 初始化系统注册ViewModel
+        public SystemRegistrationViewModel SystemRegistrationVM { get; set; }
         // 初始化派工处理ViewModel
         public DispatchManagementViewModel DispatchManagementVM { get; set; }
         // 初始化项目审查ViewModel
@@ -226,14 +242,22 @@ namespace Login_Sample.ViewModels
             BusinessReportVM = new BusinessReportViewModel();
             // 初始化配件报表ViewModel
             SparePartsReportVM = new SparePartsReportViewModel();
-            // 初始化分析ViewModel
-            AnalysisVM = new AnalysisViewModel();
             // 初始化设备管理ViewModel
             EquipmentManagementVM = new EquipmentManagementViewModel();
             // 初始化旧件管理ViewModel
             UsedPartsManagementVM = new UsedPartsManagementViewModel();
             // 初始化服务车管理ViewModel
             ServiceVehicleManagementVM = new ServiceVehicleManagementViewModel();
+            // 初始化职员管理ViewModel
+            StaffManagementVM = new StaffManagementViewModel();
+            // 初始化用户管理ViewModel
+            UserManagementVM = new UserManagementViewModel();
+            // 初始化授权管理ViewModel
+            AuthorizationManagementVM = new AuthorizationManagementViewModel();
+            // 初始化系统升级ViewModel
+            SystemUpgradeVM = new SystemUpgradeViewModel();
+            // 初始化系统注册ViewModel
+            SystemRegistrationVM = new SystemRegistrationViewModel();
             // 初始化派工处理ViewModel
             DispatchManagementVM = new DispatchManagementViewModel();
             // 初始化项目审查ViewModel
@@ -280,14 +304,22 @@ namespace Login_Sample.ViewModels
             BusinessReportView = new BusinessReportView() { DataContext = BusinessReportVM };
             // 初始化配件报表View
             SparePartsReportView = new SparePartsReportView() { DataContext = SparePartsReportVM };
-            // 初始化分析View
-            AnalysisView = new AnalysisView() { DataContext = AnalysisVM };
             // 初始化设备管理View
             EquipmentManagementView = new EquipmentManagementView() { DataContext = EquipmentManagementVM };
             // 初始化旧件管理View
             UsedPartsManagementView = new UsedPartsManagementView() { DataContext = UsedPartsManagementVM };
             // 初始化服务车管理View
             ServiceVehicleManagementView = new ServiceVehicleManagementView() { DataContext = ServiceVehicleManagementVM };
+            // 初始化职员管理View
+            StaffManagementView = new StaffManagementView() { DataContext = StaffManagementVM };
+            // 初始化用户管理View
+            UserManagementView = new UserManagementView() { DataContext = UserManagementVM };
+            // 初始化授权管理View
+            AuthorizationManagementView = new AuthorizationManagementView() { DataContext = AuthorizationManagementVM };
+            // 初始化系统升级View
+            SystemUpgradeView = new SystemUpgradeView() { DataContext = SystemUpgradeVM };
+            // 初始化系统注册View
+            SystemRegistrationView = new SystemRegistrationView() { DataContext = SystemRegistrationVM };
             // 初始化派工处理View
             DispatchManagementView = new DispatchManagementView() { DataContext = DispatchManagementVM };
             // 初始化项目审查View
@@ -449,10 +481,6 @@ namespace Login_Sample.ViewModels
                     CurrentView = SparePartsReportView;
                     CurrentModule = "SparePartsReport";
                     break;
-                case "Analysis":
-                    CurrentView = AnalysisView;
-                    CurrentModule = "Analysis";
-                    break;
                 case "EquipmentManagement":
                     CurrentView = EquipmentManagementView;
                     CurrentModule = "EquipmentManagement";
@@ -464,6 +492,26 @@ namespace Login_Sample.ViewModels
                 case "ServiceVehicleManagement":
                     CurrentView = ServiceVehicleManagementView;
                     CurrentModule = "ServiceVehicleManagement";
+                    break;
+                case "StaffManagement":
+                    CurrentView = StaffManagementView;
+                    CurrentModule = "StaffManagement";
+                    break;
+                case "UserManagement":
+                    CurrentView = UserManagementView;
+                    CurrentModule = "UserManagement";
+                    break;
+                case "AuthorizationManagement":
+                    CurrentView = AuthorizationManagementView;
+                    CurrentModule = "AuthorizationManagement";
+                    break;
+                case "SystemUpgrade":
+                    CurrentView = SystemUpgradeView;
+                    CurrentModule = "SystemUpgrade";
+                    break;
+                case "SystemRegistration":
+                    CurrentView = SystemRegistrationView;
+                    CurrentModule = "SystemRegistration";
                     break;
                 case "SystemManagement":
                     CurrentView = SystemManagementView;
