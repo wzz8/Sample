@@ -103,8 +103,18 @@ namespace Login_Sample.ViewModels
         public PrepaymentManagementView PrepaymentManagementView { get; set; }
         // 初始化消费积分View
         public ConsumptionPointsView ConsumptionPointsView { get; set; }
+        // 初始化客户信息View
+        public CustomerInfoView CustomerInfoView { get; set; }
+        // 初始化客户预约View
+        public CustomerAppointmentView CustomerAppointmentView { get; set; }
+        // 初始化客户回访View
+        public CustomerFeedbackView CustomerFeedbackView { get; set; }
+        // 初始化客户关怀View
+        public CustomerCareView CustomerCareView { get; set; }
+        // 初始化客户意见View
+        public CustomerOpinionView CustomerOpinionView { get; set; }
 
-        // 各模块的ViewModel实例
+        // 初始化命令各模块的ViewModel实例
         public DashboardViewModel DashboardVM { get; set; }
         public BusinessReceptionViewModel BusinessReceptionVM { get; set; }
         public VehicleMaintenanceViewModel VehicleMaintenanceVM { get; set; }
@@ -167,6 +177,16 @@ namespace Login_Sample.ViewModels
         public SparePartsSupplierViewModel SparePartsSupplierVM { get; set; }
         // 初始化服务预约ViewModel
         public AppointmentManagementViewModel AppointmentManagementVM { get; set; }
+        // 初始化客户信息ViewModel
+        public CustomerInfoViewModel CustomerInfoVM { get; set; }
+        // 初始化客户预约ViewModel
+        public CustomerAppointmentViewModel CustomerAppointmentVM { get; set; }
+        // 初始化客户回访ViewModel
+        public CustomerFeedbackViewModel CustomerFeedbackVM { get; set; }
+        // 初始化客户关怀ViewModel
+        public CustomerCareViewModel CustomerCareVM { get; set; }
+        // 初始化客户意见ViewModel
+        public CustomerOpinionViewModel CustomerOpinionVM { get; set; }
         // 初始化销售结算ViewModel
         public SalesSettlementViewModel SalesSettlementVM { get; set; }
         // 初始化款项处理ViewModel
@@ -282,6 +302,16 @@ namespace Login_Sample.ViewModels
             SparePartsSupplierVM = new SparePartsSupplierViewModel();
             // 初始化服务预约ViewModel
             AppointmentManagementVM = new AppointmentManagementViewModel();
+            // 初始化客户信息ViewModel
+            CustomerInfoVM = new CustomerInfoViewModel();
+            // 初始化客户预约ViewModel
+            CustomerAppointmentVM = new CustomerAppointmentViewModel();
+            // 初始化客户回访ViewModel
+            CustomerFeedbackVM = new CustomerFeedbackViewModel();
+            // 初始化客户关怀ViewModel
+            CustomerCareVM = new CustomerCareViewModel();
+            // 初始化客户意见ViewModel
+            CustomerOpinionVM = new CustomerOpinionViewModel();
 
             // 初始化各模块的View
             DashboardView = new DashboardView() { DataContext = DashboardVM };
@@ -376,6 +406,16 @@ namespace Login_Sample.ViewModels
             ConsumptionPointsView = new ConsumptionPointsView() { DataContext = ConsumptionPointsVM };
             // 初始化服务预约View
             AppointmentManagementView = new AppointmentManagementView() { DataContext = AppointmentManagementVM };
+            // 初始化客户信息View
+            CustomerInfoView = new CustomerInfoView() { DataContext = CustomerInfoVM };
+            // 初始化客户预约View
+            CustomerAppointmentView = new CustomerAppointmentView() { DataContext = CustomerAppointmentVM };
+            // 初始化客户回访View
+            CustomerFeedbackView = new CustomerFeedbackView() { DataContext = CustomerFeedbackVM };
+            // 初始化客户关怀View
+            CustomerCareView = new CustomerCareView() { DataContext = CustomerCareVM };
+            // 初始化客户意见View
+            CustomerOpinionView = new CustomerOpinionView() { DataContext = CustomerOpinionVM };
 
             // 初始化命令
             NavigateCommand = new RelayCommand(Navigate);
@@ -525,11 +565,27 @@ namespace Login_Sample.ViewModels
                     CurrentView = CustomerManagementView;
                     CurrentModule = "CustomerManagement";
                     break;
-                // 业务接待子功能导航
-                case "CustomerAppointment":
-                    CurrentView = AppointmentManagementView;
-                    CurrentModule = "AppointmentManagement";
+                case "CustomerInfo":
+                    CurrentView = CustomerInfoView;
+                    CurrentModule = "CustomerInfo";
                     break;
+                case "CustomerAppointment":
+                    CurrentView = CustomerAppointmentView;
+                    CurrentModule = "CustomerAppointment";
+                    break;
+                case "CustomerFeedback":
+                    CurrentView = CustomerFeedbackView;
+                    CurrentModule = "CustomerFeedback";
+                    break;
+                case "CustomerCare":
+                    CurrentView = CustomerCareView;
+                    CurrentModule = "CustomerCare";
+                    break;
+                case "CustomerOpinion":
+                    CurrentView = CustomerOpinionView;
+                    CurrentModule = "CustomerOpinion";
+                    break;
+                // 业务接待子功能导航
                 case "VehicleReception":
                     CurrentView = BusinessReceptionView;
                     CurrentModule = "BusinessReception";
@@ -537,10 +593,6 @@ namespace Login_Sample.ViewModels
                 case "RepairArrangement":
                     CurrentView = VehicleMaintenanceView;
                     CurrentModule = "VehicleMaintenance";
-                    break;
-                case "CustomerFeedback":
-                    CurrentView = CustomerManagementView;
-                    CurrentModule = "CustomerManagement";
                     break;
                 case "CompletedServices":
                     CurrentView = MaintenanceQueryView;

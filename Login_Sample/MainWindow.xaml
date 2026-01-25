@@ -878,25 +878,127 @@
 
                             </StackPanel>
                         </Expander>
-                        
+
                         <!--客户管理-->
-                        <Button Command="{Binding NavigateCommand}" CommandParameter="CustomerManagement">
-                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                <materialDesign:PackIcon Kind="AccountGroup" Width="20" Height="20" Margin="0,0,10,0"/>
-                                <TextBlock Text="客户管理"/>
+                        <Expander Background="#2C3E50" Margin="0,5,0,0" BorderThickness="0" HorizontalAlignment="Stretch" MouseDoubleClick="Expander_MouseDoubleClick">
+                           <Expander.Header>
+                                <Button Command="{Binding NavigateCommand}" CommandParameter="CustomerManagement">
+                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                    <materialDesign:PackIcon Kind="AccountGroup" Width="20" Height="20" Margin="0,0,10,0"/>
+                                    <TextBlock Text="客户管理"/>
+                                </StackPanel>
+                                <Button.Style>
+                                    <Style TargetType="Button" BasedOn="{StaticResource NavButtonStyle}">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding CurrentModule}" Value="CustomerManagement">
+                                                <Setter Property="Background" Value="#2C3E50"/>
+                                                <Setter Property="BorderBrush" Value="#3498DB"/>
+                                                <Setter Property="BorderThickness" Value="0,0,3,0"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+                            </Button>
+                            </Expander.Header>
+                            <StackPanel>
+
+                                <!--客户信息-->
+                                <Button Command="{Binding NavigateCommand}" CommandParameter="CustomerInfo" Margin="30,5,10,5">
+                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                        <materialDesign:PackIcon Kind="AccountCircle" Width="20" Height="20" Margin="0,0,10,0"/>
+                                        <TextBlock Text="客户信息"/>
+                                    </StackPanel>
+                                    <Button.Style>
+                                        <Style TargetType="Button" BasedOn="{StaticResource NavButtonStyle}">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding CurrentModule}" Value="CustomerInfo">
+                                                    <Setter Property="Background" Value="#2C3E50"/>
+                                                    <Setter Property="BorderBrush" Value="#3498DB"/>
+                                                    <Setter Property="BorderThickness" Value="0,0,3,0"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Button.Style>
+                                </Button>
+
+                                <!--客户预约-->
+                                <Button Command="{Binding NavigateCommand}" CommandParameter="CustomerAppointment" Margin="30,5,10,5">
+                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                        <materialDesign:PackIcon Kind="CalendarClock" Width="20" Height="20" Margin="0,0,10,0"/>
+                                        <TextBlock Text="客户预约"/>
+                                    </StackPanel>
+                                    <Button.Style>
+                                        <Style TargetType="Button" BasedOn="{StaticResource NavButtonStyle}">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding CurrentModule}" Value="CustomerAppointment">
+                                                    <Setter Property="Background" Value="#2C3E50"/>
+                                                    <Setter Property="BorderBrush" Value="#3498DB"/>
+                                                    <Setter Property="BorderThickness" Value="0,0,3,0"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Button.Style>
+                                </Button>
+
+                                <!--客户回访-->
+                                <Button Command="{Binding NavigateCommand}" CommandParameter="CustomerFeedback" Margin="30,5,10,5">
+                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                        <materialDesign:PackIcon Kind="Phone" Width="20" Height="20" Margin="0,0,10,0"/>
+                                        <TextBlock Text="客户回访"/>
+                                    </StackPanel>
+                                    <Button.Style>
+                                        <Style TargetType="Button" BasedOn="{StaticResource NavButtonStyle}">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding CurrentModule}" Value="CustomerFeedback">
+                                                    <Setter Property="Background" Value="#2C3E50"/>
+                                                    <Setter Property="BorderBrush" Value="#3498DB"/>
+                                                    <Setter Property="BorderThickness" Value="0,0,3,0"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Button.Style>
+                                </Button>
+
+                                <!--客户关怀-->
+                                <Button Command="{Binding NavigateCommand}" CommandParameter="CustomerCare" Margin="30,5,10,5">
+                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                        <materialDesign:PackIcon Kind="Heart" Width="20" Height="20" Margin="0,0,10,0"/>
+                                        <TextBlock Text="客户关怀"/>
+                                    </StackPanel>
+                                    <Button.Style>
+                                        <Style TargetType="Button" BasedOn="{StaticResource NavButtonStyle}">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding CurrentModule}" Value="CustomerCare">
+                                                    <Setter Property="Background" Value="#2C3E50"/>
+                                                    <Setter Property="BorderBrush" Value="#3498DB"/>
+                                                    <Setter Property="BorderThickness" Value="0,0,3,0"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Button.Style>
+                                </Button>
+
+                                <!--客户意见-->
+                                <Button Command="{Binding NavigateCommand}" CommandParameter="CustomerOpinion" Margin="30,5,10,5">
+                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                        <materialDesign:PackIcon Kind="MessageText" Width="20" Height="20" Margin="0,0,10,0"/>
+                                        <TextBlock Text="客户意见"/>
+                                    </StackPanel>
+                                    <Button.Style>
+                                        <Style TargetType="Button" BasedOn="{StaticResource NavButtonStyle}">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding CurrentModule}" Value="CustomerOpinion">
+                                                    <Setter Property="Background" Value="#2C3E50"/>
+                                                    <Setter Property="BorderBrush" Value="#3498DB"/>
+                                                    <Setter Property="BorderThickness" Value="0,0,3,0"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Button.Style>
+                                </Button>
+
                             </StackPanel>
-                            <Button.Style>
-                                <Style TargetType="Button" BasedOn="{StaticResource NavButtonStyle}">
-                                    <Style.Triggers>
-                                        <DataTrigger Binding="{Binding CurrentModule}" Value="CustomerManagement">
-                                            <Setter Property="Background" Value="#2C3E50"/>
-                                            <Setter Property="BorderBrush" Value="#3498DB"/>
-                                            <Setter Property="BorderThickness" Value="0,0,3,0"/>
-                                        </DataTrigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </Button.Style>
-                        </Button>
+                        </Expander>
 
                         <!--原始库存-->
                         <Button Command="{Binding NavigateCommand}" CommandParameter="RawInventory">

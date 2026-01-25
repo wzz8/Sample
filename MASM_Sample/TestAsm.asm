@@ -1,10 +1,15 @@
+.586
+.model flat,stdcall
+option casemap:none
+
 .data
-sum sqword 0
+sum dword 0
 
 .code
 main proc
-	mov rax,5
-	add rax,4
-	mov sum,rax
+	mov eax,5
+	add eax,4
+	mov sum, eax
+	ret
 main endp
 end

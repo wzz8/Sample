@@ -1,0 +1,248 @@
+<UserControl x:Class="Login_Sample.Views.CustomerAppointmentView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:Login_Sample.Views"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d"
+             d:DesignHeight="700" d:DesignWidth="900">
+    <Grid Background="#F5F5F5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <!-- 模块标题 -->
+        <Border Background="#FFFFFF" Grid.Row="0" Height="80" BorderBrush="#E0E0E0" BorderThickness="0,0,0,1">
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="20,0,0,0">
+                <materialDesign:PackIcon Kind="CalendarClock" Width="32" Height="32" Foreground="#3498DB" Margin="0,0,15,0"/>
+                <TextBlock Text="客户预约" FontSize="24" FontWeight="Bold" Foreground="#2C3E50"/>
+            </StackPanel>
+        </Border>
+        
+        <!-- 模块内容区域 -->
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="400"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            
+            <!-- 左侧：预约登记 -->
+            <Border Background="#FFFFFF" Margin="10" CornerRadius="5" Grid.Column="0">
+                <StackPanel>
+                    <TextBlock Text="预约登记" FontSize="18" FontWeight="Bold" Foreground="#2C3E50" Margin="15,15,0,15"/>
+                    
+                    <materialDesign:Card Margin="10" Padding="15">
+                        <StackPanel>
+                            <!-- 客户信息 -->
+                            <TextBlock Text="客户信息" FontSize="16" FontWeight="Bold" Foreground="#2C3E50" Margin="0,0,0,10"/>
+                            <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                                <TextBlock Text="客户名称：" Width="80" VerticalAlignment="Center"/>
+                                <TextBox Width="200" materialDesign:HintAssist.Hint="请输入客户名称"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                                <TextBlock Text="联系电话：" Width="80" VerticalAlignment="Center"/>
+                                <TextBox Width="200" materialDesign:HintAssist.Hint="请输入联系电话"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                                <TextBlock Text="车牌号码：" Width="80" VerticalAlignment="Center"/>
+                                <TextBox Width="200" materialDesign:HintAssist.Hint="请输入车牌号码"/>
+                            </StackPanel>
+                            
+                            <!-- 预约信息 -->
+                            <TextBlock Text="预约信息" FontSize="16" FontWeight="Bold" Foreground="#2C3E50" Margin="0,15,0,10"/>
+                            <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                                <TextBlock Text="预约类型：" Width="80" VerticalAlignment="Center"/>
+                                <ComboBox Width="200">
+                                    <ComboBoxItem Content="车辆维修"/>
+                                    <ComboBoxItem Content="备件购买"/>
+                                    <ComboBoxItem Content="其他服务"/>
+                                </ComboBox>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                                <TextBlock Text="预约日期：" Width="80" VerticalAlignment="Center"/>
+                                <DatePicker Width="200"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                                <TextBlock Text="预约时间：" Width="80" VerticalAlignment="Center"/>
+                                <TextBox Width="200" materialDesign:HintAssist.Hint="请输入预约时间（如：14:30）"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                                <TextBlock Text="服务顾问：" Width="80" VerticalAlignment="Center"/>
+                                <ComboBox Width="200">
+                                    <ComboBoxItem Content="张顾问"/>
+                                    <ComboBoxItem Content="李顾问"/>
+                                    <ComboBoxItem Content="王顾问"/>
+                                </ComboBox>
+                            </StackPanel>
+                            
+                            <!-- 预约详情 -->
+                            <TextBlock Text="预约详情" FontSize="16" FontWeight="Bold" Foreground="#2C3E50" Margin="0,15,0,10"/>
+                            <TextBlock Text="预约内容：" Margin="0,0,0,5"/>
+                            <TextBox Height="100" materialDesign:HintAssist.Hint="请输入预约内容" TextWrapping="Wrap" AcceptsReturn="True" Margin="0,0,0,15"/>
+                            <TextBlock Text="备注：" Margin="0,0,0,5"/>
+                            <TextBox Height="60" materialDesign:HintAssist.Hint="请输入备注信息" TextWrapping="Wrap" AcceptsReturn="True" Margin="0,0,0,15"/>
+                            
+                            <!-- 操作按钮 -->
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,10,0,0">
+                                <Button Content="保存预约" Background="#3498DB" Foreground="White" Width="100" Margin="0,0,10,0"/>
+                                <Button Content="重置" Background="#95A5A6" Foreground="White" Width="80"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </materialDesign:Card>
+                </StackPanel>
+            </Border>
+            
+            <!-- 右侧：预约列表和详情 -->
+            <Border Background="#FFFFFF" Margin="10" CornerRadius="5" Grid.Column="1">
+                <StackPanel>
+                    <TextBlock Text="预约列表" FontSize="18" FontWeight="Bold" Foreground="#2C3E50" Margin="15,15,0,15"/>
+                    
+                    <!-- 搜索和筛选 -->
+                    <StackPanel Orientation="Horizontal" Margin="15,0,15,15">
+                        <TextBox Width="200" materialDesign:HintAssist.Hint="客户名称" Margin="0,0,10,0"/>
+                        <TextBox Width="200" materialDesign:HintAssist.Hint="联系电话" Margin="0,0,10,0"/>
+                        <ComboBox Width="150" materialDesign:HintAssist.Hint="预约类型" Margin="0,0,10,0">
+                            <ComboBoxItem Content="全部"/>
+                            <ComboBoxItem Content="车辆维修"/>
+                            <ComboBoxItem Content="备件购买"/>
+                            <ComboBoxItem Content="其他服务"/>
+                        </ComboBox>
+                        <Button Content="搜索" Background="#3498DB" Foreground="White"/>
+                        <Button Content="刷新" Background="#95A5A6" Foreground="White" Margin="10,0,0,0"/>
+                    </StackPanel>
+                    
+                    <!-- 预约列表 -->
+                    <DataGrid AutoGenerateColumns="False" Margin="15,0,15,15">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="预约ID" Width="80"/>
+                            <DataGridTextColumn Header="客户名称" Width="120"/>
+                            <DataGridTextColumn Header="联系电话" Width="120"/>
+                            <DataGridTextColumn Header="车牌号码" Width="100"/>
+                            <DataGridTextColumn Header="预约类型" Width="100"/>
+                            <DataGridTextColumn Header="预约日期" Width="120"/>
+                            <DataGridTextColumn Header="预约时间" Width="100"/>
+                            <DataGridTextColumn Header="服务顾问" Width="100"/>
+                            <DataGridTextColumn Header="状态" Width="80"/>
+                            <DataGridTemplateColumn Header="操作" Width="120">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal">
+                                            <Button Content="编辑" Background="#3498DB" Foreground="White" Width="50" Margin="0,0,5,0"/>
+                                            <Button Content="取消" Background="#E74C3C" Foreground="White" Width="50"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    
+                    <!-- 预约详情 -->
+                    <TextBlock Text="预约详情" FontSize="16" FontWeight="Bold" Foreground="#2C3E50" Margin="15,20,0,10"/>
+                    <Border Background="#F8F9FA" Margin="15,0,15,15" BorderBrush="#E0E0E0" BorderThickness="1" CornerRadius="5">
+                        <StackPanel Margin="15">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="120"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Text="预约ID：" FontSize="14" FontWeight="Bold" Grid.Column="0"/>
+                                <TextBlock Text="AP20260125001" FontSize="14" Grid.Column="1"/>
+                            </Grid>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="120"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Text="客户名称：" FontSize="14" FontWeight="Bold" Grid.Column="0"/>
+                                <TextBlock Text="张三" FontSize="14" Grid.Column="1"/>
+                            </Grid>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="120"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Text="联系电话：" FontSize="14" FontWeight="Bold" Grid.Column="0"/>
+                                <TextBlock Text="13812345678" FontSize="14" Grid.Column="1"/>
+                            </Grid>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="120"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Text="车牌号码：" FontSize="14" FontWeight="Bold" Grid.Column="0"/>
+                                <TextBlock Text="京A12345" FontSize="14" Grid.Column="1"/>
+                            </Grid>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="120"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Text="预约类型：" FontSize="14" FontWeight="Bold" Grid.Column="0"/>
+                                <TextBlock Text="车辆维修" FontSize="14" Grid.Column="1"/>
+                            </Grid>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="120"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Text="预约日期：" FontSize="14" FontWeight="Bold" Grid.Column="0"/>
+                                <TextBlock Text="2026-01-25" FontSize="14" Grid.Column="1"/>
+                            </Grid>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="120"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Text="预约时间：" FontSize="14" FontWeight="Bold" Grid.Column="0"/>
+                                <TextBlock Text="14:30" FontSize="14" Grid.Column="1"/>
+                            </Grid>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="120"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Text="服务顾问：" FontSize="14" FontWeight="Bold" Grid.Column="0"/>
+                                <TextBlock Text="张顾问" FontSize="14" Grid.Column="1"/>
+                            </Grid>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="120"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Text="预约内容：" FontSize="14" FontWeight="Bold" Grid.Column="0"/>
+                                <TextBlock Text="车辆定期保养，更换机油和机滤" FontSize="14" Grid.Column="1" TextWrapping="Wrap"/>
+                            </Grid>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="120"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Text="备注：" FontSize="14" FontWeight="Bold" Grid.Column="0"/>
+                                <TextBlock Text="客户希望当天完成服务" FontSize="14" Grid.Column="1" TextWrapping="Wrap"/>
+                            </Grid>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="120"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Text="状态：" FontSize="14" FontWeight="Bold" Grid.Column="0"/>
+                                <TextBlock Text="待确认" FontSize="14" Grid.Column="1"/>
+                            </Grid>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="120"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Text="创建时间：" FontSize="14" FontWeight="Bold" Grid.Column="0"/>
+                                <TextBlock Text="2026-01-25 10:00:00" FontSize="14" Grid.Column="1"/>
+                            </Grid>
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+            </Border>
+        </Grid>
+    </Grid>
+</UserControl>

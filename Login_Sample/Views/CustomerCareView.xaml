@@ -1,0 +1,170 @@
+<UserControl x:Class="Login_Sample.Views.CustomerCareView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:Login_Sample.Views"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d"
+             d:DesignHeight="450"
+             d:DesignWidth="800">
+    <Grid Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <!-- 标题栏 -->
+        <Border Grid.Row="0" Background="#2C3E50" CornerRadius="0">
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="20,0,0,0">
+                <materialDesign:PackIcon Kind="Heart" Width="24" Height="24" Foreground="White" Margin="0,0,10,0"/>
+                <TextBlock Text="客户关怀" FontSize="18" FontFamily="Microsoft YaHei" Foreground="White" FontWeight="Bold"/>
+            </StackPanel>
+        </Border>
+        
+        <!-- 内容区域 -->
+        <Grid Grid.Row="1" Margin="20">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="300"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            
+            <!-- 左侧关怀设置 -->
+            <Border Grid.Column="0" BorderBrush="#E0E0E0" BorderThickness="1" CornerRadius="5" Margin="0,0,20,0">
+                <StackPanel Margin="15">
+                    <TextBlock Text="关怀设置" FontSize="16" FontWeight="Bold" Margin="0,0,0,15"/>
+                    
+                    <!-- 客户信息 -->
+                    <StackPanel Margin="0,0,0,15">
+                        <TextBlock Text="客户姓名" Margin="0,0,0,5"/>
+                        <TextBox Width="250" materialDesign:HintAssist.Hint="请输入客户姓名"/>
+                    </StackPanel>
+                    
+                    <StackPanel Margin="0,0,0,15">
+                        <TextBlock Text="联系电话" Margin="0,0,0,5"/>
+                        <TextBox Width="250" materialDesign:HintAssist.Hint="请输入联系电话"/>
+                    </StackPanel>
+                    
+                    <StackPanel Margin="0,0,0,15">
+                        <TextBlock Text="车牌号" Margin="0,0,0,5"/>
+                        <TextBox Width="250" materialDesign:HintAssist.Hint="请输入车牌号"/>
+                    </StackPanel>
+                    
+                    <!-- 关怀类型 -->
+                    <StackPanel Margin="0,0,0,15">
+                        <TextBlock Text="关怀类型" Margin="0,0,0,5"/>
+                        <ComboBox Width="250">
+                            <ComboBoxItem Content="车辆年审"/>
+                            <ComboBoxItem Content="车辆保养"/>
+                            <ComboBoxItem Content="保险到期"/>
+                            <ComboBoxItem Content="生日祝福"/>
+                            <ComboBoxItem Content="节日祝福"/>
+                            <ComboBoxItem Content="其他关怀"/>
+                        </ComboBox>
+                    </StackPanel>
+                    
+                    <!-- 到期日期 -->
+                    <StackPanel Margin="0,0,0,15">
+                        <TextBlock Text="到期日期" Margin="0,0,0,5"/>
+                        <DatePicker Width="250"/>
+                    </StackPanel>
+                    
+                    <!-- 提醒方式 -->
+                    <StackPanel Margin="0,0,0,15">
+                        <TextBlock Text="提醒方式" Margin="0,0,0,5"/>
+                        <StackPanel Orientation="Horizontal">
+                            <CheckBox Content="电话" Margin="0,0,15,0"/>
+                            <CheckBox Content="短信" Margin="0,0,15,0"/>
+                            <CheckBox Content="邮件"/>
+                        </StackPanel>
+                    </StackPanel>
+                    
+                    <!-- 提醒提前天数 -->
+                    <StackPanel Margin="0,0,0,15">
+                        <TextBlock Text="提醒提前天数" Margin="0,0,0,5"/>
+                        <ComboBox Width="250">
+                            <ComboBoxItem Content="1天"/>
+                            <ComboBoxItem Content="3天"/>
+                            <ComboBoxItem Content="7天"/>
+                            <ComboBoxItem Content="15天"/>
+                            <ComboBoxItem Content="30天"/>
+                        </ComboBox>
+                    </StackPanel>
+                    
+                    <!-- 操作按钮 -->
+                    <StackPanel Orientation="Horizontal" Margin="0,15,0,0">
+                        <Button Content="添加关怀" Background="#3498DB" Foreground="White" Width="100"/>
+                        <Button Content="修改关怀" Background="#F39C12" Foreground="White" Width="100" Margin="10,0,0,0"/>
+                        <Button Content="删除关怀" Background="#E74C3C" Foreground="White" Width="100" Margin="10,0,0,0"/>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+            
+            <!-- 右侧关怀列表 -->
+            <Border Grid.Column="1" BorderBrush="#E0E0E0" BorderThickness="1" CornerRadius="5">
+                <StackPanel>
+                    <!-- 搜索栏 -->
+                    <StackPanel Orientation="Horizontal" Margin="15" VerticalAlignment="Center">
+                        <TextBlock Text="关怀类型" Margin="0,0,10,0" VerticalAlignment="Center"/>
+                        <ComboBox Width="150">
+                            <ComboBoxItem Content="全部"/>
+                            <ComboBoxItem Content="车辆年审"/>
+                            <ComboBoxItem Content="车辆保养"/>
+                            <ComboBoxItem Content="保险到期"/>
+                            <ComboBoxItem Content="生日祝福"/>
+                            <ComboBoxItem Content="节日祝福"/>
+                            <ComboBoxItem Content="其他关怀"/>
+                        </ComboBox>
+                        <Button Content="搜索" Background="#3498DB" Foreground="White" Margin="10,0,0,0"/>
+                        <Button Content="刷新" Background="#95A5A6" Foreground="White" Margin="10,0,0,0"/>
+                    </StackPanel>
+                    
+                    <!-- 关怀列表 -->
+                    <DataGrid AutoGenerateColumns="False" Margin="15,0,15,15">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="关怀ID" Width="80"/>
+                            <DataGridTextColumn Header="客户名称" Width="133"/>
+                            <DataGridTextColumn Header="车牌号" Width="100"/>
+                            <DataGridTextColumn Header="关怀类型" Width="120"/>
+                            <DataGridTextColumn Header="到期日期" Width="120"/>
+                            <DataGridTextColumn Header="提醒方式" Width="120"/>
+                            <DataGridTextColumn Header="状态" Width="80"/>
+                            <DataGridTextColumn Header="操作" Width="100"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    
+                    <!-- 关怀详情 -->
+                    <Border BorderBrush="#E0E0E0" BorderThickness="1" Margin="15" CornerRadius="5">
+                        <StackPanel Margin="15">
+                            <TextBlock Text="关怀详情" FontSize="14" FontWeight="Bold" Margin="0,0,0,10"/>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition Width="200"/>
+                                    <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition Width="200"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Text="客户姓名:" Grid.Column="0" Margin="0,5,0,5"/>
+                                <TextBlock Text="" Grid.Column="1" Margin="0,5,0,5"/>
+                                <TextBlock Text="联系电话:" Grid.Column="2" Margin="0,5,0,5"/>
+                                <TextBlock Text="" Grid.Column="3" Margin="0,5,0,5"/>
+                                <TextBlock Text="车牌号:" Grid.Column="0" Margin="0,5,0,5"/>
+                                <TextBlock Text="" Grid.Column="1" Margin="0,5,0,5"/>
+                                <TextBlock Text="关怀类型:" Grid.Column="2" Margin="0,5,0,5"/>
+                                <TextBlock Text="" Grid.Column="3" Margin="0,5,0,5"/>
+                                <TextBlock Text="到期日期:" Grid.Column="0" Margin="0,5,0,5"/>
+                                <TextBlock Text="" Grid.Column="1" Margin="0,5,0,5"/>
+                                <TextBlock Text="提醒方式:" Grid.Column="2" Margin="0,5,0,5"/>
+                                <TextBlock Text="" Grid.Column="3" Margin="0,5,0,5"/>
+                                <TextBlock Text="创建时间:" Grid.Column="0" Margin="0,5,0,5"/>
+                                <TextBlock Text="" Grid.Column="1" Margin="0,5,0,5"/>
+                                <TextBlock Text="状态:" Grid.Column="2" Margin="0,5,0,5"/>
+                                <TextBlock Text="" Grid.Column="3" Margin="0,5,0,5"/>
+                            </Grid>
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+            </Border>
+        </Grid>
+    </Grid>
+</UserControl>
