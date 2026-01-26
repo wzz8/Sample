@@ -68,7 +68,7 @@
                             <TextBlock Text="Enterprise Management System" FontSize="12" Foreground="#E0E0E0" Margin="0,5,0,0"/>
                         </StackPanel>
                     </Border>
-                    
+
                     <TextBlock Text="主菜单" FontSize="12" Foreground="#BDC3C7" Margin="0,10,0,5"/>
 
                     <!--仪表盘-->
@@ -281,7 +281,7 @@
                                 </Button>
                             </Expander.Header>
                             <StackPanel>
-                                <!--车辆结算-->                                
+                                <!--车辆结算-->
                                 <Button Command="{Binding NavigateCommand}" CommandParameter="VehicleSettlement" Margin="30,5,10,5">
                                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                                         <materialDesign:PackIcon Kind="Car" Width="20" Height="20" Margin="0,0,10,0"/>
@@ -299,8 +299,8 @@
                                         </Style>
                                     </Button.Style>
                                 </Button>
-                                
-                                <!--销售结算-->                                
+
+                                <!--销售结算-->
                                 <Button Command="{Binding NavigateCommand}" CommandParameter="SalesSettlement" Margin="30,5,10,5">
                                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                                         <materialDesign:PackIcon Kind="CashRegister" Width="20" Height="20" Margin="0,0,10,0"/>
@@ -318,8 +318,8 @@
                                         </Style>
                                     </Button.Style>
                                 </Button>
-                                
-                                <!--款项处理-->                                
+
+                                <!--款项处理-->
                                 <Button Command="{Binding NavigateCommand}" CommandParameter="PaymentProcessing" Margin="30,5,10,5">
                                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                                         <materialDesign:PackIcon Kind="Bank" Width="20" Height="20" Margin="0,0,10,0"/>
@@ -337,8 +337,8 @@
                                         </Style>
                                     </Button.Style>
                                 </Button>
-                                
-                                <!--财务审核-->                                
+
+                                <!--财务审核-->
                                 <Button Command="{Binding NavigateCommand}" CommandParameter="FinancialAudit" Margin="30,5,10,5">
                                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                                         <materialDesign:PackIcon Kind="CheckCircle" Width="20" Height="20" Margin="0,0,10,0"/>
@@ -356,8 +356,8 @@
                                         </Style>
                                     </Button.Style>
                                 </Button>
-                                
-                                <!--改结算-->                                
+
+                                <!--改结算-->
                                 <Button Command="{Binding NavigateCommand}" CommandParameter="SettlementModification" Margin="30,5,10,5">
                                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                                         <materialDesign:PackIcon Kind="Edit" Width="20" Height="20" Margin="0,0,10,0"/>
@@ -375,8 +375,8 @@
                                         </Style>
                                     </Button.Style>
                                 </Button>
-                                
-                                <!--欠账处理-->                                
+
+                                <!--欠账处理-->
                                 <Button Command="{Binding NavigateCommand}" CommandParameter="DebtManagement" Margin="30,5,10,5">
                                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                                         <materialDesign:PackIcon Kind="Cash" Width="20" Height="20" Margin="0,0,10,0"/>
@@ -394,8 +394,8 @@
                                         </Style>
                                     </Button.Style>
                                 </Button>
-                                
-                                <!--预收预付-->                                
+
+                                <!--预收预付-->
                                 <Button Command="{Binding NavigateCommand}" CommandParameter="PrepaymentManagement" Margin="30,5,10,5">
                                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                                         <materialDesign:PackIcon Kind="CreditCard" Width="20" Height="20" Margin="0,0,10,0"/>
@@ -413,8 +413,8 @@
                                         </Style>
                                     </Button.Style>
                                 </Button>
-                                
-                                <!--消费积分-->                                
+
+                                <!--消费积分-->
                                 <Button Command="{Binding NavigateCommand}" CommandParameter="ConsumptionPoints" Margin="30,5,10,5">
                                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                                         <materialDesign:PackIcon Kind="Star" Width="20" Height="20" Margin="0,0,10,0"/>
@@ -612,6 +612,26 @@
                                         </Style>
                                     </Button.Style>
                                 </Button>
+
+                                <!--原始库存-->
+                                <Button Command="{Binding NavigateCommand}" CommandParameter="RawInventory">
+                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                        <materialDesign:PackIcon Kind="Warehouse" Width="20" Height="20" Margin="0,0,10,0"/>
+                                        <TextBlock Text="原始库存"/>
+                                    </StackPanel>
+                                    <Button.Style>
+                                        <Style TargetType="Button" BasedOn="{StaticResource NavButtonStyle}">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding CurrentModule}" Value="RawInventory">
+                                                    <Setter Property="Background" Value="#2C3E50"/>
+                                                    <Setter Property="BorderBrush" Value="#3498DB"/>
+                                                    <Setter Property="BorderThickness" Value="0,0,3,0"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Button.Style>
+                                </Button>
+
                             </StackPanel>
                         </Expander>
 
@@ -717,7 +737,7 @@
                                         </Style>
                                     </Button.Style>
                                 </Button>
-                                
+
                                 <!--配件报表-->
                                 <Button Command="{Binding NavigateCommand}" CommandParameter="SparePartsReport" Margin="30,5,10,5">
                                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
@@ -736,7 +756,7 @@
                                         </Style>
                                     </Button.Style>
                                 </Button>
-                                
+
                                 <!--分析-->
                                 <Button Command="{Binding NavigateCommand}" CommandParameter="Analysis" Margin="30,5,10,5">
                                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
@@ -780,7 +800,7 @@
                                 </Button>
                             </Expander.Header>
                             <StackPanel>
-                                
+
                                 <!--职员管理-->
                                 <Button Command="{Binding NavigateCommand}" CommandParameter="StaffManagement" Margin="30,5,10,5">
                                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
@@ -881,24 +901,24 @@
 
                         <!--客户管理-->
                         <Expander Background="#2C3E50" Margin="0,5,0,0" BorderThickness="0" HorizontalAlignment="Stretch" MouseDoubleClick="Expander_MouseDoubleClick">
-                           <Expander.Header>
+                            <Expander.Header>
                                 <Button Command="{Binding NavigateCommand}" CommandParameter="CustomerManagement">
-                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                    <materialDesign:PackIcon Kind="AccountGroup" Width="20" Height="20" Margin="0,0,10,0"/>
-                                    <TextBlock Text="客户管理"/>
-                                </StackPanel>
-                                <Button.Style>
-                                    <Style TargetType="Button" BasedOn="{StaticResource NavButtonStyle}">
-                                        <Style.Triggers>
-                                            <DataTrigger Binding="{Binding CurrentModule}" Value="CustomerManagement">
-                                                <Setter Property="Background" Value="#2C3E50"/>
-                                                <Setter Property="BorderBrush" Value="#3498DB"/>
-                                                <Setter Property="BorderThickness" Value="0,0,3,0"/>
-                                            </DataTrigger>
-                                        </Style.Triggers>
-                                    </Style>
-                                </Button.Style>
-                            </Button>
+                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                        <materialDesign:PackIcon Kind="AccountGroup" Width="20" Height="20" Margin="0,0,10,0"/>
+                                        <TextBlock Text="客户管理"/>
+                                    </StackPanel>
+                                    <Button.Style>
+                                        <Style TargetType="Button" BasedOn="{StaticResource NavButtonStyle}">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding CurrentModule}" Value="CustomerManagement">
+                                                    <Setter Property="Background" Value="#2C3E50"/>
+                                                    <Setter Property="BorderBrush" Value="#3498DB"/>
+                                                    <Setter Property="BorderThickness" Value="0,0,3,0"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Button.Style>
+                                </Button>
                             </Expander.Header>
                             <StackPanel>
 
@@ -997,27 +1017,29 @@
                                     </Button.Style>
                                 </Button>
 
+                                <!--保险代理-->
+                                <Button Command="{Binding NavigateCommand}" CommandParameter="InsuranceAgent" Margin="30,5,10,5">
+                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                        <materialDesign:PackIcon Kind="CarInsurance" Width="20" Height="20" Margin="0,0,10,0"/>
+                                        <TextBlock Text="保险代理"/>
+                                    </StackPanel>
+                                    <Button.Style>
+                                        <Style TargetType="Button" BasedOn="{StaticResource NavButtonStyle}">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding CurrentModule}" Value="InsuranceAgent">
+                                                    <Setter Property="Background" Value="#2C3E50"/>
+                                                    <Setter Property="BorderBrush" Value="#3498DB"/>
+                                                    <Setter Property="BorderThickness" Value="0,0,3,0"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Button.Style>
+                                </Button>
+
                             </StackPanel>
                         </Expander>
 
-                        <!--原始库存-->
-                        <Button Command="{Binding NavigateCommand}" CommandParameter="RawInventory">
-                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                <materialDesign:PackIcon Kind="Warehouse" Width="20" Height="20" Margin="0,0,10,0"/>
-                                <TextBlock Text="原始库存"/>
-                            </StackPanel>
-                            <Button.Style>
-                                <Style TargetType="Button" BasedOn="{StaticResource NavButtonStyle}">
-                                    <Style.Triggers>
-                                        <DataTrigger Binding="{Binding CurrentModule}" Value="RawInventory">
-                                            <Setter Property="Background" Value="#2C3E50"/>
-                                            <Setter Property="BorderBrush" Value="#3498DB"/>
-                                            <Setter Property="BorderThickness" Value="0,0,3,0"/>
-                                        </DataTrigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </Button.Style>
-                        </Button>
+
 
                         <!--其他-->
                         <Expander Background="#2C3E50" Margin="0,5,0,0" BorderThickness="0" HorizontalAlignment="Stretch" MouseDoubleClick="Expander_MouseDoubleClick">
@@ -1117,10 +1139,10 @@
                                         </Style>
                                     </Button.Style>
                                 </Button>
-                                
+
                             </StackPanel>
                         </Expander>
-                        
+
                         <!-- 退出按钮 -->
                         <Button Style="{StaticResource NavButtonStyle}" Command="{Binding LogoutCommand}" Margin="0,30,0,0">
                             <StackPanel Orientation="Horizontal" VerticalAlignment="Center">

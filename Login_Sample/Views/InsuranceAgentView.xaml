@@ -1,0 +1,159 @@
+<UserControl x:Class="Login_Sample.Views.InsuranceAgentView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:Login_Sample.Views"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d"
+             d:DesignHeight="450"
+             d:DesignWidth="800">
+    <Grid Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <!-- 标题栏 -->
+        <Border Grid.Row="0" Background="#2C3E50" CornerRadius="0">
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="20,0,0,0">
+                <materialDesign:PackIcon Kind="CarInsurance" Width="24" Height="24" Foreground="White" Margin="0,0,10,0"/>
+                <TextBlock Text="保险代理" FontSize="18" FontFamily="Microsoft YaHei" Foreground="White" FontWeight="Bold"/>
+            </StackPanel>
+        </Border>
+        
+        <!-- 内容区域 -->
+        <Grid Grid.Row="1" Margin="20">
+            <!-- 搜索栏 -->
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,15" VerticalAlignment="Center">
+                <TextBlock Text="承保公司" Margin="0,0,10,0" VerticalAlignment="Center"/>
+                <ComboBox Width="150">
+                    <ComboBoxItem Content="全部"/>
+                    <ComboBoxItem Content="人保财险"/>
+                    <ComboBoxItem Content="太平洋保险"/>
+                    <ComboBoxItem Content="平安保险"/>
+                    <ComboBoxItem Content="大地保险"/>
+                    <ComboBoxItem Content="阳光保险"/>
+                    <ComboBoxItem Content="其他"/>
+                </ComboBox>
+                <TextBlock Text="保险类型" Margin="20,0,10,0" VerticalAlignment="Center"/>
+                <ComboBox Width="150">
+                    <ComboBoxItem Content="全部"/>
+                    <ComboBoxItem Content="交强险"/>
+                    <ComboBoxItem Content="商业险"/>
+                    <ComboBoxItem Content="车船税"/>
+                </ComboBox>
+                <TextBlock Text="状态" Margin="20,0,10,0" VerticalAlignment="Center"/>
+                <ComboBox Width="150">
+                    <ComboBoxItem Content="全部"/>
+                    <ComboBoxItem Content="已投保"/>
+                    <ComboBoxItem Content="待续保"/>
+                    <ComboBoxItem Content="已过期"/>
+                </ComboBox>
+                <Button Content="搜索" Background="#3498DB" Foreground="White" Margin="20,0,0,0"/>
+                <Button Content="刷新" Background="#95A5A6" Foreground="White" Margin="10,0,0,0"/>
+            </StackPanel>
+            
+            <!-- 保险记录列表 -->
+            <DataGrid AutoGenerateColumns="False" Margin="0,0,0,15">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="记录ID" Width="80"/>
+                    <DataGridTextColumn Header="客户姓名" Width="120"/>
+                    <DataGridTextColumn Header="联系方式" Width="120"/>
+                    <DataGridTextColumn Header="车牌号" Width="100"/>
+                    <DataGridTextColumn Header="承保公司" Width="120"/>
+                    <DataGridTextColumn Header="保险类型" Width="100"/>
+                    <DataGridTextColumn Header="保险金额" Width="100"/>
+                    <DataGridTextColumn Header="投保日期" Width="120"/>
+                    <DataGridTextColumn Header="到期日期" Width="120"/>
+                    <DataGridTextColumn Header="状态" Width="80"/>
+                    <DataGridTextColumn Header="操作" Width="100"/>
+                </DataGrid.Columns>
+            </DataGrid>
+            
+            <!-- 保险详情和统计 -->
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="300"/>
+                </Grid.ColumnDefinitions>
+                
+                <!-- 保险详情 -->
+                <Border Grid.Column="0" BorderBrush="#E0E0E0" BorderThickness="1" CornerRadius="5" Margin="0,0,15,0">
+                    <StackPanel Margin="15">
+                        <TextBlock Text="保险详情" FontSize="16" FontWeight="Bold" Margin="0,0,0,10"/>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="120"/>
+                                <ColumnDefinition Width="200"/>
+                                <ColumnDefinition Width="120"/>
+                                <ColumnDefinition Width="200"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="客户姓名:" Grid.Column="0" Margin="0,5,0,5"/>
+                            <TextBlock Text="" Grid.Column="1" Margin="0,5,0,5"/>
+                            <TextBlock Text="联系方式:" Grid.Column="2" Margin="0,5,0,5"/>
+                            <TextBlock Text="" Grid.Column="3" Margin="0,5,0,5"/>
+                            <TextBlock Text="车牌号:" Grid.Column="0" Margin="0,5,0,5"/>
+                            <TextBlock Text="" Grid.Column="1" Margin="0,5,0,5"/>
+                            <TextBlock Text="车辆型号:" Grid.Column="2" Margin="0,5,0,5"/>
+                            <TextBlock Text="" Grid.Column="3" Margin="0,5,0,5"/>
+                            <TextBlock Text="承保公司:" Grid.Column="0" Margin="0,5,0,5"/>
+                            <TextBlock Text="" Grid.Column="1" Margin="0,5,0,5"/>
+                            <TextBlock Text="保险类型:" Grid.Column="2" Margin="0,5,0,5"/>
+                            <TextBlock Text="" Grid.Column="3" Margin="0,5,0,5"/>
+                            <TextBlock Text="保险金额:" Grid.Column="0" Margin="0,5,0,5"/>
+                            <TextBlock Text="" Grid.Column="1" Margin="0,5,0,5"/>
+                            <TextBlock Text="佣金比例:" Grid.Column="2" Margin="0,5,0,5"/>
+                            <TextBlock Text="" Grid.Column="3" Margin="0,5,0,5"/>
+                            <TextBlock Text="投保日期:" Grid.Column="0" Margin="0,5,0,5"/>
+                            <TextBlock Text="" Grid.Column="1" Margin="0,5,0,5"/>
+                            <TextBlock Text="到期日期:" Grid.Column="2" Margin="0,5,0,5"/>
+                            <TextBlock Text="" Grid.Column="3" Margin="0,5,0,5"/>
+                            <TextBlock Text="保单号:" Grid.Column="0" Margin="0,5,0,5"/>
+                            <TextBlock Text="" Grid.Column="1" Margin="0,5,0,5"/>
+                            <TextBlock Text="状态:" Grid.Column="2" Margin="0,5,0,5"/>
+                            <TextBlock Text="" Grid.Column="3" Margin="0,5,0,5"/>
+                        </Grid>
+                        <StackPanel Orientation="Horizontal" Margin="0,10,0,0" HorizontalAlignment="Right">
+                            <Button Content="编辑" Background="#3498DB" Foreground="White" Width="100"/>
+                            <Button Content="删除" Background="#E74C3C" Foreground="White" Width="100" Margin="10,0,0,0"/>
+                            <Button Content="续保提醒" Background="#F39C12" Foreground="White" Width="100" Margin="10,0,0,0"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+                
+                <!-- 统计信息 -->
+                <Border Grid.Column="1" BorderBrush="#E0E0E0" BorderThickness="1" CornerRadius="5">
+                    <StackPanel Margin="15">
+                        <TextBlock Text="统计信息" FontSize="16" FontWeight="Bold" Margin="0,0,0,15"/>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="40"/>
+                                <RowDefinition Height="40"/>
+                                <RowDefinition Height="40"/>
+                                <RowDefinition Height="40"/>
+                                <RowDefinition Height="40"/>
+                                <RowDefinition Height="40"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="120"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="总投保数:" Grid.Row="0" Grid.Column="0" Margin="0,5,0,5"/>
+                            <TextBlock Text="0" Grid.Row="0" Grid.Column="1" Margin="0,5,0,5" FontWeight="Bold"/>
+                            <TextBlock Text="实收保费:" Grid.Row="1" Grid.Column="0" Margin="0,5,0,5"/>
+                            <TextBlock Text="¥0.00" Grid.Row="1" Grid.Column="1" Margin="0,5,0,5" FontWeight="Bold" Foreground="#E74C3C"/>
+                            <TextBlock Text="待续保数:" Grid.Row="2" Grid.Column="0" Margin="0,5,0,5"/>
+                            <TextBlock Text="0" Grid.Row="2" Grid.Column="1" Margin="0,5,0,5" FontWeight="Bold"/>
+                            <TextBlock Text="已过期数:" Grid.Row="3" Grid.Column="0" Margin="0,5,0,5"/>
+                            <TextBlock Text="0" Grid.Row="3" Grid.Column="1" Margin="0,5,0,5" FontWeight="Bold"/>
+                            <TextBlock Text="佣金收入:" Grid.Row="4" Grid.Column="0" Margin="0,5,0,5"/>
+                            <TextBlock Text="¥0.00" Grid.Row="4" Grid.Column="1" Margin="0,5,0,5" FontWeight="Bold" Foreground="#27AE60"/>
+                        </Grid>
+                        <Button Content="导出统计" Background="#3498DB" Foreground="White" Margin="0,15,0,0"/>
+                    </StackPanel>
+                </Border>
+            </Grid>
+        </Grid>
+    </Grid>
+</UserControl>

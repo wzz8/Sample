@@ -113,6 +113,8 @@ namespace Login_Sample.ViewModels
         public CustomerCareView CustomerCareView { get; set; }
         // 初始化客户意见View
         public CustomerOpinionView CustomerOpinionView { get; set; }
+        // 初始化保险代理View
+        public InsuranceAgentView InsuranceAgentView { get; set; }
 
         // 初始化命令各模块的ViewModel实例
         public DashboardViewModel DashboardVM { get; set; }
@@ -187,6 +189,8 @@ namespace Login_Sample.ViewModels
         public CustomerCareViewModel CustomerCareVM { get; set; }
         // 初始化客户意见ViewModel
         public CustomerOpinionViewModel CustomerOpinionVM { get; set; }
+        // 初始化保险代理ViewModel
+        public InsuranceAgentViewModel InsuranceAgentVM { get; set; }
         // 初始化销售结算ViewModel
         public SalesSettlementViewModel SalesSettlementVM { get; set; }
         // 初始化款项处理ViewModel
@@ -312,6 +316,8 @@ namespace Login_Sample.ViewModels
             CustomerCareVM = new CustomerCareViewModel();
             // 初始化客户意见ViewModel
             CustomerOpinionVM = new CustomerOpinionViewModel();
+            // 初始化保险代理ViewModel
+            InsuranceAgentVM = new InsuranceAgentViewModel();
 
             // 初始化各模块的View
             DashboardView = new DashboardView() { DataContext = DashboardVM };
@@ -416,6 +422,8 @@ namespace Login_Sample.ViewModels
             CustomerCareView = new CustomerCareView() { DataContext = CustomerCareVM };
             // 初始化客户意见View
             CustomerOpinionView = new CustomerOpinionView() { DataContext = CustomerOpinionVM };
+            // 初始化保险代理View
+            InsuranceAgentView = new InsuranceAgentView() { DataContext = InsuranceAgentVM };
 
             // 初始化命令
             NavigateCommand = new RelayCommand(Navigate);
@@ -584,6 +592,10 @@ namespace Login_Sample.ViewModels
                 case "CustomerOpinion":
                     CurrentView = CustomerOpinionView;
                     CurrentModule = "CustomerOpinion";
+                    break;
+                case "InsuranceAgent":
+                    CurrentView = InsuranceAgentView;
+                    CurrentModule = "InsuranceAgent";
                     break;
                 // 业务接待子功能导航
                 case "VehicleReception":
