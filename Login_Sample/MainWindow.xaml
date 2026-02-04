@@ -96,10 +96,10 @@
                     <StackPanel>
 
                         <!-- 业务接待主菜单 -->
-                        <Expander Background="#2C3E50" Margin="0,5,0,0" BorderThickness="0" HorizontalAlignment="Stretch" MouseDoubleClick="Expander_MouseDoubleClick">
+                        <Expander Background="#2C3E50" Margin="0,5,0,0" BorderThickness="0" HorizontalAlignment="Stretch">
 
                             <Expander.Header>
-                                <Button Command="{Binding NavigateCommand}" CommandParameter="BusinessReception" HorizontalAlignment="Left">
+                                <Button Command="{Binding NavigateCommand}" CommandParameter="BusinessReception" HorizontalAlignment="Left" MouseDoubleClick="ExpanderButton_MouseDoubleClick">
                                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                                         <materialDesign:PackIcon Kind="AccountGroup" Width="20" Height="20" Margin="0,0,10,0"/>
                                         <TextBlock Text="业务接待"/>
@@ -260,9 +260,9 @@
                         </Expander>
 
                         <!--财务结算-->
-                        <Expander Background="#2C3E50" Margin="0,5,0,0" BorderThickness="0" HorizontalAlignment="Stretch" MouseDoubleClick="Expander_MouseDoubleClick">
+                        <Expander Background="#2C3E50" Margin="0,5,0,0" BorderThickness="0" HorizontalAlignment="Stretch">
                             <Expander.Header>
-                                <Button Command="{Binding NavigateCommand}" CommandParameter="FinancialSettlement" HorizontalAlignment="Left">
+                                <Button Command="{Binding NavigateCommand}" CommandParameter="FinancialSettlement" HorizontalAlignment="Left" MouseDoubleClick="ExpanderButton_MouseDoubleClick">
                                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                                         <materialDesign:PackIcon Kind="Cash" Width="20" Height="20" Margin="0,0,10,0"/>
                                         <TextBlock Text="财务结算"/>
@@ -436,9 +436,9 @@
                         </Expander>
 
                         <!--备件管理-->
-                        <Expander Background="#2C3E50" Margin="0,5,0,0" BorderThickness="0" HorizontalAlignment="Stretch" MouseDoubleClick="Expander_MouseDoubleClick">
+                        <Expander Background="#2C3E50" Margin="0,5,0,0" BorderThickness="0" HorizontalAlignment="Stretch">
                             <Expander.Header>
-                                <Button Command="{Binding NavigateCommand}" CommandParameter="SparePartsManagement" HorizontalAlignment="Left">
+                                <Button Command="{Binding NavigateCommand}" CommandParameter="SparePartsManagement" HorizontalAlignment="Left" MouseDoubleClick="ExpanderButton_MouseDoubleClick">
                                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                                         <materialDesign:PackIcon Kind="Box" Width="20" Height="20" Margin="0,0,10,0"/>
                                         <TextBlock Text="备件管理"/>
@@ -636,9 +636,9 @@
                         </Expander>
 
                         <!--车间管理-->
-                        <Expander Background="#2C3E50" Margin="0,5,0,0" BorderThickness="0" HorizontalAlignment="Stretch" MouseDoubleClick="Expander_MouseDoubleClick">
+                        <Expander Background="#2C3E50" Margin="0,5,0,0" BorderThickness="0" HorizontalAlignment="Stretch">
                             <Expander.Header>
-                                <Button Command="{Binding NavigateCommand}" CommandParameter="WorkshopManagement" HorizontalAlignment="Left">
+                                <Button Command="{Binding NavigateCommand}" CommandParameter="WorkshopManagement" HorizontalAlignment="Left" MouseDoubleClick="ExpanderButton_MouseDoubleClick">
                                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                                         <materialDesign:PackIcon Kind="Factory" Width="20" Height="20" Margin="0,0,10,0"/>
                                         <TextBlock Text="车间管理"/>
@@ -698,9 +698,9 @@
                         </Expander>
 
                         <!--决策分析-->
-                        <Expander Background="#2C3E50" Margin="0,5,0,0" BorderThickness="0" HorizontalAlignment="Stretch" MouseDoubleClick="Expander_MouseDoubleClick">
+                        <Expander Background="#2C3E50" Margin="0,5,0,0" BorderThickness="0" HorizontalAlignment="Stretch">
                             <Expander.Header>
-                                <Button Command="{Binding NavigateCommand}" CommandParameter="LeadershipQuery" HorizontalAlignment="Left">
+                                <Button Command="{Binding NavigateCommand}" CommandParameter="LeadershipQuery" HorizontalAlignment="Left" MouseDoubleClick="ExpanderButton_MouseDoubleClick">
                                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                                         <materialDesign:PackIcon Kind="ChartLine" Width="20" Height="20" Margin="0,0,10,0"/>
                                         <TextBlock Text="决策分析"/>
@@ -779,9 +779,9 @@
                         </Expander>
 
                         <!--系统管理-->
-                        <Expander Background="#2C3E50" Margin="0,5,0,0" BorderThickness="0" HorizontalAlignment="Stretch" MouseDoubleClick="Expander_MouseDoubleClick">
+                        <Expander Background="#2C3E50" Margin="0,5,0,0" BorderThickness="0" HorizontalAlignment="Stretch">
                             <Expander.Header>
-                                <Button Command="{Binding NavigateCommand}" CommandParameter="SystemManagement">
+                                <Button Command="{Binding NavigateCommand}" CommandParameter="SystemManagement" MouseDoubleClick="ExpanderButton_MouseDoubleClick">
                                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                                         <materialDesign:PackIcon Kind="Cog" Width="20" Height="20" Margin="0,0,10,0"/>
                                         <TextBlock Text="系统管理"/>
@@ -900,9 +900,9 @@
                         </Expander>
 
                         <!--客户管理-->
-                        <Expander Background="#2C3E50" Margin="0,5,0,0" BorderThickness="0" HorizontalAlignment="Stretch" MouseDoubleClick="Expander_MouseDoubleClick">
+                        <Expander Background="#2C3E50" Margin="0,5,0,0" BorderThickness="0" HorizontalAlignment="Stretch">
                             <Expander.Header>
-                                <Button Command="{Binding NavigateCommand}" CommandParameter="CustomerManagement">
+                                <Button Command="{Binding NavigateCommand}" CommandParameter="CustomerManagement" MouseDoubleClick="ExpanderButton_MouseDoubleClick">
                                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                                         <materialDesign:PackIcon Kind="AccountGroup" Width="20" Height="20" Margin="0,0,10,0"/>
                                         <TextBlock Text="客户管理"/>
@@ -1040,9 +1040,9 @@
                         </Expander>
 
                         <!--其他-->
-                        <Expander Background="#2C3E50" Margin="0,5,0,0" BorderThickness="0" HorizontalAlignment="Stretch" MouseDoubleClick="Expander_MouseDoubleClick">
+                        <Expander Background="#2C3E50" Margin="0,5,0,0" BorderThickness="0" HorizontalAlignment="Stretch">
                             <Expander.Header>
-                                <Button Command="{Binding NavigateCommand}" CommandParameter="Other" HorizontalAlignment="Left">
+                                <Button Command="{Binding NavigateCommand}" CommandParameter="Other" HorizontalAlignment="Left" MouseDoubleClick="ExpanderButton_MouseDoubleClick">
                                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                                         <materialDesign:PackIcon Kind="MoreVert" Width="20" Height="20" Margin="0,0,10,0"/>
                                         <TextBlock Text="其他"/>
