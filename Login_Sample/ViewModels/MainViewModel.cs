@@ -87,7 +87,7 @@ namespace Login_Sample.ViewModels
         public SparePartsSupplierView SparePartsSupplierView { get; set; }
         // 新增车辆结算视图
         public VehicleSettlementView VehicleSettlementView { get; set; }
-        // 新增服务预约视图
+        // 新增预约管理视图
         public AppointmentManagementView AppointmentManagementView { get; set; }
         // 初始化销售结算View
         public SalesSettlementView SalesSettlementView { get; set; }
@@ -177,7 +177,7 @@ namespace Login_Sample.ViewModels
         public SparePartsScrapViewModel SparePartsScrapVM { get; set; }
         // 初始化备件供货商ViewModel
         public SparePartsSupplierViewModel SparePartsSupplierVM { get; set; }
-        // 初始化服务预约ViewModel
+        // 初始化预约管理ViewModel
         public AppointmentManagementViewModel AppointmentManagementVM { get; set; }
         // 初始化客户信息ViewModel
         public CustomerInfoViewModel CustomerInfoVM { get; set; }
@@ -304,7 +304,7 @@ namespace Login_Sample.ViewModels
             SparePartsScrapVM = new SparePartsScrapViewModel();
             // 初始化备件供货商ViewModel
             SparePartsSupplierVM = new SparePartsSupplierViewModel();
-            // 初始化服务预约ViewModel
+            // 初始化预约管理ViewModel
             AppointmentManagementVM = new AppointmentManagementViewModel();
             // 初始化客户信息ViewModel
             CustomerInfoVM = new CustomerInfoViewModel();
@@ -410,7 +410,7 @@ namespace Login_Sample.ViewModels
             ConsumptionPointsVM = new ConsumptionPointsViewModel();
             // 初始化消费积分View
             ConsumptionPointsView = new ConsumptionPointsView() { DataContext = ConsumptionPointsVM };
-            // 初始化服务预约View
+            // 初始化预约管理View
             AppointmentManagementView = new AppointmentManagementView() { DataContext = AppointmentManagementVM };
             // 初始化客户信息View
             CustomerInfoView = new CustomerInfoView() { DataContext = CustomerInfoVM };
