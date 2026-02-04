@@ -31,10 +31,13 @@ namespace Login_Sample.Views
             if (sender is MaterialDesignThemes.Wpf.Card card && card.Tag is string pageName)
             {
                 // 获取MainViewModel实例
-                if (DataContext is ViewModels.MainViewModel mainViewModel)
+                if (App.Current.MainWindow.DataContext is ViewModels.MainViewModel mainViewModel)
                 {
-                    // 调用导航命令
-                    mainViewModel.NavigateCommand.Execute(pageName);
+                    if (mainViewModel != null && mainViewModel.NavigateCommand.CanExecute(pageName))
+                    {
+                        // 调用导航命令
+                        mainViewModel.NavigateCommand.Execute(pageName);
+                    }
                 }
             }
         }
