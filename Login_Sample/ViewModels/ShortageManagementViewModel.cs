@@ -1,3 +1,5 @@
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using Login_Sample.Data;
 using System;
 using System.Collections.Generic;
@@ -12,15 +14,8 @@ namespace Login_Sample.ViewModels
     /// <summary>
     /// 缺件管理视图模型
     /// </summary>
-    public class ShortageManagementViewModel : INotifyPropertyChanged
+    public class ShortageManagementViewModel : ObservableObject
     {
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        private void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
         #region 查询条件属性
 
         // 客户姓名
@@ -190,14 +185,14 @@ namespace Login_Sample.ViewModels
         public ShortageManagementViewModel()
         {
             // 初始化命令
-            AddShortageCommand = new RelayCommand(ExecuteAddShortage);
-            SearchCommand = new RelayCommand(ExecuteSearch);
-            ResetCommand = new RelayCommand(ExecuteReset);
-            RefreshCommand = new RelayCommand(ExecuteRefresh);
-            PreviousPageCommand = new RelayCommand(ExecutePreviousPage);
-            NextPageCommand = new RelayCommand(ExecuteNextPage);
-            NotifyCustomerCommand = new RelayCommand(ExecuteNotifyCustomer);
-            ProcessShortageCommand = new RelayCommand(ExecuteProcessShortage);
+            AddShortageCommand = new RelayCommand<object>(ExecuteAddShortage);
+            SearchCommand = new RelayCommand<object>(ExecuteSearch);
+            ResetCommand = new RelayCommand<object>(ExecuteReset);
+            RefreshCommand = new RelayCommand<object>(ExecuteRefresh);
+            PreviousPageCommand = new RelayCommand<object>(ExecutePreviousPage);
+            NextPageCommand = new RelayCommand<object>(ExecuteNextPage);
+            NotifyCustomerCommand = new RelayCommand<object>(ExecuteNotifyCustomer);
+            ProcessShortageCommand = new RelayCommand<object>(ExecuteProcessShortage);
 
             // 初始化状态选项
             StatusOptions = new List<string> { "全部", "已确认", "已订货", "已到货", "已通知", "已处理" };

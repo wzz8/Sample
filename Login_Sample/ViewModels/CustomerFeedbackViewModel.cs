@@ -1,19 +1,13 @@
+using CommunityToolkit.Mvvm.ComponentModel;
+using MaterialDesignThemes.Wpf;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
-using MaterialDesignThemes.Wpf;
 
 namespace Login_Sample.ViewModels
 {
-    public class CustomerFeedbackViewModel : INotifyPropertyChanged
+    public class CustomerFeedbackViewModel : ObservableObject
     {
-        public event PropertyChangedEventHandler? PropertyChanged;
-
-        private void OnPropertyChanged([CallerMemberName] string? propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
         // 构造函数
         public CustomerFeedbackViewModel()
         {

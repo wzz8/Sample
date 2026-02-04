@@ -1,3 +1,5 @@
+using CommunityToolkit.Mvvm.ComponentModel;
+using MaterialDesignThemes.Wpf;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -7,11 +9,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
-using MaterialDesignThemes.Wpf;
 
 namespace Login_Sample.ViewModels
 {
-    public class SparePartsManagementViewModel : INotifyPropertyChanged
+    public class SparePartsManagementViewModel : ObservableObject
     {
         // 统计卡片属性
         private int _totalSpareParts;
@@ -66,13 +67,6 @@ namespace Login_Sample.ViewModels
             TotalInventory = 5870;
             TodayInbound = 32;
             TodayOutbound = 18;
-        }
-
-        // 属性变更通知实现
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

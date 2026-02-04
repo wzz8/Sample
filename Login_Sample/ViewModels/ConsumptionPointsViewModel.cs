@@ -1,3 +1,5 @@
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -9,7 +11,7 @@ using System.Windows.Threading;
 
 namespace Login_Sample.ViewModels
 {
-    public class ConsumptionPointsViewModel : INotifyPropertyChanged
+    public class ConsumptionPointsViewModel : ObservableObject
     {
         #region 字段
         private string _customerName = string.Empty;
@@ -187,8 +189,8 @@ namespace Login_Sample.ViewModels
         /// </summary>
         public ConsumptionPointsViewModel()
         {
-            SearchRecordsCommand = new RelayCommand(SearchRecords);
-            RefreshRecordsCommand = new RelayCommand(RefreshRecords);
+            SearchRecordsCommand = new RelayCommand<object>(SearchRecords);
+            RefreshRecordsCommand = new RelayCommand<object>(RefreshRecords);
 
             // 初始化日期为当前月份
             var now = DateTime.Now;
@@ -332,14 +334,6 @@ namespace Login_Sample.ViewModels
         }
         #endregion
 
-        #region INotifyPropertyChanged 实现
-        public event PropertyChangedEventHandler? PropertyChanged;
-
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-        #endregion
     }
 
     #region 外部类

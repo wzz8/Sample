@@ -1,3 +1,5 @@
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
@@ -6,7 +8,7 @@ using System.Windows.Input;
 
 namespace Login_Sample.ViewModels
 {
-    public class PaymentProcessingViewModel : INotifyPropertyChanged
+    public class PaymentProcessingViewModel : ObservableObject
     {
         #region 字段
         private string _paymentUnit = string.Empty;
@@ -199,11 +201,11 @@ namespace Login_Sample.ViewModels
         /// </summary>
         public PaymentProcessingViewModel()
         {
-            IncomeCommand = new RelayCommand(ShowIncomeWindow);
-            ExpenseCommand = new RelayCommand(ShowExpenseWindow);
-            CorrectPaymentCommand = new RelayCommand(CorrectPayment);
-            SavePaymentCommand = new RelayCommand(SavePayment);
-            RefreshRecordsCommand = new RelayCommand(RefreshRecords);
+            IncomeCommand = new RelayCommand<object>(ShowIncomeWindow);
+            ExpenseCommand = new RelayCommand<object>(ShowExpenseWindow);
+            CorrectPaymentCommand = new RelayCommand<object>(CorrectPayment);
+            SavePaymentCommand = new RelayCommand<object>(SavePayment);
+            RefreshRecordsCommand = new RelayCommand<object>(RefreshRecords);
 
             // 初始化模拟数据
             LoadMockData();
@@ -371,15 +373,6 @@ namespace Login_Sample.ViewModels
         {
             ErrorMessage = message;
             ErrorVisibility = Visibility.Visible;
-        }
-        #endregion
-
-        #region INotifyPropertyChanged 实现
-        public event PropertyChangedEventHandler? PropertyChanged;
-
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
         #endregion
 

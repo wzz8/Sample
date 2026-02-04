@@ -1,3 +1,5 @@
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -11,21 +13,14 @@ namespace Login_Sample.ViewModels
     /// <summary>
     /// 库存盘点视图模型
     /// </summary>
-    public class InventoryCheckViewModel : INotifyPropertyChanged
+    public class InventoryCheckViewModel : ObservableObject
     {
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        private void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
         // 构造函数
         public InventoryCheckViewModel()
         {
             // 初始化命令
-            StartCheckCommand = new RelayCommand(StartCheck);
-            SaveCheckResultCommand = new RelayCommand(SaveCheckResult);
+            StartCheckCommand = new RelayCommand<object>(StartCheck);
+            SaveCheckResultCommand = new RelayCommand<object>(SaveCheckResult);
 
             // 加载模拟数据
             LoadSampleData();

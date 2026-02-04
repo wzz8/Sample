@@ -1,24 +1,19 @@
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using Login_Sample.Data;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
-using System;
-using Login_Sample.Data;
-using Microsoft.EntityFrameworkCore;
 
 namespace Login_Sample.ViewModels
 {
-    public class VehicleSettlementViewModel : INotifyPropertyChanged
+    public class VehicleSettlementViewModel : ObservableObject
     {
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        private void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
         private readonly ApplicationDbContext _context;
 
         // 搜索条件
@@ -102,9 +97,9 @@ namespace Login_Sample.ViewModels
             _context = new ApplicationDbContext();
             
             // 初始化命令
-            SearchCommand = new RelayCommand(SearchSettlements);
-            ResetCommand = new RelayCommand(ResetSearch);
-            SettleCommand = new RelayCommand(SettleSelectedItem, CanSettle);
+            SearchCommand = new RelayCommand<object>(SearchSettlements);
+            ResetCommand = new RelayCommand<object>(ResetSearch);
+            SettleCommand = new RelayCommand<object>(SettleSelectedItem, CanSettle);
 
             // 初始化状态选项
             StatusOptions = new List<string> { "全部", "待处理", "维修中", "已完工", "已结算" };

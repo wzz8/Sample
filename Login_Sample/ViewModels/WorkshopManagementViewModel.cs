@@ -1,3 +1,5 @@
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -9,7 +11,7 @@ using System.Windows.Input;
 
 namespace Login_Sample.ViewModels
 {
-    public class WorkshopManagementViewModel : INotifyPropertyChanged
+    public class WorkshopManagementViewModel : ObservableObject
     {
         #region Properties
         
@@ -115,8 +117,8 @@ namespace Login_Sample.ViewModels
         public WorkshopManagementViewModel()
         {
             // 初始化命令
-            RefreshDataCommand = new RelayCommand(RefreshData);
-            QueryCommand = new RelayCommand(ExecuteQuery);
+            RefreshDataCommand = new RelayCommand<object>(RefreshData);
+            QueryCommand = new RelayCommand<object>(ExecuteQuery);
             
             // 初始化数据
             InitializeData();
@@ -347,17 +349,6 @@ namespace Login_Sample.ViewModels
                     }
                 }
             };
-        }
-        
-        #endregion
-        
-        #region INotifyPropertyChanged Implementation
-        
-        public event PropertyChangedEventHandler PropertyChanged;
-        
-        protected virtual void OnPropertyChanged(string propertyName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
         
         #endregion

@@ -1,15 +1,17 @@
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using Login_Sample.Data;
+using Microsoft.EntityFrameworkCore;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
-using Login_Sample.Data;
-using Microsoft.EntityFrameworkCore;
 
 namespace Login_Sample.ViewModels
 {
-    public class RegisterViewModel : INotifyPropertyChanged
+    public class RegisterViewModel : ObservableObject
     {
         private string _username = string.Empty;
         private string _email = string.Empty;
@@ -177,10 +179,10 @@ namespace Login_Sample.ViewModels
             // 初始化数据库上下文
             _dbContext = new ApplicationDbContext();
             
-            RegisterCommand = new RelayCommand(Register);
-            BackToLoginCommand = new RelayCommand(BackToLogin);
-            PasswordChangedCommand = new RelayCommand(HandlePasswordChanged);
-            ConfirmPasswordChangedCommand = new RelayCommand(HandleConfirmPasswordChanged);
+            RegisterCommand = new RelayCommand<object>(Register);
+            BackToLoginCommand = new RelayCommand<object>(BackToLogin);
+            PasswordChangedCommand = new RelayCommand<object>(HandlePasswordChanged);
+            ConfirmPasswordChangedCommand = new RelayCommand<object>(HandleConfirmPasswordChanged);
             
             // 创建图标
             Icon = CreateRegisterIcon();
@@ -386,14 +388,5 @@ namespace Login_Sample.ViewModels
             ErrorVisibility = Visibility.Collapsed;
             return true;
         }
-
-        #region INotifyPropertyChanged 实现
-        public event PropertyChangedEventHandler? PropertyChanged;
-
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-        #endregion
     }
 }

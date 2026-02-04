@@ -1,14 +1,16 @@
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using Login_Sample.Data;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
-using System.Linq;
 
 namespace Login_Sample.ViewModels
 {
-    public class SparePartsInboundViewModel : INotifyPropertyChanged
+    public class SparePartsInboundViewModel : ObservableObject
     {
         // 命令定义
         public ICommand SaveInboundCommand { get; set; }
@@ -80,11 +82,11 @@ namespace Login_Sample.ViewModels
         public SparePartsInboundViewModel()
         {
             // 初始化命令
-            SaveInboundCommand = new RelayCommand(SaveInbound);
-            AddInboundItemCommand = new RelayCommand(AddInboundItem);
-            RemoveInboundItemCommand = new RelayCommand(RemoveInboundItem);
-            ResetCommand = new RelayCommand(Reset);
-            ReturnSparePartsCommand = new RelayCommand(ReturnSpareParts);
+            SaveInboundCommand = new RelayCommand<object>(SaveInbound);
+            AddInboundItemCommand = new RelayCommand<object>(AddInboundItem);
+            RemoveInboundItemCommand = new RelayCommand<object>(RemoveInboundItem);
+            ResetCommand = new RelayCommand<object>(Reset);
+            ReturnSparePartsCommand = new RelayCommand<object>(ReturnSpareParts);
             
             // 初始化属性
             _inboundNumber = GenerateInboundNumber();
@@ -287,13 +289,6 @@ namespace Login_Sample.ViewModels
                 BranchName = "总部",
                 LastUpdatedTime = DateTime.Now
             });
-        }
-        
-        // INotifyPropertyChanged 实现
-        public event PropertyChangedEventHandler? PropertyChanged;
-        protected void OnPropertyChanged([CallerMemberName] string? propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

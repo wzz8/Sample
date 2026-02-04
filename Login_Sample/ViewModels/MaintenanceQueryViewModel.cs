@@ -1,3 +1,5 @@
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -6,7 +8,7 @@ using System.Windows.Input;
 
 namespace Login_Sample.ViewModels
 {
-    public class MaintenanceQueryViewModel : INotifyPropertyChanged
+    public class MaintenanceQueryViewModel : ObservableObject
     {
         // 状态枚举
         public enum MaintenanceStatus
@@ -95,8 +97,8 @@ namespace Login_Sample.ViewModels
         // 构造函数
         public MaintenanceQueryViewModel()
         {
-            QueryCommand = new RelayCommand(ExecuteQuery);
-            ResetCommand = new RelayCommand(ExecuteReset);
+            QueryCommand = new RelayCommand<object>(ExecuteQuery);
+            ResetCommand = new RelayCommand<object>(ExecuteReset);
 
             // 初始化模拟数据
             InitializeMockData();
@@ -266,13 +268,6 @@ namespace Login_Sample.ViewModels
 
             // 重新加载全部数据
             InitializeMockData();
-        }
-
-        // INotifyPropertyChanged 实现
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected virtual void OnPropertyChanged(string propertyName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 

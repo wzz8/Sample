@@ -1,3 +1,4 @@
+using CommunityToolkit.Mvvm.ComponentModel;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -6,7 +7,7 @@ using System.Windows.Threading;
 
 namespace Login_Sample.ViewModels
 {
-    public class DashboardViewModel : INotifyPropertyChanged
+    public class DashboardViewModel : ObservableObject
     {
         // 业务接待模块数据
         private int _todayReceptions;
@@ -305,22 +306,5 @@ namespace Login_Sample.ViewModels
             TotalInventoryValue = Math.Max(0, TotalInventoryValue);
             TotalInventoryItems = Math.Max(0, TotalInventoryItems);
         }
-        
-        #region INotifyPropertyChanged
-        
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-        
-        protected bool SetProperty<T>(ref T field, T value, [CallerMemberName] string propertyName = null)
-        {
-            if (EqualityComparer<T>.Default.Equals(field, value)) return false;
-            field = value;
-            OnPropertyChanged(propertyName);
-            return true;
-        }
-        
-        #endregion
     }
 }

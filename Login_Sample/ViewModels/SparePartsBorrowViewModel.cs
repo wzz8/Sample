@@ -1,31 +1,26 @@
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using Login_Sample.Data;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Input;
-using Login_Sample.Data;
 
 namespace Login_Sample.ViewModels
 {
     /// <summary>
     /// 备件借用视图模型
     /// </summary>
-    public class SparePartsBorrowViewModel : INotifyPropertyChanged
+    public class SparePartsBorrowViewModel : ObservableObject
     {
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        private void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
         public SparePartsBorrowViewModel()
         {
             // 初始化命令
-            BorrowSparePartsCommand = new RelayCommand(BorrowSpareParts);
-            ReturnSparePartsCommand = new RelayCommand(ReturnSpareParts);
-            RefreshBorrowRecordsCommand = new RelayCommand(RefreshBorrowRecords);
+            BorrowSparePartsCommand = new RelayCommand<object>(BorrowSpareParts);
+            ReturnSparePartsCommand = new RelayCommand<object>(ReturnSpareParts);
+            RefreshBorrowRecordsCommand = new RelayCommand<object>(RefreshBorrowRecords);
 
             // 加载模拟数据
             LoadSampleData();

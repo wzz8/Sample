@@ -1,3 +1,5 @@
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -9,7 +11,7 @@ using System.Windows.Threading;
 
 namespace Login_Sample.ViewModels
 {
-    public class FinancialAuditViewModel : INotifyPropertyChanged
+    public class FinancialAuditViewModel : ObservableObject
     {
         #region 字段
         private string _searchKey = string.Empty;
@@ -180,10 +182,10 @@ namespace Login_Sample.ViewModels
         /// </summary>
         public FinancialAuditViewModel()
         {
-            SearchDocumentsCommand = new RelayCommand(SearchDocuments);
-            AuditDocumentCommand = new RelayCommand(AuditDocument);
-            CancelAuditCommand = new RelayCommand(CancelAudit);
-            RefreshDocumentsCommand = new RelayCommand(RefreshDocuments);
+            SearchDocumentsCommand = new RelayCommand<object>(SearchDocuments);
+            AuditDocumentCommand = new RelayCommand<object>(AuditDocument);
+            CancelAuditCommand = new RelayCommand<object>(CancelAudit);
+            RefreshDocumentsCommand = new RelayCommand<object>(RefreshDocuments);
 
             // 初始化模拟数据
             LoadMockData();
@@ -389,15 +391,6 @@ namespace Login_Sample.ViewModels
         {
             ErrorMessage = message;
             ErrorVisibility = Visibility.Visible;
-        }
-        #endregion
-
-        #region INotifyPropertyChanged 实现
-        public event PropertyChangedEventHandler? PropertyChanged;
-
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
         #endregion
     }

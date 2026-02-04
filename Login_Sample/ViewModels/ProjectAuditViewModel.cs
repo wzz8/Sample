@@ -1,18 +1,19 @@
-using System;using System.Collections.Generic;using System.Collections.ObjectModel;using System.ComponentModel;using System.Linq;using System.Runtime.CompilerServices;using System.Windows.Input;using Login_Sample.Data;
-
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using Login_Sample.Data;
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Linq;
+using System.Runtime.CompilerServices;
+using System.Windows.Input;
 namespace Login_Sample.ViewModels{
     /// <summary>
     /// 项目审查视图模型
     /// </summary>
-    public class ProjectAuditViewModel : INotifyPropertyChanged
+    public class ProjectAuditViewModel : ObservableObject
     {
-        public event PropertyChangedEventHandler? PropertyChanged;
-        
-        private void OnPropertyChanged([CallerMemberName] string? propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-        
         // 命令
         public ICommand SearchCommand { get; set; }
         public ICommand AuditCommand { get; set; }
@@ -72,9 +73,9 @@ namespace Login_Sample.ViewModels{
         public ProjectAuditViewModel()
         {
             // 初始化命令
-            SearchCommand = new RelayCommand(Search);
-            AuditCommand = new RelayCommand(Audit);
-            ResetCommand = new RelayCommand(Reset);
+            SearchCommand = new RelayCommand<object>(Search);
+            AuditCommand = new RelayCommand<object>(Audit);
+            ResetCommand = new RelayCommand<object>(Reset);
             
             // 初始化非空字段
             _licensePlate = string.Empty;

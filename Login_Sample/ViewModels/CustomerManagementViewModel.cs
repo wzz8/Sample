@@ -1,14 +1,15 @@
+using CommunityToolkit.Mvvm.ComponentModel;
+using Login_Sample.Data;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using Login_Sample.Data;
 
 namespace Login_Sample.ViewModels
 {
     /// <summary>
     /// 客户管理视图模型
     /// </summary>
-    public class CustomerManagementViewModel : INotifyPropertyChanged
+    public class CustomerManagementViewModel : ObservableObject
     {
         private ObservableCollection<Customer> _customers;
         private Customer? _selectedCustomer;

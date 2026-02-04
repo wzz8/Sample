@@ -1,23 +1,18 @@
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using Login_Sample.Data;
+using MaterialDesignThemes.Wpf;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
-using Login_Sample.Data;
-using MaterialDesignThemes.Wpf;
 
 namespace Login_Sample.ViewModels
 {
-    public class InventoryManagementViewModel : INotifyPropertyChanged
+    public class InventoryManagementViewModel : ObservableObject
     {
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        private void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
         private ApplicationDbContext _dbContext;
 
         // 库存配件列表
@@ -92,9 +87,9 @@ namespace Login_Sample.ViewModels
             LoadSparePartsSales();
 
             // 初始化命令
-            RefreshCommand = new RelayCommand(RefreshData);
-            AdjustPriceCommand = new RelayCommand(AdjustPrice);
-            UpdateMinInventoryCommand = new RelayCommand(UpdateMinInventory);
+            RefreshCommand = new RelayCommand<object>(RefreshData);
+            AdjustPriceCommand = new RelayCommand<object>(AdjustPrice);
+            UpdateMinInventoryCommand = new RelayCommand<object>(UpdateMinInventory);
         }
 
         // 加载库存配件

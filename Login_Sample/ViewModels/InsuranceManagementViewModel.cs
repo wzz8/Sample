@@ -1,3 +1,5 @@
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using Login_Sample.Data;
 using System;
 using System.Collections.Generic;
@@ -12,15 +14,8 @@ namespace Login_Sample.ViewModels
     /// <summary>
     /// 保险管理视图模型
     /// </summary>
-    public class InsuranceManagementViewModel : INotifyPropertyChanged
+    public class InsuranceManagementViewModel : ObservableObject
     {
-        public event PropertyChangedEventHandler? PropertyChanged;
-
-        private void OnPropertyChanged([CallerMemberName] string? propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
         #region 查询条件属性
 
         // 客户姓名
@@ -209,15 +204,15 @@ namespace Login_Sample.ViewModels
         public InsuranceManagementViewModel()
         {
             // 初始化命令
-            AddClaimCommand = new RelayCommand(ExecuteAddClaim);
-            SearchCommand = new RelayCommand(ExecuteSearch);
-            ResetCommand = new RelayCommand(ExecuteReset);
-            RefreshCommand = new RelayCommand(ExecuteRefresh);
-            PreviousPageCommand = new RelayCommand(ExecutePreviousPage);
-            NextPageCommand = new RelayCommand(ExecuteNextPage);
-            ViewClaimCommand = new RelayCommand(ExecuteViewClaim);
-            NegotiateCommand = new RelayCommand(ExecuteNegotiate);
-            UpdateStatusCommand = new RelayCommand(ExecuteUpdateStatus);
+            AddClaimCommand = new RelayCommand<object>(ExecuteAddClaim);
+            SearchCommand = new RelayCommand<object>(ExecuteSearch);
+            ResetCommand = new RelayCommand<object>(ExecuteReset);
+            RefreshCommand = new RelayCommand<object>(ExecuteRefresh);
+            PreviousPageCommand = new RelayCommand<object>(ExecutePreviousPage);
+            NextPageCommand = new RelayCommand<object>(ExecuteNextPage);
+            ViewClaimCommand = new RelayCommand<object>(ExecuteViewClaim);
+            NegotiateCommand = new RelayCommand<object>(ExecuteNegotiate);
+            UpdateStatusCommand = new RelayCommand<object>(ExecuteUpdateStatus);
 
             // 初始化状态选项
             ClaimStatusOptions = new List<string> { "全部", "已提交", "处理中", "已赔付", "已完成", "已拒绝" };

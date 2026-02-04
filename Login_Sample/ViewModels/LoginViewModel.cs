@@ -1,15 +1,17 @@
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using Login_Sample;
+using Login_Sample.Data;
+using Microsoft.EntityFrameworkCore;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
-using Login_Sample;
-using Login_Sample.Data;
-using Microsoft.EntityFrameworkCore;
 
 namespace Login_Sample.ViewModels
 {
-    public class LoginViewModel : INotifyPropertyChanged
+    public class LoginViewModel : ObservableObject
     {
         private bool _isNoEnabled = true;
         private string _No = string.Empty;
@@ -208,33 +210,33 @@ namespace Login_Sample.ViewModels
         /// <summary>
         /// 登录命令
         /// </summary>
-        public RelayCommand LoginCommand { get; set; }
+        public RelayCommand<object> LoginCommand { get; set; }
 
         /// <summary>
         /// 注册命令
         /// </summary>
-        public RelayCommand RegisterCommand { get; set; }
+        public RelayCommand<object> RegisterCommand { get; set; }
 
         /// <summary>
         /// 关闭命令
         /// </summary>
-        public RelayCommand CloseCommand { get; set; }
+        public RelayCommand<object> CloseCommand { get; set; }
         
         /// <summary>
         /// 设置命令
         /// </summary>
-        public RelayCommand SettingsCommand { get; set; }
+        public RelayCommand<object> SettingsCommand { get; set; }
 
         public LoginViewModel()
         {
             // 初始化数据库上下文
             _dbContext = new ApplicationDbContext();
             
-            LoginCommand = new RelayCommand(Login);
-            RegisterCommand = new RelayCommand(Register);
-            CloseCommand = new RelayCommand(Close);
-            PasswordChangedCommand = new RelayCommand(HandlePasswordChanged);
-            SettingsCommand = new RelayCommand(Settings);
+            LoginCommand = new RelayCommand<object>(Login);
+            RegisterCommand = new RelayCommand<object>(Register);
+            CloseCommand = new RelayCommand<object>(Close);
+            PasswordChangedCommand = new RelayCommand<object>(HandlePasswordChanged);
+            SettingsCommand = new RelayCommand<object>(Settings);
             IsNoEnabled = true;
             
             UpdateUIState();
@@ -398,16 +400,5 @@ namespace Login_Sample.ViewModels
 
             return new DrawingImage(drawingGroup);
         }
-
-        #region INotifyPropertyChanged
-
-        public event PropertyChangedEventHandler? PropertyChanged = delegate { };
-
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-        #endregion
     }
 }

@@ -1,17 +1,19 @@
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using Login_Sample.Data;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
-using Login_Sample.Data;
 
 namespace Login_Sample.ViewModels
 {
     /// <summary>
     /// 备件报废视图模型
     /// </summary>
-    public class SparePartsScrapViewModel : INotifyPropertyChanged
+    public class SparePartsScrapViewModel : ObservableObject
     {
         #region 属性和字段
 
@@ -134,9 +136,9 @@ namespace Login_Sample.ViewModels
         public SparePartsScrapViewModel()
         {
             // 初始化命令
-            StartScrapCommand = new RelayCommand(StartScrap, CanStartScrap);
-            ConfirmScrapCommand = new RelayCommand(ConfirmScrap, CanConfirmScrap);
-            RefreshScrapRecordsCommand = new RelayCommand(RefreshScrapRecords, CanRefreshScrapRecords);
+            StartScrapCommand = new RelayCommand<object>(StartScrap, CanStartScrap);
+            ConfirmScrapCommand = new RelayCommand<object>(ConfirmScrap, CanConfirmScrap);
+            RefreshScrapRecordsCommand = new RelayCommand<object>(RefreshScrapRecords, CanRefreshScrapRecords);
 
             // 初始化数据
             InitializeData();
@@ -310,26 +312,6 @@ namespace Login_Sample.ViewModels
         private bool CanRefreshScrapRecords(object parameter)
         {
             return true;
-        }
-
-        #endregion
-
-        #region INotifyPropertyChanged 实现
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        /// <summary>
-        /// 设置属性值并通知属性更改
-        /// </summary>
-        protected bool SetProperty<T>(ref T field, T newValue, [CallerMemberName] string? propertyName = null)
-        {
-            if (!EqualityComparer<T>.Default.Equals(field, newValue))
-            {
-                field = newValue;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-                return true;
-            }
-            return false;
         }
 
         #endregion

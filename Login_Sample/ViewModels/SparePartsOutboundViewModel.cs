@@ -1,13 +1,15 @@
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using Login_Sample.Data;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Input;
-using Login_Sample.Data;
 
 namespace Login_Sample.ViewModels
 {
-    public class SparePartsOutboundViewModel : INotifyPropertyChanged
+    public class SparePartsOutboundViewModel : ObservableObject
     {
         // 工单号
         private string _workOrderNumber;
@@ -92,8 +94,8 @@ namespace Login_Sample.ViewModels
             RequiredSpareParts = new ObservableCollection<InventoryItem>();
 
             // 初始化命令
-            SearchWorkOrderCommand = new RelayCommand(SearchWorkOrder);
-            OutboundCommand = new RelayCommand(OutboundSpareParts);
+            SearchWorkOrderCommand = new RelayCommand<object>(SearchWorkOrder);
+            OutboundCommand = new RelayCommand<object>(OutboundSpareParts);
 
             // 加载示例数据
             LoadSampleWorkOrders();
@@ -287,13 +289,6 @@ namespace Login_Sample.ViewModels
             RequiredSpareParts.Clear();
             Remarks = string.Empty;
             OperationTime = DateTime.Now;
-        }
-
-        // INotifyPropertyChanged 实现
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected virtual void OnPropertyChanged([System.Runtime.CompilerServices.CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

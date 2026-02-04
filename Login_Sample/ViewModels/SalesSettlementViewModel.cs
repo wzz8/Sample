@@ -1,3 +1,5 @@
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
@@ -5,7 +7,7 @@ using System.Windows.Input;
 
 namespace Login_Sample.ViewModels
 {
-    public class SalesSettlementViewModel : INotifyPropertyChanged
+    public class SalesSettlementViewModel : ObservableObject
     {
         private string _purchaseUnit = string.Empty;
         private string _salesOrderNumber = string.Empty;
@@ -178,8 +180,8 @@ namespace Login_Sample.ViewModels
         /// </summary>
         public SalesSettlementViewModel()
         {
-            SearchCommand = new RelayCommand(SearchSalesOrder);
-            SettleCommand = new RelayCommand(SettleSalesOrder);
+            SearchCommand = new RelayCommand<object>(SearchSalesOrder);
+            SettleCommand = new RelayCommand<object>(SettleSalesOrder);
             
             // 初始化销售日期为当前日期
             SalesDate = DateTime.Now.ToString("yyyy-MM-dd");
@@ -274,14 +276,5 @@ namespace Login_Sample.ViewModels
             ErrorMessage = message;
             ErrorVisibility = Visibility.Visible;
         }
-
-        #region INotifyPropertyChanged 实现
-        public event PropertyChangedEventHandler? PropertyChanged;
-
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-        #endregion
     }
 }

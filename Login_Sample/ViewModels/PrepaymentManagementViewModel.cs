@@ -1,3 +1,5 @@
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -9,7 +11,7 @@ using System.Windows.Threading;
 
 namespace Login_Sample.ViewModels
 {
-    public class PrepaymentManagementViewModel : INotifyPropertyChanged
+    public class PrepaymentManagementViewModel : ObservableObject
     {
         #region 字段
         private string _customerName = string.Empty;
@@ -214,10 +216,10 @@ namespace Login_Sample.ViewModels
         /// </summary>
         public PrepaymentManagementViewModel()
         {
-            RegisterPrepaymentCommand = new RelayCommand(RegisterPrepayment);
-            SearchRecordsCommand = new RelayCommand(SearchRecords);
-            RefreshRecordsCommand = new RelayCommand(RefreshRecords);
-            DeleteRecordCommand = new RelayCommand(DeleteRecord);
+            RegisterPrepaymentCommand = new RelayCommand<object>(RegisterPrepayment);
+            SearchRecordsCommand = new RelayCommand<object>(SearchRecords);
+            RefreshRecordsCommand = new RelayCommand<object>(RefreshRecords);
+            DeleteRecordCommand = new RelayCommand<object>(DeleteRecord);
 
             // 初始化模拟数据
             LoadMockData();
@@ -429,15 +431,6 @@ namespace Login_Sample.ViewModels
         {
             ErrorMessage = message;
             ErrorVisibility = Visibility.Visible;
-        }
-        #endregion
-
-        #region INotifyPropertyChanged 实现
-        public event PropertyChangedEventHandler? PropertyChanged;
-
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
         #endregion
     }

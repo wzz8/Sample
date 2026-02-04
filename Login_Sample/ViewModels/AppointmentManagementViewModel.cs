@@ -1,18 +1,20 @@
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using Login_Sample.Data;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows.Input;
-using Microsoft.EntityFrameworkCore;
-using DataTechnician = Login_Sample.Data.Technician;
 using DataCustomer = Login_Sample.Data.Customer;
 using DataCustomerVehicle = Login_Sample.Data.CustomerVehicle;
-using Login_Sample.Data;
+using DataTechnician = Login_Sample.Data.Technician;
 
 namespace Login_Sample.ViewModels
 {
-    public class AppointmentManagementViewModel : INotifyPropertyChanged
+    public class AppointmentManagementViewModel : ObservableObject
     {
         private readonly ApplicationDbContext _dbContext;
         
@@ -147,10 +149,10 @@ namespace Login_Sample.ViewModels
             AppointmentTypeOptions = new List<string> { "常规保养", "故障维修", "轮胎更换", "机油更换", "汽车检查", "其他" };
             
             // 初始化命令
-            AddAppointmentCommand = new RelayCommand(AddAppointment);
-            UpdateAppointmentCommand = new RelayCommand(UpdateAppointment);
-            DeleteAppointmentCommand = new RelayCommand(DeleteAppointment);
-            LoadDataCommand = new RelayCommand(LoadData);
+            AddAppointmentCommand = new RelayCommand<object>(AddAppointment);
+            UpdateAppointmentCommand = new RelayCommand<object>(UpdateAppointment);
+            DeleteAppointmentCommand = new RelayCommand<object>(DeleteAppointment);
+            LoadDataCommand = new RelayCommand<object>(LoadData);
             
             // 加载数据
             LoadData(null);

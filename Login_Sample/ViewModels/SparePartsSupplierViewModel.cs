@@ -1,19 +1,21 @@
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using Login_Sample.Data;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Windows.Input;
-using Login_Sample.Data;
 using System.Windows;
+using System.Windows.Input;
 
 namespace Login_Sample.ViewModels
 {
     /// <summary>
     /// 备件供货商视图模型
     /// </summary>
-    public class SparePartsSupplierViewModel : INotifyPropertyChanged
+    public class SparePartsSupplierViewModel : ObservableObject
     {
         #region 属性和字段
 
@@ -193,12 +195,12 @@ namespace Login_Sample.ViewModels
             _dbContext = new ApplicationDbContext();
 
             // 初始化命令
-            AddCommand = new RelayCommand(AddSupplier);
-            SaveCommand = new RelayCommand(SaveSupplier, CanSaveSupplier);
-            UpdateCommand = new RelayCommand(UpdateSupplier, CanUpdateSupplier);
-            DeleteCommand = new RelayCommand(DeleteSupplier, CanDeleteSupplier);
-            SearchCommand = new RelayCommand(SearchSuppliers);
-            ResetCommand = new RelayCommand(ResetForm);
+            AddCommand = new RelayCommand<object>(AddSupplier);
+            SaveCommand = new RelayCommand<object>(SaveSupplier, CanSaveSupplier);
+            UpdateCommand = new RelayCommand<object>(UpdateSupplier, CanUpdateSupplier);
+            DeleteCommand = new RelayCommand<object>(DeleteSupplier, CanDeleteSupplier);
+            SearchCommand = new RelayCommand<object>(SearchSuppliers);
+            ResetCommand = new RelayCommand<object>(ResetForm);
 
             // 初始化数据
             InitializeData();
@@ -519,27 +521,6 @@ namespace Login_Sample.ViewModels
         private bool CanDeleteSupplier(object parameter)
         {
             return SelectedSupplier != null;
-        }
-
-        #endregion
-
-        #region INotifyPropertyChanged 实现
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-        protected bool SetProperty<T>(ref T field, T value, [CallerMemberName] string propertyName = null)
-        {
-            if (EqualityComparer<T>.Default.Equals(field, value))
-                return false;
-
-            field = value;
-            OnPropertyChanged(propertyName);
-            return true;
         }
 
         #endregion

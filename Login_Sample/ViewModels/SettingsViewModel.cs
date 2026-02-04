@@ -1,3 +1,5 @@
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
@@ -5,7 +7,7 @@ using System.Windows.Input;
 
 namespace Login_Sample.ViewModels
 {
-    public class SettingsViewModel : INotifyPropertyChanged
+    public class SettingsViewModel : ObservableObject
     {
         private string _serverAddress = "127.0.0.1"; // 默认服务器地址
         private string _serverPort = "8080"; // 默认服务器端口
@@ -130,12 +132,12 @@ namespace Login_Sample.ViewModels
         /// <summary>
         /// 保存命令
         /// </summary>
-        public RelayCommand SaveCommand { get; set; }
+        public RelayCommand<object> SaveCommand { get; set; }
 
         /// <summary>
         /// 取消命令
         /// </summary>
-        public RelayCommand CancelCommand { get; set; }
+        public RelayCommand<object> CancelCommand { get; set; }
 
         /// <summary>
         /// 窗口引用
@@ -145,8 +147,8 @@ namespace Login_Sample.ViewModels
         public SettingsViewModel(Window window)
         {
             _window = window;
-            SaveCommand = new RelayCommand(Save);
-            CancelCommand = new RelayCommand(Cancel);
+            SaveCommand = new RelayCommand<object>(Save);
+            CancelCommand = new RelayCommand<object>(Cancel);
         }
 
         /// <summary>
@@ -191,14 +193,5 @@ namespace Login_Sample.ViewModels
             ErrorMessage = message;
             ErrorVisibility = Visibility.Visible;
         }
-
-        #region INotifyPropertyChanged 实现
-        public event PropertyChangedEventHandler? PropertyChanged;
-
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-        #endregion
     }
 }

@@ -12,6 +12,7 @@
     <None Remove="build.log" />
     <None Remove="build_errors.txt" />
     <None Remove="build_output.txt" />
+    <None Remove="ViewModels\StaffManagementViewModel.cs~RF7f386b.TMP" />
   </ItemGroup>
 
   <ItemGroup>
@@ -24,6 +25,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
     <PackageReference Include="MaterialDesignThemes" Version="5.3.0" />
     <PackageReference Include="Microsoft.AspNetCore.Cryptography.KeyDerivation" Version="10.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.0">

@@ -1,3 +1,5 @@
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -9,7 +11,7 @@ using System.Windows.Threading;
 
 namespace Login_Sample.ViewModels
 {
-    public class SettlementModificationViewModel : INotifyPropertyChanged
+    public class SettlementModificationViewModel : ObservableObject
     {
         #region 字段
         private string _searchKey = string.Empty;
@@ -209,9 +211,9 @@ namespace Login_Sample.ViewModels
         /// </summary>
         public SettlementModificationViewModel()
         {
-            SearchDocumentsCommand = new RelayCommand(SearchDocuments);
-            ModifySettlementCommand = new RelayCommand(ModifySettlement);
-            RefreshDocumentsCommand = new RelayCommand(RefreshDocuments);
+            SearchDocumentsCommand = new RelayCommand<object>(SearchDocuments);
+            ModifySettlementCommand = new RelayCommand<object>(ModifySettlement);
+            RefreshDocumentsCommand = new RelayCommand<object>(RefreshDocuments);
 
             // 初始化模拟数据
             LoadMockData();
@@ -416,15 +418,6 @@ namespace Login_Sample.ViewModels
         {
             ErrorMessage = message;
             ErrorVisibility = Visibility.Visible;
-        }
-        #endregion
-
-        #region INotifyPropertyChanged 实现
-        public event PropertyChangedEventHandler? PropertyChanged;
-
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
         #endregion
     }

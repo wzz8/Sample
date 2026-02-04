@@ -1,29 +1,25 @@
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using Login_Sample.Views;
+using MaterialDesignThemes.Wpf;
 using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using Login_Sample.Views;
-using MaterialDesignThemes.Wpf;
+using System.Xml.Linq;
 
 namespace Login_Sample.ViewModels
 {
-    public class MainViewModel : INotifyPropertyChanged
+    public class MainViewModel : ObservableObject
     {
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        private void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
         // 当前选中的模块
         private UserControl _currentView;
         public UserControl CurrentView
         {
             get { return _currentView; }
-            set { _currentView = value; OnPropertyChanged(); }
+            set => SetProperty(ref _currentView, value);
         }
 
         // 各模块的View实例
@@ -215,7 +211,7 @@ namespace Login_Sample.ViewModels
         public string CurrentUser
         {
             get { return _currentUser; }
-            set { _currentUser = value; OnPropertyChanged(); }
+            set => SetProperty(ref _currentUser, value);
         }
 
         // 当前时间
@@ -223,7 +219,7 @@ namespace Login_Sample.ViewModels
         public string CurrentTime
         {
             get { return _currentTime; }
-            set { _currentTime = value; OnPropertyChanged(); }
+            set => SetProperty(ref _currentTime, value);
         }
 
         // 当前选中的模块
@@ -231,7 +227,7 @@ namespace Login_Sample.ViewModels
         public string CurrentModule
         {
             get { return _currentModule; }
-            set { _currentModule = value; OnPropertyChanged(); }
+            set => SetProperty(ref _currentModule, value);
         }
 
         // 侧边栏位置
@@ -239,7 +235,7 @@ namespace Login_Sample.ViewModels
         public bool SidebarOnLeft
         {
             get { return _sidebarOnLeft; }
-            set { _sidebarOnLeft = value; OnPropertyChanged(); }
+            set => SetProperty(ref _sidebarOnLeft, value);
         }
 
         // 构造函数
@@ -426,8 +422,8 @@ namespace Login_Sample.ViewModels
             InsuranceAgentView = new InsuranceAgentView() { DataContext = InsuranceAgentVM };
 
             // 初始化命令
-            NavigateCommand = new RelayCommand(Navigate);
-            LogoutCommand = new RelayCommand(Logout);
+            NavigateCommand = new RelayCommand<object>(Navigate);
+            LogoutCommand = new RelayCommand<object>(Logout);
 
             // 初始化用户信息和时间
             CurrentUser = "管理员";

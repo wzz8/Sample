@@ -1,3 +1,5 @@
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -9,7 +11,7 @@ using System.Windows.Threading;
 
 namespace Login_Sample.ViewModels
 {
-    public class DebtManagementViewModel : INotifyPropertyChanged
+    public class DebtManagementViewModel : ObservableObject
     {
         #region 字段
         private string _ownerName = string.Empty;
@@ -175,9 +177,9 @@ namespace Login_Sample.ViewModels
         /// </summary>
         public DebtManagementViewModel()
         {
-            SearchVehiclesCommand = new RelayCommand(SearchVehicles);
-            RefreshVehiclesCommand = new RelayCommand(RefreshVehicles);
-            MarkAsProcessedCommand = new RelayCommand(MarkAsProcessed);
+            SearchVehiclesCommand = new RelayCommand<object>(SearchVehicles);
+            RefreshVehiclesCommand = new RelayCommand<object>(RefreshVehicles);
+            MarkAsProcessedCommand = new RelayCommand<object>(MarkAsProcessed);
 
             // 初始化模拟数据
             LoadMockData();
@@ -348,14 +350,6 @@ namespace Login_Sample.ViewModels
         }
         #endregion
 
-        #region INotifyPropertyChanged 实现
-        public event PropertyChangedEventHandler? PropertyChanged;
-
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-        #endregion
     }
 
     #region 外部类

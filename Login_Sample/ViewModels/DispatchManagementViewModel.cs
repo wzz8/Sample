@@ -1,3 +1,5 @@
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -5,7 +7,7 @@ using System.Windows.Input;
 
 namespace Login_Sample.ViewModels
 {
-    public class DispatchManagementViewModel : INotifyPropertyChanged
+    public class DispatchManagementViewModel : ObservableObject
     {
         // 内部车辆类
         public class Vehicle
@@ -136,9 +138,9 @@ namespace Login_Sample.ViewModels
         public DispatchManagementViewModel()
         {
             // 初始化命令
-            AddRepairItemCommand = new RelayCommand(AddRepairItem);
-            AssignTechnicianCommand = new RelayCommand(AssignTechnician);
-            SaveDispatchCommand = new RelayCommand(SaveDispatch);
+            AddRepairItemCommand = new RelayCommand<object>(AddRepairItem);
+            AssignTechnicianCommand = new RelayCommand<object>(AssignTechnician);
+            SaveDispatchCommand = new RelayCommand<object>(SaveDispatch);
             
             // 初始化数据
             LoadVehiclesInRepair();
@@ -244,17 +246,6 @@ namespace Login_Sample.ViewModels
                 // 例如，将维修项目和技师分配信息保存到数据库
                 // 可以显示保存成功的提示
             }
-        }
-        
-        #endregion
-        
-        #region INotifyPropertyChanged Implementation
-        
-        public event PropertyChangedEventHandler PropertyChanged;
-        
-        protected virtual void OnPropertyChanged(string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
         
         #endregion

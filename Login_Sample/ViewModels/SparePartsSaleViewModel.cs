@@ -1,22 +1,17 @@
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using Login_Sample.Data;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
-using Login_Sample.Data;
 
 namespace Login_Sample.ViewModels
 {
-    public class SparePartsSaleViewModel : INotifyPropertyChanged
+    public class SparePartsSaleViewModel : ObservableObject
     {
-        public event PropertyChangedEventHandler? PropertyChanged;
-
-        private void OnPropertyChanged([CallerMemberName] string? propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
         private readonly ApplicationDbContext _context;
 
         // 配件列表
@@ -169,7 +164,7 @@ namespace Login_Sample.ViewModels
             _totalAmount = 0;
 
             // 初始化命令
-            SellCommand = new RelayCommand(SellSpareParts);
+            SellCommand = new RelayCommand<object>(SellSpareParts);
 
             // 加载库存配件数据
             LoadInventoryItems();
